@@ -17,6 +17,10 @@ const test =  () => {
     console.log('#input值为:', $('#input').val())
 }
 
-$(function () {
+const creatPanel
+
+// jquery加载后执行
+$(() => {
+    // 测试 正式用的时候删除
     test()
 })
