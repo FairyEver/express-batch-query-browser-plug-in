@@ -8,7 +8,22 @@
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    你好 我是测试站点
+<body style="padding: 30px;">
+    <h1>插件测试站点</h1>
+    <button type="button" class="btn btn-primary" onclick="search()">尝试点击这个按钮</button>
+    <div class="input-group mt-3 mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">尝试改变这里的值</span>
+        </div>
+        <input type="text" class="form-control" value="Hello World">
+    </div>
 </body>
+<script>
+    // 尝试访问这个变量
+    var n = 100;
+    // 尝试使用这个方法
+    function search () {
+        console.log('你触发了search函数')
+    }
+</script>
 </html>
