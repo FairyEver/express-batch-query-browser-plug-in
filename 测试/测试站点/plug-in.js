@@ -4,7 +4,8 @@ if ($) {
     console.log('jQuery ready') 
 }
 
-function test () {
+// 测试代码
+const test =  () => {
     // 调用测试方法
     search()
     // 检测输入框的值
@@ -17,5 +18,5 @@ function test () {
 }
 
 $(function () {
-    test()    
+    test()
 })
