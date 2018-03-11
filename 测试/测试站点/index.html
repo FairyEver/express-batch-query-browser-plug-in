@@ -26,34 +26,20 @@
     </table>
 </body>
 <script>
-    var data = [
-        {first: 'dahsd', last: 'asdasd', handle: 'asd5a'},
-        {first: 'adfdfhsd', last: 'asdasd', handle: 'asc5c5c3da'},
-        {first: 'dsaf', last: 'asda4csd', handle: 'as3c534da'},
-        {first: 'ahsdf', last: 'asdac254sd', handle: 'asda'},
-        {first: 'dfghgfhfg', last: 'asdc2345casd', handle: 'asc54da'},
-        {first: 'dadfghsd', last: 'asdac235csd', handle: 'as2da'},
-        {first: 'dadfhdfgsd', last: 'as345c5dasd', handle: 'as52da'},
-        {first: 'dahsd', last: 'asdasd', handle: 'asd5a'},
-        {first: 'adfdfhsd', last: 'asdasd', handle: 'asc5c5c3da'},
-        {first: 'dsaf', last: 'asda4csd', handle: 'as3c534da'},
-        {first: 'ahsdf', last: 'asdac254sd', handle: 'asda'},
-        {first: 'dfghgfhfg', last: 'asdc2345casd', handle: 'asc54da'},
-        {first: 'dadfghsd', last: 'asdac235csd', handle: 'as2da'},
-        {first: 'dadfhdfgsd', last: 'as345c5dasd', handle: 'as52da'},
-        {first: 'dahsd', last: 'asdasd', handle: 'asd5a'},
-        {first: 'adfdfhsd', last: 'asdasd', handle: 'asc5c5c3da'},
-        {first: 'dsaf', last: 'asda4csd', handle: 'as3c534da'},
-        {first: 'ahsdf', last: 'asdac254sd', handle: 'asda'},
-        {first: 'dfghgfhfg', last: 'asdc2345casd', handle: 'asc54da'},
-        {first: 'dadfghsd', last: 'asdac235csd', handle: 'as2da'},
-        {first: 'dadfhdfgsd', last: 'as345c5dasd', handle: 'as52da'}
-    ]
     function loadData () {
         var tbody = $('#table tbody')[0]
-        data.forEach(function (e, index) {
-            $('<tr><th scope="row">'+(index+1)+'</th><td>'+e.first+'</td><td>'+e.last+'</td><td>'+e.handle+'</td></tr>').appendTo(tbody)
-        })
+        for (let i = 0; i < 100; i++) {
+            $('<tr><th scope="row">'+
+                (i+1)+
+                '</th><td>'+
+                (Math.random()*100000).toFixed(2)+
+                '</td><td>'+
+                (Math.random()*100000).toFixed(2)+
+                '</td><td>'+
+                (Math.random()*100000).toFixed(2)+
+                '</td></tr>')
+            .appendTo(tbody)
+        }
     }
 </script>
 </html>
