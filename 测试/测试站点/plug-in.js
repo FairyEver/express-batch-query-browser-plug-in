@@ -79,4 +79,6 @@ $(async () => {
     domCache()
     // 给页面元素注册事件
     domRegistMethod()
+    // 操作页面中的函数 载入数据
+    loadData()
 })
