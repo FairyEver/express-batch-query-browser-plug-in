@@ -1,0 +1,19 @@
+.x {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(#000, .8);
+    color: #FFF;
+    user-select: none;
+    .x-header {
+        padding: 10px;
+        .toggle {
+            float: right;
+            cursor: pointer;
+        }
+    }
+    .x-body {
+        padding: 10px;
+    }
+}

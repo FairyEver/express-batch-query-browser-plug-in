@@ -4,6 +4,15 @@ if ($) {
     console.log('jQuery ready') 
 }
 
+// 等待
+const sleep = async (time = 0) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve()
+        }, time)
+    })
+}
+
 // 测试代码
 const test =  () => {
     // 调用测试方法
@@ -17,10 +26,10 @@ const test =  () => {
     console.log('#input值为:', $('#input').val())
 }
 
-const creatPanel
-
 // jquery加载后执行
-$(() => {
+$(async () => {
     // 测试 正式用的时候删除
     test()
+
+    await sleep(3000)
 })
