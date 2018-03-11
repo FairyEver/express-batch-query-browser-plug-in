@@ -21,15 +21,26 @@ const domCreat = () => {
             <span class="toggle" id="panelToggleButton">隐藏</span>
         </div>
         <div class="x-body" id="panelBody">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">选择单号文件</span>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">选择单号文件</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="upload">
+                    <label class="custom-file-label" for="upload">请选择保存单号的 .xlsx 文件</label>
+                </div>
             </div>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01">
-                <label class="custom-file-label" for="inputGroupFile01">请选择保存单号的 .xlsx 文件</label>
+            <p>进度</p>
+            <div class="progress">
+                <div
+                    class="progress-bar progress-bar-striped progress-bar-animated"
+                    role="progressbar"
+                    aria-valuenow="75"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 75%">
+                </div>
             </div>
-        </div>
         </div>
     </div>
     `.trim()))
@@ -39,7 +50,8 @@ const domCache = () => {
     // id的可以这样注册
     [
         'panelToggleButton',
-        'panelBody'
+        'panelBody',
+        'upload'
     ].forEach(e => {
         x.dom[e] = $(`#${e}`)
     })
