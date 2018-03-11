@@ -1,1 +1,3 @@
-# zhong-tong-express-batch-query-browser-plug-in
+# 中通快递单号批量查询
+
+需要登陆中通快递内部系统然后自动批量查询单号信息
