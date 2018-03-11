@@ -27,18 +27,32 @@
 </body>
 <script>
     var data = [
-        {id: 1, first: 'dahsd', last: 'asdasd', handle: 'asd5a'},
-        {id: 2, first: 'adfdfhsd', last: 'asdasd', handle: 'asc5c5c3da'},
-        {id: 3, first: 'dsaf', last: 'asda4csd', handle: 'as3c534da'},
-        {id: 4, first: 'ahsdf', last: 'asdac254sd', handle: 'asda'},
-        {id: 5, first: 'dfghgfhfg', last: 'asdc2345casd', handle: 'asc54da'},
-        {id: 6, first: 'dadfghsd', last: 'asdac235csd', handle: 'as2da'},
-        {id: 7, first: 'dadfhdfgsd', last: 'as345c5dasd', handle: 'as52da'}
+        {first: 'dahsd', last: 'asdasd', handle: 'asd5a'},
+        {first: 'adfdfhsd', last: 'asdasd', handle: 'asc5c5c3da'},
+        {first: 'dsaf', last: 'asda4csd', handle: 'as3c534da'},
+        {first: 'ahsdf', last: 'asdac254sd', handle: 'asda'},
+        {first: 'dfghgfhfg', last: 'asdc2345casd', handle: 'asc54da'},
+        {first: 'dadfghsd', last: 'asdac235csd', handle: 'as2da'},
+        {first: 'dadfhdfgsd', last: 'as345c5dasd', handle: 'as52da'},
+        {first: 'dahsd', last: 'asdasd', handle: 'asd5a'},
+        {first: 'adfdfhsd', last: 'asdasd', handle: 'asc5c5c3da'},
+        {first: 'dsaf', last: 'asda4csd', handle: 'as3c534da'},
+        {first: 'ahsdf', last: 'asdac254sd', handle: 'asda'},
+        {first: 'dfghgfhfg', last: 'asdc2345casd', handle: 'asc54da'},
+        {first: 'dadfghsd', last: 'asdac235csd', handle: 'as2da'},
+        {first: 'dadfhdfgsd', last: 'as345c5dasd', handle: 'as52da'},
+        {first: 'dahsd', last: 'asdasd', handle: 'asd5a'},
+        {first: 'adfdfhsd', last: 'asdasd', handle: 'asc5c5c3da'},
+        {first: 'dsaf', last: 'asda4csd', handle: 'as3c534da'},
+        {first: 'ahsdf', last: 'asdac254sd', handle: 'asda'},
+        {first: 'dfghgfhfg', last: 'asdc2345casd', handle: 'asc54da'},
+        {first: 'dadfghsd', last: 'asdac235csd', handle: 'as2da'},
+        {first: 'dadfhdfgsd', last: 'as345c5dasd', handle: 'as52da'}
     ]
     function loadData () {
         var tbody = $('#table tbody')[0]
-        data.forEach(function (e) {
-            $('<tr><th scope="row">'+e.id+'</th><td>'+e.first+'</td><td>'+e.last+'</td><td>'+e.handle+'</td></tr>').appendTo(tbody)
+        data.forEach(function (e, index) {
+            $('<tr><th scope="row">'+(index+1)+'</th><td>'+e.first+'</td><td>'+e.last+'</td><td>'+e.handle+'</td></tr>').appendTo(tbody)
         })
     }
 </script>
