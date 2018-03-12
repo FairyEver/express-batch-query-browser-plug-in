@@ -96,6 +96,9 @@ export default class X {
     startSearch () {
         $("#txtJobNoList").val(this.ids[0])
         search()
+            .then(() => {
+                console.log('OK')
+            })
     }
     // 将数据以CSV形式导出
     exportCSV () {
