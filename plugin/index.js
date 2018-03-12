@@ -9,8 +9,7 @@ js.forEach(function (e) {
 })
 
 const link = [
-    'http://localhost:7879/plug-in.css',
-    'http://localhost:7879/bootstrap.min.css'
+    'http://localhost:7879/dist/index.css'
 ]
 link.forEach(function (e) {
     var link = document.createElement('link');

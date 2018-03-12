@@ -80,7 +80,7 @@ js.forEach(function (e) {
     document.body.appendChild(s);
 });
 
-var link = ['http://localhost:7879/plug-in.css', 'http://localhost:7879/bootstrap.min.css'];
+var link = ['http://localhost:7879/dist/index.css'];
 link.forEach(function (e) {
     var link = document.createElement('link');
     link.type = 'text/css';
@@ -88,7 +88,7 @@ link.forEach(function (e) {
     link.href = e;
     document.head.appendChild(link);
 });
-},{}],10:[function(require,module,exports) {
+},{}],11:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -211,5 +211,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[10,1])
+},{}]},{},[11,1])
 //# sourceMappingURL=/dist/src.map
