@@ -51,6 +51,7 @@ export default (ids) => {
                                 $("#ajaxdata").html("<div style=\"text-align:center; width:100%; line-height:150%;margin-top: 130px;\"><img src=\"/images/error.png\" width=\"150\" /><br/>" + rs.n + "</div>");
                             } else {
                                 $("#ajaxdata").html(rs.n);
+                                console.log(rs.n)
                                 resolve()
                             }
                             dialogOnresizeparameters();

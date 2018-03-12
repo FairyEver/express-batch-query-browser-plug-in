@@ -376,6 +376,7 @@ exports.default = function (ids) {
                                 $("#ajaxdata").html("<div style=\"text-align:center; width:100%; line-height:150%;margin-top: 130px;\"><img src=\"/images/error.png\" width=\"150\" /><br/>" + rs.n + "</div>");
                             } else {
                                 $("#ajaxdata").html(rs.n);
+                                console.log(rs.n);
                                 resolve();
                             }
                             dialogOnresizeparameters();
@@ -575,7 +576,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/bootstrap.min.css":3,"./style/plug-in.scss":4,"./class/X":5}],27:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":3,"./style/plug-in.scss":4,"./class/X":5}],28:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -698,5 +699,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[27,1])
+},{}]},{},[28,1])
 //# sourceMappingURL=/dist/load.map
