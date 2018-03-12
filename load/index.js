@@ -4,9 +4,6 @@ import './style/plug-in.scss'
 import log from './lib/log'
 import readExcel from './lib/readExcel'
 
-log('plugin loaded')
-log(readExcel)
-
 let x = {
     panelShow: true,
     dom: {}
@@ -73,10 +70,14 @@ const domRegistMethod = () => {
     // 打开Excel文件输入框
     x.dom.upload.on('change', () => {
         const file = x.dom.upload.get(0).files[0]
-        readExcel(file)
-            .then(res => {
-                console.log(res)
-            })
+        if (file) {
+            readExcel(file)
+                .then(res => {
+                    console.log(res)
+                })
+        } else {
+            alert('文件读取失败')
+        }
     })
 }
 

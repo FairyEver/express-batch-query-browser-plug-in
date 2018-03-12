@@ -30553,9 +30553,6 @@ var _readExcel2 = _interopRequireDefault(_readExcel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _log2.default)('plugin loaded');
-(0, _log2.default)(_readExcel2.default);
-
 var x = {
     panelShow: true,
     dom: {}
@@ -30588,9 +30585,13 @@ var domRegistMethod = function domRegistMethod() {
     // 打开Excel文件输入框
     x.dom.upload.on('change', function () {
         var file = x.dom.upload.get(0).files[0];
-        (0, _readExcel2.default)(file).then(function (res) {
-            console.log(res);
-        });
+        if (file) {
+            (0, _readExcel2.default)(file).then(function (res) {
+                console.log(res);
+            });
+        } else {
+            alert('文件读取失败');
+        }
     });
 };
 
@@ -30605,7 +30606,7 @@ $(function () {
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],33:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],35:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30728,5 +30729,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[33,1])
+},{}]},{},[35,1])
 //# sourceMappingURL=/dist/index.map
