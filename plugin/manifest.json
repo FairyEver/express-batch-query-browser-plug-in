@@ -8,8 +8,8 @@
     },
     "content_scripts": [
         {
-        "matches": ["http://app.d2collection.com/zt-plug-in/index.html", "http://localhost:7879/"],
-        "js": ["script.js"]
+            "matches": ["http://app.d2collection.com/zt-plug-in/index.html", "http://localhost:7879/"],
+            "js": ["/dist/src.js"]
         }
     ]
 }
