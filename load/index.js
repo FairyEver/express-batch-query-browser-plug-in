@@ -73,7 +73,7 @@ const domRegistMethod = () => {
     // 打开Excel文件输入框
     x.dom.upload.on('change', () => {
         const file = x.dom.upload.get(0).files[0]
-        readXlsx(file)
+        readExcel(file)
             .then(res => {
                 console.log(res)
             })
@@ -81,7 +81,7 @@ const domRegistMethod = () => {
 }
 
 // jquery加载后执行
-$(async () => {
+$(() => {
     // 将操作界面添加到页面
     domCreat()
     // 将页面元素注册到缓存

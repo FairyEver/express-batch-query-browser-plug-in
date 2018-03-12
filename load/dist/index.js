@@ -30539,8 +30539,6 @@ exports.default = function (file) {
 },{"xlsx":26}],1:[function(require,module,exports) {
 'use strict';
 
-var _this = undefined;
-
 require('./style/bootstrap.min.css');
 
 require('./style/plug-in.scss');
@@ -30554,8 +30552,6 @@ var _readExcel = require('./lib/readExcel');
 var _readExcel2 = _interopRequireDefault(_readExcel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 (0, _log2.default)('plugin loaded');
 (0, _log2.default)(_readExcel2.default);
@@ -30592,35 +30588,24 @@ var domRegistMethod = function domRegistMethod() {
     // 打开Excel文件输入框
     x.dom.upload.on('change', function () {
         var file = x.dom.upload.get(0).files[0];
-        readXlsx(file).then(function (res) {
+        (0, _readExcel2.default)(file).then(function (res) {
             console.log(res);
         });
     });
 };
 
 // jquery加载后执行
-$(_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-            switch (_context.prev = _context.next) {
-                case 0:
-                    // 将操作界面添加到页面
-                    domCreat();
-                    // 将页面元素注册到缓存
-                    domCache();
-                    // 给页面元素注册事件
-                    domRegistMethod();
-                    // 操作页面中的函数 载入数据
-                    loadData();
-
-                case 4:
-                case 'end':
-                    return _context.stop();
-            }
-        }
-    }, _callee, _this);
-})));
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],31:[function(require,module,exports) {
+$(function () {
+    // 将操作界面添加到页面
+    domCreat();
+    // 将页面元素注册到缓存
+    domCache();
+    // 给页面元素注册事件
+    domRegistMethod();
+    // 操作页面中的函数 载入数据
+    loadData();
+});
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],33:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30743,5 +30728,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[31,1])
+},{}]},{},[33,1])
 //# sourceMappingURL=/dist/index.map
