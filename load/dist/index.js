@@ -71,9 +71,106 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({9:[function(require,module,exports) {
+})({15:[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
 
-},{}],11:[function(require,module,exports) {
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],14:[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":15}],13:[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+},{"_css_loader":14}],17:[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+},{"_css_loader":14}],19:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function () {
+    for (var _len = arguments.length, logs = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        logs[_key - 1] = arguments[_key];
+    }
+
+    var arg1 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'log';
+
+    if (logs.length === 0) {
+        console.log(arg1);
+    } else {
+        console.group(arg1);
+        logs.forEach(function (e) {
+            console.log(e);
+        });
+        console.groupEnd();
+    }
+};
+},{}],28:[function(require,module,exports) {
+
+},{}],27:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 /* cpexcel.js (C) 2013-present SheetJS -- http://sheetjs.com */
 /*jshint -W100 */
@@ -1574,7 +1671,7 @@ if (typeof module !== 'undefined' && module.exports && typeof DO_NOT_EXPORT_CODE
   return cpt;
 }));
 
-},{"buffer":9}],10:[function(require,module,exports) {
+},{"buffer":28}],29:[function(require,module,exports) {
 var global = (1,eval)("this");
 var Buffer = require("buffer").Buffer;
 /*!
@@ -10569,7 +10666,7 @@ module.exports = ZStream;
 (9)
 }));
 
-},{"buffer":9}],8:[function(require,module,exports) {
+},{"buffer":28}],26:[function(require,module,exports) {
 var global = (1,eval)("this");
 var Buffer = require("buffer").Buffer;
 var process = require("process");
@@ -30388,109 +30485,59 @@ XLSX.CFB = CFB;
 /*exported XLS, ODS */
 var XLS = XLSX, ODS = XLSX;
 
-},{"./dist/cpexcel.js":11,"fs":9,"./jszip.js":10,"crypto":9,"stream":9,"buffer":9,"process":9}],15:[function(require,module,exports) {
-var bundleURL = null;
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],14:[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-  newLink.onload = function () {
-    link.remove();
-  };
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":15}],13:[function(require,module,exports) {
-
-        var reloadCSS = require('_css_loader');
-        module.hot.dispose(reloadCSS);
-        module.hot.accept(reloadCSS);
-      
-},{"_css_loader":14}],17:[function(require,module,exports) {
-
-        var reloadCSS = require('_css_loader');
-        module.hot.dispose(reloadCSS);
-        module.hot.accept(reloadCSS);
-      
-},{"_css_loader":14}],19:[function(require,module,exports) {
+},{"./dist/cpexcel.js":27,"fs":28,"./jszip.js":29,"crypto":28,"stream":28,"buffer":28,"process":28}],25:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-
-exports.default = function () {
-    for (var _len = arguments.length, logs = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        logs[_key - 1] = arguments[_key];
-    }
-
-    var arg1 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'log';
-
-    if (logs.length === 0) {
-        console.log(arg1);
-    } else {
-        console.group(arg1);
-        logs.forEach(function (e) {
-            console.log(e);
-        });
-        console.groupEnd();
-    }
-};
-},{}],1:[function(require,module,exports) {
-'use strict';
 
 var _xlsx = require('xlsx');
 
 var _xlsx2 = _interopRequireDefault(_xlsx);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (file) {
+  return new Promise(function (resolve, reject) {
+    var reader = new FileReader();
+    var fixdata = function fixdata(data) {
+      var o = '';
+      var l = 0;
+      var w = 10240;
+      for (; l < data.byteLength / w; ++l) {
+        o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
+      }o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+      return o;
+    };
+    var getHeaderRow = function getHeaderRow(sheet) {
+      var headers = [];
+      var range = _xlsx2.default.utils.decode_range(sheet['!ref']);
+      var C = void 0;
+      var R = range.s.r;
+      for (C = range.s.c; C <= range.e.c; ++C) {
+        var cell = sheet[_xlsx2.default.utils.encode_cell({ c: C, r: R })];
+        var hdr = 'UNKNOWN ' + C;
+        if (cell && cell.t) hdr = _xlsx2.default.utils.format_cell(cell);
+        headers.push(hdr);
+      }
+      return headers;
+    };
+    reader.onload = function (e) {
+      var data = e.target.result;
+      var fixedData = fixdata(data);
+      var workbook = _xlsx2.default.read(btoa(fixedData), { type: 'base64' });
+      var firstSheetName = workbook.SheetNames[0];
+      var worksheet = workbook.Sheets[firstSheetName];
+      var header = getHeaderRow(worksheet);
+      var results = _xlsx2.default.utils.sheet_to_json(worksheet);
+      resolve({ header: header, results: results });
+    };
+    reader.readAsArrayBuffer(file);
+  });
+};
+},{"xlsx":26}],1:[function(require,module,exports) {
+'use strict';
 
 require('./style/bootstrap.min.css');
 
@@ -30500,10 +30547,15 @@ var _log = require('./lib/log');
 
 var _log2 = _interopRequireDefault(_log);
 
+var _readExcel = require('./lib/readExcel');
+
+var _readExcel2 = _interopRequireDefault(_readExcel);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _log2.default)('plugin loaded');
-},{"xlsx":8,"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19}],21:[function(require,module,exports) {
+(0, _log2.default)(_readExcel2.default);
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],30:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30626,5 +30678,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[21,1])
+},{}]},{},[30,1])
 //# sourceMappingURL=/dist/index.map
