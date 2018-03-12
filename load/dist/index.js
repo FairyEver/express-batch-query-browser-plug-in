@@ -30560,9 +30560,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // 面板显示
 var panelShow = true;
 
-// 单号
-var ids = [];
-
 // 进度条
 var progress = null;
 
@@ -30571,7 +30568,7 @@ var control = null;
 
 // 将操作界面添加到页面
 var domCreat = function domCreat() {
-    $('body').append($('\n    <div class="x">\n        <div class="x-header">\n            \u6279\u91CF\u64CD\u4F5C\n            <span class="toggle" id="panelToggleButton">\u9690\u85CF</span>\n        </div>\n        <div class="x-body" id="panelBody">\n\n            <div class="input-group mb-3">\n                <div class="custom-file">\n                    <input type="file" class="custom-file-input" id="excelUploader">\n                    <label class="custom-file-label" for="excelUploader">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n                </div>\n                <div class="input-group-append">\n                    <button id="startSearchBtn" class="btn btn-secondary" type="button" disabled>\u67E5\u8BE2</button>\n                </div>\n            </div>\n            <div id="progress-panel" style="display: none;">\n                <p id="progress-title">\u8FDB\u5EA6</p>\n                <div class="progress mb-3">\n                    <div\n                        id="progress-bar"\n                        class="progress-bar progress-bar-striped progress-bar-animated"\n                        role="progressbar"\n                        aria-valuenow="0"\n                        aria-valuemin="0"\n                        aria-valuemax="0"\n                        style="width: 0%">\n                    </div>\n                </div>\n                <div>\n                    <button id="startButton" type="button" class="btn btn-light">\u5F00\u59CB</button>\n                </div>\n            </div>\n        </div>\n    </div>\n    '.trim()));
+    $('body').append($('\n    <div class="x">\n        <div class="x-header">\n            \u6279\u91CF\u64CD\u4F5C\n            <span class="toggle" id="panelToggleButton">\u9690\u85CF</span>\n        </div>\n        <div class="x-body" id="panelBody">\n\n            <div class="input-group mb-3">\n                <div class="custom-file">\n                    <input type="file" class="custom-file-input" id="excelUploader">\n                    <label class="custom-file-label" for="excelUploader">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n                </div>\n            </div>\n            <div id="progress-panel" style="display: none;">\n                <p id="progress-title">\u8FDB\u5EA6</p>\n                <div class="progress mb-3">\n                    <div\n                        id="progress-bar"\n                        class="progress-bar progress-bar-striped progress-bar-animated"\n                        role="progressbar"\n                        aria-valuenow="0"\n                        aria-valuemin="0"\n                        aria-valuemax="0"\n                        style="width: 0%">\n                    </div>\n                </div>\n                <div>\n                    <button id="startButton" type="button" class="btn btn-light">\u5F00\u59CB</button>\n                </div>\n            </div>\n        </div>\n    </div>\n    '.trim()));
     // 面板切换按钮
     $('#panelToggleButton').on('click', function () {
         if (panelShow) {
@@ -30586,26 +30583,17 @@ var domCreat = function domCreat() {
     });
     // Excel载入
     $('#excelUploader').on('change', function () {
-        // 切换查询按钮的状态
-        var startSearchBtnToggle = function startSearchBtnToggle(open) {
-            var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-            if (open) {
-                $('#startSearchBtn').removeAttr('disabled').removeClass('btn-secondary').addClass('btn-success').text('\u5F00\u59CB\u67E5\u8BE2 ' + length + ' \u6761\u5355\u53F7');
-            } else {
-                $('#startSearchBtn').attr('disabled', 'true').removeClass('btn-success').addClass('btn-secondary').text('\u67E5\u8BE2');
-            }
-        };
-        // 禁用查询按钮
-        startSearchBtnToggle(false);
         // 获取文件
         var file = $('#excelUploader').get(0).files[0];
         if (file) {
             (0, _readExcel2.default)(file).then(function (res) {
-                console.log(res);
-                startSearchBtnToggle(true, res.results.length);
+                // 实例化进度条对象
+                progress = new Progress();
                 progress.setBarMax(res.results.length);
                 progress.show();
+                // 实例化控制类
+                control = new Control();
+                console.log(control);
             }).catch(function (err) {
                 (0, _log2.default)(err);
             });
@@ -30668,9 +30656,9 @@ var Progress = function () {
 
 var Control = function () {
     function Control() {
-        //
-
         _classCallCheck(this, Control);
+
+        this.name = 'Hello';
     }
 
     _createClass(Control, [{
@@ -30699,12 +30687,10 @@ var Control = function () {
 $(function () {
     // 将操作界面添加到页面
     domCreat();
-    // 实例化一个进度条对象
-    progress = new Progress();
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],100:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],103:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30827,5 +30813,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[100,1])
+},{}]},{},[103,1])
 //# sourceMappingURL=/dist/index.map

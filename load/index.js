@@ -7,9 +7,6 @@ import readExcel from './lib/readExcel'
 // 面板显示
 let panelShow = true
 
-// 单号
-let ids = []
-
 // 进度条
 let progress = null
 
@@ -30,9 +27,6 @@ const domCreat = () => {
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="excelUploader">
                     <label class="custom-file-label" for="excelUploader">载入 .xlsx 文件</label>
-                </div>
-                <div class="input-group-append">
-                    <button id="startSearchBtn" class="btn btn-secondary" type="button" disabled>查询</button>
                 </div>
             </div>
             <div id="progress-panel" style="display: none;">
@@ -69,33 +63,18 @@ const domCreat = () => {
     })
     // Excel载入
     $('#excelUploader').on('change', () => {
-        // 切换查询按钮的状态
-        const startSearchBtnToggle = (open, length = 0) => {
-            if (open) {
-                $('#startSearchBtn')
-                    .removeAttr('disabled')
-                    .removeClass('btn-secondary')
-                    .addClass('btn-success')
-                    .text(`开始查询 ${length} 条单号`)
-            } else {
-                $('#startSearchBtn')
-                    .attr('disabled', 'true')
-                    .removeClass('btn-success')
-                    .addClass('btn-secondary')
-                    .text(`查询`)
-            }
-        }
-        // 禁用查询按钮
-        startSearchBtnToggle(false)
         // 获取文件
         const file = $('#excelUploader').get(0).files[0]
         if (file) {
             readExcel (file)
                 .then (res => {
-                    console.log(res)
-                    startSearchBtnToggle(true, res.results.length)
+                    // 实例化进度条对象
+                    progress = new Progress()
                     progress.setBarMax(res.results.length)
                     progress.show()
+                    // 实例化控制类
+                    control = new Control()
+                    console.log(control)
                 })
                 .catch (err => {
                     log(err)
@@ -140,7 +119,7 @@ class Progress {
 // 控制类
 class Control {
     constructor () {
-        //
+        this.name = 'Hello'
     }
     start () {
         alert(start)
@@ -151,8 +130,6 @@ class Control {
 $(() => {
     // 将操作界面添加到页面
     domCreat()
-    // 实例化一个进度条对象
-    progress = new Progress()
     // 操作页面中的函数 载入数据
     loadData()
 })
