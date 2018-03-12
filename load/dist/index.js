@@ -30553,51 +30553,43 @@ var _readExcel2 = _interopRequireDefault(_readExcel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var x = {
-    panelShow: true,
-    dom: {}
+// 面板显示
+var panelShow = true;
 
-    // 将操作界面添加到页面
-};var domCreat = function domCreat() {
-    $('body').append($('\n    <div class="x">\n        <div class="x-header">\n            \u6279\u91CF\u64CD\u4F5C\n            <span class="toggle" id="panelToggleButton">\u9690\u85CF</span>\n        </div>\n        <div class="x-body" id="panelBody">\n\n            <div class="input-group mb-3">\n                <div class="custom-file">\n                    <input type="file" class="custom-file-input" id="excelUploader">\n                    <label class="custom-file-label" for="excelUploader">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n                </div>\n                <div class="input-group-append">\n                    <button id="startSearchBtn" class="btn btn-secondary" type="button" disabled>\u67E5\u8BE2</button>\n                </div>\n            </div>\n\n            <p>\u8FDB\u5EA6</p>\n\n            <div class="progress">\n                <div\n                    class="progress-bar progress-bar-striped progress-bar-animated"\n                    role="progressbar"\n                    aria-valuenow="75"\n                    aria-valuemin="0"\n                    aria-valuemax="100"\n                    style="width: 75%">\n                </div>\n            </div>\n        </div>\n    </div>\n    '.trim()));
-};
-// 将页面元素注册到缓存
-var domCache = function domCache() {
-    // id的可以这样注册
-    ['panelToggleButton', 'panelBody', 'excelUploader', 'startSearchBtn'].forEach(function (e) {
-        x.dom[e] = $('#' + e);
-    });
-};
-// 给页面元素注册事件
-var domRegistMethod = function domRegistMethod() {
+// 单号
+var ids = [];
+
+// 将操作界面添加到页面
+var domCreat = function domCreat() {
+    $('body').append($('\n    <div class="x">\n        <div class="x-header">\n            \u6279\u91CF\u64CD\u4F5C\n            <span class="toggle" id="panelToggleButton">\u9690\u85CF</span>\n        </div>\n        <div class="x-body" id="panelBody">\n\n            <div class="input-group mb-3">\n                <div class="custom-file">\n                    <input type="file" class="custom-file-input" id="excelUploader">\n                    <label class="custom-file-label" for="excelUploader">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n                </div>\n                <div class="input-group-append">\n                    <button id="startSearchBtn" class="btn btn-secondary" type="button" disabled>\u67E5\u8BE2</button>\n                </div>\n            </div>\n            <p>\u8FDB\u5EA6</p>\n            <div id="progress" class="progress">\n                <div\n                    class="progress-bar progress-bar-striped progress-bar-animated"\n                    role="progressbar"\n                    aria-valuenow="75"\n                    aria-valuemin="0"\n                    aria-valuemax="100"\n                    style="width: 75%">\n                </div>\n            </div>\n        </div>\n    </div>\n    '.trim()));
     // 面板切换按钮
-    x.dom.panelToggleButton.on('click', function () {
-        if (x.panelShow) {
-            x.dom.panelBody.hide();
-            x.panelShow = false;
-            x.dom.panelToggleButton.text('显示');
+    $('#panelToggleButton').on('click', function () {
+        if (panelShow) {
+            panelShow = false;
+            $('#panelBody').hide();
+            $('#panelToggleButton').text('显示');
         } else {
-            x.dom.panelBody.show();
-            x.panelShow = true;
-            x.dom.panelToggleButton.text('隐藏');
+            panelShow = true;
+            $('#panelBody').show();
+            $('#panelToggleButton').text('隐藏');
         }
     });
     // Excel载入
-    x.dom.excelUploader.on('change', function () {
+    $('#excelUploader').on('change', function () {
         // 切换查询按钮的状态
         var startSearchBtnToggle = function startSearchBtnToggle(open) {
             var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
             if (open) {
-                x.dom.startSearchBtn.removeAttr('disabled').removeClass('btn-secondary').addClass('btn-success').text('\u5F00\u59CB\u67E5\u8BE2 ' + length + ' \u6761\u5355\u53F7');
+                $('#startSearchBtn').removeAttr('disabled').removeClass('btn-secondary').addClass('btn-success').text('\u5F00\u59CB\u67E5\u8BE2 ' + length + ' \u6761\u5355\u53F7');
             } else {
-                x.dom.startSearchBtn.attr('disabled', 'true').removeClass('btn-success').addClass('btn-secondary').text('\u67E5\u8BE2');
+                $('#startSearchBtn').attr('disabled', 'true').removeClass('btn-success').addClass('btn-secondary').text('\u67E5\u8BE2');
             }
         };
         // 禁用查询按钮
         startSearchBtnToggle(false);
         // 获取文件
-        var file = x.dom.excelUploader.get(0).files[0];
+        var file = $('#excelUploader').get(0).files[0];
         if (file) {
             (0, _readExcel2.default)(file).then(function (res) {
                 console.log(res);
@@ -30615,14 +30607,10 @@ var domRegistMethod = function domRegistMethod() {
 $(function () {
     // 将操作界面添加到页面
     domCreat();
-    // 将页面元素注册到缓存
-    domCache();
-    // 给页面元素注册事件
-    domRegistMethod();
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],49:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],59:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30745,5 +30733,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[49,1])
+},{}]},{},[59,1])
 //# sourceMappingURL=/dist/index.map

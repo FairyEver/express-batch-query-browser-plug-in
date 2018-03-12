@@ -4,10 +4,11 @@ import './style/plug-in.scss'
 import log from './lib/log'
 import readExcel from './lib/readExcel'
 
-let x = {
-    panelShow: true,
-    dom: {}
-}
+// 面板显示
+let panelShow = true
+
+// 单号
+let ids = []
 
 // 将操作界面添加到页面
 const domCreat = () => {
@@ -28,10 +29,8 @@ const domCreat = () => {
                     <button id="startSearchBtn" class="btn btn-secondary" type="button" disabled>查询</button>
                 </div>
             </div>
-
             <p>进度</p>
-
-            <div class="progress">
+            <div id="progress" class="progress">
                 <div
                     class="progress-bar progress-bar-striped progress-bar-animated"
                     role="progressbar"
@@ -44,45 +43,30 @@ const domCreat = () => {
         </div>
     </div>
     `.trim()))
-}
-// 将页面元素注册到缓存
-const domCache = () => {
-    // id的可以这样注册
-    [
-        'panelToggleButton',
-        'panelBody',
-        'excelUploader',
-        'startSearchBtn'
-    ].forEach(e => {
-        x.dom[e] = $(`#${e}`)
-    })
-}
-// 给页面元素注册事件
-const domRegistMethod = () => {
     // 面板切换按钮
-    x.dom.panelToggleButton.on('click', () => {
-        if (x.panelShow) {
-            x.dom.panelBody.hide()
-            x.panelShow = false
-            x.dom.panelToggleButton.text('显示')
+    $('#panelToggleButton').on('click', () => {
+        if (panelShow) {
+            panelShow = false
+            $('#panelBody').hide()
+            $('#panelToggleButton').text('显示')
         } else {
-            x.dom.panelBody.show()
-            x.panelShow = true
-            x.dom.panelToggleButton.text('隐藏')
+            panelShow = true
+            $('#panelBody').show()
+            $('#panelToggleButton').text('隐藏')
         }
     })
     // Excel载入
-    x.dom.excelUploader.on('change', () => {
+    $('#excelUploader').on('change', () => {
         // 切换查询按钮的状态
         const startSearchBtnToggle = (open, length = 0) => {
             if (open) {
-                x.dom.startSearchBtn
+                $('#startSearchBtn')
                     .removeAttr('disabled')
                     .removeClass('btn-secondary')
                     .addClass('btn-success')
                     .text(`开始查询 ${length} 条单号`)
             } else {
-                x.dom.startSearchBtn
+                $('#startSearchBtn')
                     .attr('disabled', 'true')
                     .removeClass('btn-success')
                     .addClass('btn-secondary')
@@ -92,7 +76,7 @@ const domRegistMethod = () => {
         // 禁用查询按钮
         startSearchBtnToggle(false)
         // 获取文件
-        const file = x.dom.excelUploader.get(0).files[0]
+        const file = $('#excelUploader').get(0).files[0]
         if (file) {
             readExcel (file)
                 .then (res => {
@@ -112,10 +96,6 @@ const domRegistMethod = () => {
 $(() => {
     // 将操作界面添加到页面
     domCreat()
-    // 将页面元素注册到缓存
-    domCache()
-    // 给页面元素注册事件
-    domRegistMethod()
     // 操作页面中的函数 载入数据
     loadData()
 })
