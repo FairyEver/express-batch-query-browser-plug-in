@@ -30388,19 +30388,96 @@ XLSX.CFB = CFB;
 /*exported XLS, ODS */
 var XLS = XLSX, ODS = XLSX;
 
-},{"./dist/cpexcel.js":11,"fs":9,"./jszip.js":10,"crypto":9,"stream":9,"buffer":9,"process":9}],1:[function(require,module,exports) {
+},{"./dist/cpexcel.js":11,"fs":9,"./jszip.js":10,"crypto":9,"stream":9,"buffer":9,"process":9}],15:[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],14:[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":15}],13:[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+},{"_css_loader":14}],17:[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+},{"_css_loader":14}],1:[function(require,module,exports) {
 'use strict';
 
 var _xlsx = require('xlsx');
 
 var _xlsx2 = _interopRequireDefault(_xlsx);
 
+require('./style/bootstrap.min.css');
+
+require('./style/plug-in.scss');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 alert('i am mew');
 
 console.log(_xlsx2.default);
-},{"xlsx":8}],12:[function(require,module,exports) {
+},{"xlsx":8,"./style/bootstrap.min.css":13,"./style/plug-in.scss":17}],18:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30523,5 +30600,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[12,1])
+},{}]},{},[18,1])
 //# sourceMappingURL=/dist/index.map

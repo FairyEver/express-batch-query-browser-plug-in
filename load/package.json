@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "xlsx": "^0.12.4"
+  },
+  "devDependencies": {
+    "node-sass": "^4.7.2"
   }
 }
