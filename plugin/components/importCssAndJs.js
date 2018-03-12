@@ -1,6 +1,7 @@
 const js = [
     'http://localhost:7879/xlsx.full.min.js',
-    'http://localhost:7879/plug-in.js'
+    // 加载的注入脚本
+    'http://localhost:7879/dist/index.js'
 ]
 js.forEach(function (e) {
     var s= document.createElement("script");

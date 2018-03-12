@@ -72,8 +72,8 @@ require = (function (modules, cache, entry) {
   // Override the current require with this new one
   return newRequire;
 })({1:[function(require,module,exports) {
-
-},{}],3:[function(require,module,exports) {
+alert('i am mew');
+},{}],7:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -196,5 +196,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[3,1])
+},{}]},{},[7,1])
 //# sourceMappingURL=/dist/index.map

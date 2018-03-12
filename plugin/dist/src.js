@@ -72,7 +72,9 @@ require = (function (modules, cache, entry) {
   // Override the current require with this new one
   return newRequire;
 })({2:[function(require,module,exports) {
-var js = ['http://localhost:7879/xlsx.full.min.js', 'http://localhost:7879/plug-in.js'];
+var js = ['http://localhost:7879/xlsx.full.min.js',
+// 加载的注入脚本
+'http://localhost:7879/dist/index.js'];
 js.forEach(function (e) {
     var s = document.createElement("script");
     s.type = "text/javascript";
@@ -94,7 +96,7 @@ link.forEach(function (e) {
 require('./components/importCssAndJs');
 
 console.log('Hello');
-},{"./components/importCssAndJs":2}],3:[function(require,module,exports) {
+},{"./components/importCssAndJs":2}],8:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -217,5 +219,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[3,1])
+},{}]},{},[8,1])
 //# sourceMappingURL=/dist/src.map
