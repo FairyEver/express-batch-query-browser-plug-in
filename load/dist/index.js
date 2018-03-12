@@ -30539,6 +30539,8 @@ exports.default = function (file) {
 },{"xlsx":26}],1:[function(require,module,exports) {
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 require('./style/bootstrap.min.css');
 
 require('./style/plug-in.scss');
@@ -30553,15 +30555,20 @@ var _readExcel2 = _interopRequireDefault(_readExcel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 // 面板显示
 var panelShow = true;
 
 // 单号
 var ids = [];
 
+// 进度条
+var progress = null;
+
 // 将操作界面添加到页面
 var domCreat = function domCreat() {
-    $('body').append($('\n    <div class="x">\n        <div class="x-header">\n            \u6279\u91CF\u64CD\u4F5C\n            <span class="toggle" id="panelToggleButton">\u9690\u85CF</span>\n        </div>\n        <div class="x-body" id="panelBody">\n\n            <div class="input-group mb-3">\n                <div class="custom-file">\n                    <input type="file" class="custom-file-input" id="excelUploader">\n                    <label class="custom-file-label" for="excelUploader">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n                </div>\n                <div class="input-group-append">\n                    <button id="startSearchBtn" class="btn btn-secondary" type="button" disabled>\u67E5\u8BE2</button>\n                </div>\n            </div>\n            <p>\u8FDB\u5EA6</p>\n            <div id="progress" class="progress">\n                <div\n                    class="progress-bar progress-bar-striped progress-bar-animated"\n                    role="progressbar"\n                    aria-valuenow="75"\n                    aria-valuemin="0"\n                    aria-valuemax="100"\n                    style="width: 75%">\n                </div>\n            </div>\n        </div>\n    </div>\n    '.trim()));
+    $('body').append($('\n    <div class="x">\n        <div class="x-header">\n            \u6279\u91CF\u64CD\u4F5C\n            <span class="toggle" id="panelToggleButton">\u9690\u85CF</span>\n        </div>\n        <div class="x-body" id="panelBody">\n\n            <div class="input-group mb-3">\n                <div class="custom-file">\n                    <input type="file" class="custom-file-input" id="excelUploader">\n                    <label class="custom-file-label" for="excelUploader">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n                </div>\n                <div class="input-group-append">\n                    <button id="startSearchBtn" class="btn btn-secondary" type="button" disabled>\u67E5\u8BE2</button>\n                </div>\n            </div>\n            <div id="progressPanel" style="display: none;">\n                <p>\u8FDB\u5EA6</p>\n                <div class="progress">\n                    <div\n                        id="progress-bar"\n                        class="progress-bar progress-bar-striped progress-bar-animated"\n                        role="progressbar"\n                        aria-valuenow="0"\n                        aria-valuemin="0"\n                        aria-valuemax="0"\n                        style="width: 0%">\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    '.trim()));
     // 面板切换按钮
     $('#panelToggleButton').on('click', function () {
         if (panelShow) {
@@ -30594,6 +30601,8 @@ var domCreat = function domCreat() {
             (0, _readExcel2.default)(file).then(function (res) {
                 console.log(res);
                 startSearchBtnToggle(true, res.results.length);
+                progress.setBarMax(res.results.length);
+                progress.show();
             }).catch(function (err) {
                 (0, _log2.default)(err);
             });
@@ -30603,14 +30612,56 @@ var domCreat = function domCreat() {
     });
 };
 
+var Progress = function () {
+    function Progress() {
+        _classCallCheck(this, Progress);
+
+        this.panel = $('#progressPanel');
+        this.bar = $('#progress-bar');
+        this.max = 0;
+        this.min = 0;
+        this.now = 0;
+    }
+
+    _createClass(Progress, [{
+        key: 'show',
+        value: function show() {
+            this.panel.show();
+        }
+    }, {
+        key: 'hide',
+        value: function hide() {
+            this.panel.hide();
+        }
+    }, {
+        key: 'setBarMax',
+        value: function setBarMax(max) {
+            this.max = max;
+            this.bar.attr('aria-valuemax', max);
+        }
+    }, {
+        key: 'setBarNow',
+        value: function setBarNow(now) {
+            this.now = now;
+            this.bar.attr('aria-valuenow', now);
+            this.bar.css('width', Math.round(this.now / (this.max - this.min) * 100) + '%');
+        }
+    }]);
+
+    return Progress;
+}();
+
 // jquery加载后执行
+
+
 $(function () {
     // 将操作界面添加到页面
     domCreat();
+    progress = new Progress();
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],59:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],87:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30733,5 +30784,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[59,1])
+},{}]},{},[87,1])
 //# sourceMappingURL=/dist/index.map

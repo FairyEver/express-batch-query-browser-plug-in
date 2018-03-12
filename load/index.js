@@ -10,6 +10,9 @@ let panelShow = true
 // 单号
 let ids = []
 
+// 进度条
+let progress = null
+
 // 将操作界面添加到页面
 const domCreat = () => {
     $('body').append($(`
@@ -29,15 +32,18 @@ const domCreat = () => {
                     <button id="startSearchBtn" class="btn btn-secondary" type="button" disabled>查询</button>
                 </div>
             </div>
-            <p>进度</p>
-            <div id="progress" class="progress">
-                <div
-                    class="progress-bar progress-bar-striped progress-bar-animated"
-                    role="progressbar"
-                    aria-valuenow="75"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    style="width: 75%">
+            <div id="progressPanel" style="display: none;">
+                <p>进度</p>
+                <div class="progress">
+                    <div
+                        id="progress-bar"
+                        class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar"
+                        aria-valuenow="0"
+                        aria-valuemin="0"
+                        aria-valuemax="0"
+                        style="width: 0%">
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,6 +88,8 @@ const domCreat = () => {
                 .then (res => {
                     console.log(res)
                     startSearchBtnToggle(true, res.results.length)
+                    progress.setBarMax(res.results.length)
+                    progress.show()
                 })
                 .catch (err => {
                     log(err)
@@ -92,10 +100,36 @@ const domCreat = () => {
     })
 }
 
+class Progress {
+    constructor () {
+        this.panel = $('#progressPanel')
+        this.bar = $('#progress-bar')
+        this.max = 0
+        this.min = 0
+        this.now = 0
+    }
+    show () {
+        this.panel.show()
+    }
+    hide () {
+        this.panel.hide()
+    }
+    setBarMax (max) {
+        this.max = max
+        this.bar.attr('aria-valuemax', max)
+    }
+    setBarNow (now) {
+        this.now = now
+        this.bar.attr('aria-valuenow', now)
+        this.bar.css('width', Math.round((this.now / (this.max - this.min)) * 100) + '%')
+    }
+}
+
 // jquery加载后执行
 $(() => {
     // 将操作界面添加到页面
     domCreat()
+    progress = new Progress()
     // 操作页面中的函数 载入数据
     loadData()
 })
