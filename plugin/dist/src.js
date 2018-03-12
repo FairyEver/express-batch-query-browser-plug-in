@@ -88,7 +88,9 @@ require = (function (modules, cache, entry) {
 'use strict';
 
 require('./components/importCssAndJs');
-},{"./components/importCssAndJs":8}],7:[function(require,module,exports) {
+
+console.log('Hello');
+},{"./components/importCssAndJs":8}],9:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -211,5 +213,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[7,1])
+},{}]},{},[9,1])
 //# sourceMappingURL=/dist/src.map
