@@ -440,6 +440,7 @@ var X = function () {
     }, {
         key: 'startSearch',
         value: function startSearch() {
+            $("#txtJobNoList").val(this.ids[0]);
             // 校验是否输入框有值
             var txtbill = document.getElementById("txtJobNoList");
             if (txtbill.value.trim() == "") {
@@ -504,6 +505,7 @@ var X = function () {
                             //$("#ajaxdata").html("<div style=\"text-align:center; width:100%; line-height:150%;margin-top: 130px;\"><img src=\"/images/error.png\" width=\"150\" /><br/>数据加载出错，请重试！</div>");
                         },
                         success: function success(rs) {
+                            console.log(rs);
                             isSearch = true;
                             $("#Button1").removeClass("gray");
                             if (rs.n == "" || rs.n == null) {
@@ -581,7 +583,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/bootstrap.min.css":3,"./style/plug-in.scss":4,"./class/X":5}],17:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":3,"./style/plug-in.scss":4,"./class/X":5}],19:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -704,5 +706,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[17,1])
+},{}]},{},[19,1])
 //# sourceMappingURL=/dist/load.map

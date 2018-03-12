@@ -92,6 +92,7 @@ export default class X {
     }
     // 开始搜索数据
     startSearch () {
+        $("#txtJobNoList").val(this.ids[0])
         // 校验是否输入框有值
         var txtbill = document.getElementById("txtJobNoList");
         if (txtbill.value.trim() == "") {
@@ -156,6 +157,7 @@ export default class X {
                         //$("#ajaxdata").html("<div style=\"text-align:center; width:100%; line-height:150%;margin-top: 130px;\"><img src=\"/images/error.png\" width=\"150\" /><br/>数据加载出错，请重试！</div>");
                     },
                     success: function (rs) {
+                        console.log(rs)
                         isSearch = true; 
                         $("#Button1").removeClass("gray");
                         if (rs.n == "" || rs.n == null) {
