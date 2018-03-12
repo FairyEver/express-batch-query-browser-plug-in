@@ -30584,11 +30584,26 @@ var domRegistMethod = function domRegistMethod() {
     });
     // Excel载入
     x.dom.excelUploader.on('change', function () {
+        // 切换查询按钮的状态
+        var startSearchBtnToggle = function startSearchBtnToggle(open) {
+            var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+            if (open) {
+                x.dom.startSearchBtn.removeAttr('disabled').removeClass('btn-secondary').addClass('btn-success').text('\u5F00\u59CB\u67E5\u8BE2 ' + length + ' \u6761\u5355\u53F7');
+            } else {
+                x.dom.startSearchBtn.attr('disabled', 'true').removeClass('btn-success').addClass('btn-secondary').text('\u67E5\u8BE2');
+            }
+        };
+        // 禁用查询按钮
+        startSearchBtnToggle(false);
+        // 获取文件
         var file = x.dom.excelUploader.get(0).files[0];
         if (file) {
             (0, _readExcel2.default)(file).then(function (res) {
                 console.log(res);
-                x.dom.startSearchBtn.removeAttr('disabled').removeClass('btn-secondary').addClass('btn-success').text('\u5F00\u59CB\u67E5\u8BE2 ' + res.results.length + ' \u6761\u5355\u53F7');
+                startSearchBtnToggle(true, res.results.length);
+            }).catch(function (err) {
+                (0, _log2.default)(err);
             });
         } else {
             alert('文件读取失败');
@@ -30607,7 +30622,7 @@ $(function () {
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],47:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],49:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30730,5 +30745,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[47,1])
+},{}]},{},[49,1])
 //# sourceMappingURL=/dist/index.map

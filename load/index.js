@@ -73,16 +73,34 @@ const domRegistMethod = () => {
     })
     // Excel载入
     x.dom.excelUploader.on('change', () => {
+        // 切换查询按钮的状态
+        const startSearchBtnToggle = (open, length = 0) => {
+            if (open) {
+                x.dom.startSearchBtn
+                    .removeAttr('disabled')
+                    .removeClass('btn-secondary')
+                    .addClass('btn-success')
+                    .text(`开始查询 ${length} 条单号`)
+            } else {
+                x.dom.startSearchBtn
+                    .attr('disabled', 'true')
+                    .removeClass('btn-success')
+                    .addClass('btn-secondary')
+                    .text(`查询`)
+            }
+        }
+        // 禁用查询按钮
+        startSearchBtnToggle(false)
+        // 获取文件
         const file = x.dom.excelUploader.get(0).files[0]
         if (file) {
-            readExcel(file)
-                .then(res => {
+            readExcel (file)
+                .then (res => {
                     console.log(res)
-                    x.dom.startSearchBtn
-                        .removeAttr('disabled')
-                        .removeClass('btn-secondary')
-                        .addClass('btn-success')
-                        .text(`开始查询 ${res.results.length} 条单号`)
+                    startSearchBtnToggle(true, res.results.length)
+                })
+                .catch (err => {
+                    log(err)
                 })
         } else {
             alert('文件读取失败')
