@@ -82,7 +82,6 @@ js.forEach(function (e) {
 
 var link = ['http://localhost:7879/plug-in.css', 'http://localhost:7879/bootstrap.min.css'];
 link.forEach(function (e) {
-    console.log(e);
     var link = document.createElement('link');
     link.type = 'text/css';
     link.rel = 'stylesheet';
@@ -95,7 +94,7 @@ link.forEach(function (e) {
 require('./components/importCssAndJs');
 
 console.log('Hello');
-},{"./components/importCssAndJs":8}],13:[function(require,module,exports) {
+},{"./components/importCssAndJs":8}],14:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -218,5 +217,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[13,1])
+},{}]},{},[14,1])
 //# sourceMappingURL=/dist/src.map

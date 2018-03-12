@@ -14,7 +14,6 @@ const link = [
     'http://localhost:7879/bootstrap.min.css'
 ]
 link.forEach(function (e) {
-    console.log(e)
     var link = document.createElement('link');
     link.type = 'text/css';
     link.rel = 'stylesheet';
