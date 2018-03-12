@@ -13,6 +13,9 @@ let ids = []
 // 进度条
 let progress = null
 
+// 控制类
+let control = null
+
 // 将操作界面添加到页面
 const domCreat = () => {
     $('body').append($(`
@@ -32,9 +35,9 @@ const domCreat = () => {
                     <button id="startSearchBtn" class="btn btn-secondary" type="button" disabled>查询</button>
                 </div>
             </div>
-            <div id="progressPanel" style="display: none;">
-                <p>进度</p>
-                <div class="progress">
+            <div id="progress-panel" style="display: none;">
+                <p id="progress-title">进度</p>
+                <div class="progress mb-3">
                     <div
                         id="progress-bar"
                         class="progress-bar progress-bar-striped progress-bar-animated"
@@ -44,6 +47,9 @@ const domCreat = () => {
                         aria-valuemax="0"
                         style="width: 0%">
                     </div>
+                </div>
+                <div>
+                    <button id="startButton" type="button" class="btn btn-light">开始</button>
                 </div>
             </div>
         </div>
@@ -100,10 +106,12 @@ const domCreat = () => {
     })
 }
 
+// 进度条类
 class Progress {
     constructor () {
-        this.panel = $('#progressPanel')
+        this.panel = $('#progress-panel')
         this.bar = $('#progress-bar')
+        this.title = $('#progress-title')
         this.max = 0
         this.min = 0
         this.now = 0
@@ -122,6 +130,20 @@ class Progress {
         this.now = now
         this.bar.attr('aria-valuenow', now)
         this.bar.css('width', Math.round((this.now / (this.max - this.min)) * 100) + '%')
+        this.updateTitle()
+    }
+    updateTitle () {
+        this.title.text(`${this.now} / ${this.max}`)
+    }
+}
+
+// 控制类
+class Control {
+    constructor () {
+        //
+    }
+    start () {
+        alert(start)
     }
 }
 
@@ -129,6 +151,7 @@ class Progress {
 $(() => {
     // 将操作界面添加到页面
     domCreat()
+    // 实例化一个进度条对象
     progress = new Progress()
     // 操作页面中的函数 载入数据
     loadData()
