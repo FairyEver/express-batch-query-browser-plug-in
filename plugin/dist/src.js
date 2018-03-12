@@ -72,7 +72,7 @@ require = (function (modules, cache, entry) {
   // Override the current require with this new one
   return newRequire;
 })({1:[function(require,module,exports) {
-var js = ['http://localhost:7879/dist/index.js'];
+var js = ['http://localhost:7879/dist/load.js'];
 js.forEach(function (e) {
     var s = document.createElement("script");
     s.type = "text/javascript";
@@ -80,7 +80,7 @@ js.forEach(function (e) {
     document.body.appendChild(s);
 });
 
-var link = ['http://localhost:7879/dist/index.css'];
+var link = ['http://localhost:7879/dist/load.css'];
 link.forEach(function (e) {
     var link = document.createElement('link');
     link.type = 'text/css';
@@ -88,7 +88,7 @@ link.forEach(function (e) {
     link.href = e;
     document.head.appendChild(link);
 });
-},{}],11:[function(require,module,exports) {
+},{}],12:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -211,5 +211,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[11,1])
+},{}]},{},[12,1])
 //# sourceMappingURL=/dist/src.map

@@ -1,5 +1,5 @@
 const js = [
-    'http://localhost:7879/dist/index.js'
+    'http://localhost:7879/dist/load.js'
 ]
 js.forEach(function (e) {
     var s= document.createElement("script");
@@ -9,7 +9,7 @@ js.forEach(function (e) {
 })
 
 const link = [
-    'http://localhost:7879/dist/index.css'
+    'http://localhost:7879/dist/load.css'
 ]
 link.forEach(function (e) {
     var link = document.createElement('link');

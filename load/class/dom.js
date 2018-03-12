@@ -9,7 +9,7 @@ export default `
         <div class="input-group mb-3">
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="uploader">
-                <label class="custom-file-label" for="uploader">载入 .xlsx 文件</label>
+                <label class="custom-file-label" for="uploader">选择单号列表</label>
             </div>
         </div>
         <div id="progress" style="display: none;">
@@ -23,8 +23,9 @@ export default `
                 </div>
             </div>
         </div>
-        <div id="control" style="display: none;">
+        <div id="control" style="display: block;">
             <button id="startButton" type="button" class="btn btn-light">开始</button>
+            <button id="downloadButton" type="button" class="btn btn-light">下载结果</button>
         </div>
     </div>
 </div>
