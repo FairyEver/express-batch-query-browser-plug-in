@@ -18,16 +18,19 @@ const domCreat = () => {
             <span class="toggle" id="panelToggleButton">隐藏</span>
         </div>
         <div class="x-body" id="panelBody">
+
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">选择单号文件</span>
-                </div>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="upload">
-                    <label class="custom-file-label" for="upload">请选择保存单号的 .xlsx 文件</label>
+                    <input type="file" class="custom-file-input" id="excelUploader">
+                    <label class="custom-file-label" for="excelUploader">载入 .xlsx 文件</label>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button">开始查询</button>
                 </div>
             </div>
+
             <p>进度</p>
+
             <div class="progress">
                 <div
                     class="progress-bar progress-bar-striped progress-bar-animated"
@@ -48,7 +51,7 @@ const domCache = () => {
     [
         'panelToggleButton',
         'panelBody',
-        'upload'
+        'excelUploader'
     ].forEach(e => {
         x.dom[e] = $(`#${e}`)
     })
@@ -68,8 +71,8 @@ const domRegistMethod = () => {
         }
     })
     // 打开Excel文件输入框
-    x.dom.upload.on('change', () => {
-        const file = x.dom.upload.get(0).files[0]
+    x.dom.excelUploader.on('change', () => {
+        const file = x.dom.excelUploader.get(0).files[0]
         if (file) {
             readExcel(file)
                 .then(res => {
