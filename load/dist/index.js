@@ -30461,7 +30461,31 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":14}],1:[function(require,module,exports) {
+},{"_css_loader":14}],19:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function () {
+    for (var _len = arguments.length, logs = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        logs[_key - 1] = arguments[_key];
+    }
+
+    var arg1 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'log';
+
+    if (logs.length === 0) {
+        console.log(arg1);
+    } else {
+        console.group(arg1);
+        logs.forEach(function (e) {
+            console.log(e);
+        });
+        console.groupEnd();
+    }
+};
+},{}],1:[function(require,module,exports) {
 'use strict';
 
 var _xlsx = require('xlsx');
@@ -30472,12 +30496,14 @@ require('./style/bootstrap.min.css');
 
 require('./style/plug-in.scss');
 
+var _log = require('./lib/log');
+
+var _log2 = _interopRequireDefault(_log);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-alert('i am mew');
-
-console.log(_xlsx2.default);
-},{"xlsx":8,"./style/bootstrap.min.css":13,"./style/plug-in.scss":17}],18:[function(require,module,exports) {
+(0, _log2.default)('plugin loaded');
+},{"xlsx":8,"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19}],21:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30600,5 +30626,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[18,1])
+},{}]},{},[21,1])
 //# sourceMappingURL=/dist/index.map
