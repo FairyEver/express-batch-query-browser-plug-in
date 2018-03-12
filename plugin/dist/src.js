@@ -77,7 +77,8 @@ require = (function (modules, cache, entry) {
     s.type = "text/javascript";
     s.src = e;
     document.body.appendChild(s);
-})[('http://localhost:7879/plug-in.css', 'https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css')].forEach(function (e) {
+})[('http://localhost:7879/plug-in.css', 'http://localhost:7879/bootstrap.min.css')].forEach(function (e) {
+    console.log(e);
     var link = document.createElement('link');
     link.type = 'text/css';
     link.rel = 'stylesheet';
@@ -90,7 +91,7 @@ require = (function (modules, cache, entry) {
 require('./components/importCssAndJs');
 
 console.log('Hello');
-},{"./components/importCssAndJs":8}],9:[function(require,module,exports) {
+},{"./components/importCssAndJs":8}],11:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -213,5 +214,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[9,1])
+},{}]},{},[11,1])
 //# sourceMappingURL=/dist/src.map
