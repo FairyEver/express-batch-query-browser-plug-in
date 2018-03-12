@@ -5,7 +5,6 @@ export default class Control {
         this.startBtn = $('#control-startButton')
         // 按钮绑定事件
         this.startBtn.on('click', () => {
-            console.log(progress)
         })
         // 显示
         this.show()

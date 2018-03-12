@@ -30592,9 +30592,7 @@ var Control = function () {
         this.panel = $('#control-panel');
         this.startBtn = $('#control-startButton');
         // 按钮绑定事件
-        this.startBtn.on('click', function () {
-            console.log(progress);
-        });
+        this.startBtn.on('click', function () {});
         // 显示
         this.show();
     }
@@ -30687,7 +30685,7 @@ $(function () {
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/readExcel":25,"./lib/ClassProgress":108,"./lib/ClassControl":110}],120:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/readExcel":25,"./lib/ClassProgress":108,"./lib/ClassControl":110}],121:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30810,5 +30808,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[120,1])
+},{}]},{},[121,1])
 //# sourceMappingURL=/dist/index.map
