@@ -144,31 +144,7 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":14}],19:[function(require,module,exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function () {
-    for (var _len = arguments.length, logs = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        logs[_key - 1] = arguments[_key];
-    }
-
-    var arg1 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'log';
-
-    if (logs.length === 0) {
-        console.log(arg1);
-    } else {
-        console.group(arg1);
-        logs.forEach(function (e) {
-            console.log(e);
-        });
-        console.groupEnd();
-    }
-};
-},{}],28:[function(require,module,exports) {
+},{"_css_loader":14}],28:[function(require,module,exports) {
 
 },{}],27:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
@@ -30611,7 +30587,11 @@ var Control = function () {
         _classCallCheck(this, Control);
 
         this.panel = $('#control-panel');
+        this.startBtn = $('#control-startButton');
         this.show();
+        this.startBtn.on('click', function () {
+            console.log('Hello');
+        });
     }
 
     _createClass(Control, [{
@@ -30631,10 +30611,6 @@ exports.default = Control;
 require('./style/bootstrap.min.css');
 
 require('./style/plug-in.scss');
-
-var _log = require('./lib/log');
-
-var _log2 = _interopRequireDefault(_log);
 
 var _readExcel = require('./lib/readExcel');
 
@@ -30691,9 +30667,8 @@ var domCreat = function domCreat() {
                 progress.setBarMax(res.results.length);
                 // 实例化控制类
                 control = new _ClassControl2.default();
-                console.log(control);
             }).catch(function (err) {
-                (0, _log2.default)(err);
+                console.log(err);
             });
         } else {
             alert('文件读取失败');
@@ -30708,7 +30683,7 @@ $(function () {
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25,"./lib/ClassProgress":108,"./lib/ClassControl":110}],109:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/readExcel":25,"./lib/ClassProgress":108,"./lib/ClassControl":110}],113:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30831,5 +30806,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[109,1])
+},{}]},{},[113,1])
 //# sourceMappingURL=/dist/index.map

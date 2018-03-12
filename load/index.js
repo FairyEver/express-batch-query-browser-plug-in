@@ -1,7 +1,6 @@
 import './style/bootstrap.min.css'
 import './style/plug-in.scss'
 
-import log from './lib/log'
 import readExcel from './lib/readExcel'
 
 // 进度条类
@@ -78,10 +77,9 @@ const domCreat = () => {
                     progress.setBarMax(res.results.length)
                     // 实例化控制类
                     control = new Control()
-                    console.log(control)
                 })
                 .catch (err => {
-                    log(err)
+                    console.log(err)
                 })
         } else {
             alert('文件读取失败')
