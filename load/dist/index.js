@@ -30539,6 +30539,8 @@ exports.default = function (file) {
 },{"xlsx":26}],1:[function(require,module,exports) {
 'use strict';
 
+var _this = undefined;
+
 require('./style/bootstrap.min.css');
 
 require('./style/plug-in.scss');
@@ -30553,9 +30555,72 @@ var _readExcel2 = _interopRequireDefault(_readExcel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 (0, _log2.default)('plugin loaded');
 (0, _log2.default)(_readExcel2.default);
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],30:[function(require,module,exports) {
+
+var x = {
+    panelShow: true,
+    dom: {}
+
+    // 将操作界面添加到页面
+};var domCreat = function domCreat() {
+    $('body').append($('\n    <div class="x">\n        <div class="x-header">\n            \u6279\u91CF\u64CD\u4F5C\n            <span class="toggle" id="panelToggleButton">\u9690\u85CF</span>\n        </div>\n        <div class="x-body" id="panelBody">\n            <div class="input-group mb-3">\n                <div class="input-group-prepend">\n                    <span class="input-group-text">\u9009\u62E9\u5355\u53F7\u6587\u4EF6</span>\n                </div>\n                <div class="custom-file">\n                    <input type="file" class="custom-file-input" id="upload">\n                    <label class="custom-file-label" for="upload">\u8BF7\u9009\u62E9\u4FDD\u5B58\u5355\u53F7\u7684 .xlsx \u6587\u4EF6</label>\n                </div>\n            </div>\n            <p>\u8FDB\u5EA6</p>\n            <div class="progress">\n                <div\n                    class="progress-bar progress-bar-striped progress-bar-animated"\n                    role="progressbar"\n                    aria-valuenow="75"\n                    aria-valuemin="0"\n                    aria-valuemax="100"\n                    style="width: 75%">\n                </div>\n            </div>\n        </div>\n    </div>\n    '.trim()));
+};
+// 将页面元素注册到缓存
+var domCache = function domCache() {
+    // id的可以这样注册
+    ['panelToggleButton', 'panelBody', 'upload'].forEach(function (e) {
+        x.dom[e] = $('#' + e);
+    });
+};
+// 给页面元素注册事件
+var domRegistMethod = function domRegistMethod() {
+    // 面板切换按钮
+    x.dom.panelToggleButton.on('click', function () {
+        if (x.panelShow) {
+            x.dom.panelBody.hide();
+            x.panelShow = false;
+            x.dom.panelToggleButton.text('显示');
+        } else {
+            x.dom.panelBody.show();
+            x.panelShow = true;
+            x.dom.panelToggleButton.text('隐藏');
+        }
+    });
+    // 打开Excel文件输入框
+    x.dom.upload.on('change', function () {
+        var file = x.dom.upload.get(0).files[0];
+        readXlsx(file).then(function (res) {
+            console.log(res);
+        });
+    });
+};
+
+// jquery加载后执行
+$(_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+            switch (_context.prev = _context.next) {
+                case 0:
+                    // 将操作界面添加到页面
+                    domCreat();
+                    // 将页面元素注册到缓存
+                    domCache();
+                    // 给页面元素注册事件
+                    domRegistMethod();
+                    // 操作页面中的函数 载入数据
+                    loadData();
+
+                case 4:
+                case 'end':
+                    return _context.stop();
+            }
+        }
+    }, _callee, _this);
+})));
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],31:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30678,5 +30743,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[30,1])
+},{}]},{},[31,1])
 //# sourceMappingURL=/dist/index.map
