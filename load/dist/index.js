@@ -150,7 +150,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"input-group mb-3\">\n            <div class=\"custom-file\">\n                <input type=\"file\" class=\"custom-file-input\" id=\"uploader\">\n                <label class=\"custom-file-label\" for=\"uploader\">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n            </div>\n        </div>\n        <div id=\"progress\">\n            <p id=\"progress-title\">\u8FDB\u5EA6</p>\n            <div class=\"progress mb-3\">\n                <div\n                    id=\"progress-bar\"\n                    class=\"progress-bar progress-bar-striped progress-bar-animated\"\n                    role=\"progressbar\"\n                    aria-valuenow=\"0\"\n                    aria-valuemin=\"0\"\n                    aria-valuemax=\"0\"\n                    style=\"width: 0%\">\n                </div>\n            </div>\n            <div id=\"control-panel\">\n                <button id=\"control-startButton\" type=\"button\" class=\"btn btn-light\">\u5F00\u59CB</button>\n            </div>\n        </div>\n    </div>\n</div>\n\n".trim();
+exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"input-group mb-3\">\n            <div class=\"custom-file\">\n                <input type=\"file\" class=\"custom-file-input\" id=\"uploader\">\n                <label class=\"custom-file-label\" for=\"uploader\">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n            </div>\n        </div>\n        <div id=\"progress\" style=\"display: none;\">\n            <p id=\"progressTitle\">\u8FDB\u5EA6</p>\n            <div class=\"progress mb-3\">\n                <div\n                    id=\"progressBar\"\n                    class=\"progress-bar progress-bar-striped progress-bar-animated\"\n                    role=\"progressbar\"\n                    style=\"width: 0%\">\n                </div>\n            </div>\n        </div>\n        <div id=\"control\" style=\"display: none;\">\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-light\">\u5F00\u59CB</button>\n        </div>\n    </div>\n</div>\n\n".trim();
 },{}],130:[function(require,module,exports) {
 'use strict';
 
@@ -174,35 +174,28 @@ var X = function () {
 
         // 在页面上添加面板
         $('body').append($(_dom2.default));
+        // 需要查询的列表
+        this.ids = [];
+        // 已经完成的
+        this.finish = [];
         // 注册
         this.cache();
         this.register();
     }
-    // 显示面板
+    // 缓存元素
 
 
     _createClass(X, [{
-        key: 'panelShow',
-        value: function panelShow() {
-            this.$panel.show();
-            this.$panelToggleBtn.text('隐藏');
-        }
-        // 隐藏面板
-
-    }, {
-        key: 'panelHide',
-        value: function panelHide() {
-            this.$panel.hide();
-            this.$panelToggleBtn.text('显示');
-        }
-        // 缓存元素
-
-    }, {
         key: 'cache',
         value: function cache() {
             this.$panel = $('#panel');
             this.$panelToggleBtn = $('#panelToggleBtn');
             this.$uploader = $('#uploader');
+            this.$progress = $('#progress');
+            this.$progressTitle = $('#progressTitle');
+            this.$progressBar = $('#progressBar');
+            this.$control = $('#control');
+            this.$startButton = $('#startButton');
         }
         // 注册事件
 
@@ -211,6 +204,7 @@ var X = function () {
         value: function register() {
             var _this = this;
 
+            // 切换显示隐藏面板
             this.$panelToggleBtn.on('click', function () {
                 if (_this.$panel.is(":hidden")) {
                     _this.panelShow();
@@ -224,10 +218,46 @@ var X = function () {
                 var reader = new FileReader();
                 reader.readAsText(file, 'utf-8');
                 reader.onload = function (e) {
-                    var fileText = e.target.result.split("\n");
-                    console.log(fileText);
+                    _this.ids = e.target.result.split("\n");
+                    if (_this.ids.length > 0) {
+                        _this.$progress.show();
+                        _this.$control.show();
+                    }
                 };
             });
+            // 开始按钮
+            this.$startButton.on('click', function () {
+                // this.finishLength ++
+                // this.progressUpdate()
+                _this.finish.push({
+                    name: 'liyang'
+                });
+                _this.progressUpdate();
+            });
+        }
+        // 显示面板
+
+    }, {
+        key: 'panelShow',
+        value: function panelShow() {
+            this.$panel.show();
+            this.$panelToggleBtn.text('隐藏');
+        }
+        // 隐藏面板
+
+    }, {
+        key: 'panelHide',
+        value: function panelHide() {
+            this.$panel.hide();
+            this.$panelToggleBtn.text('显示');
+        }
+        // 更新进度条
+
+    }, {
+        key: 'progressUpdate',
+        value: function progressUpdate() {
+            var n = Math.round(this.finish.length / this.ids.length * 100);
+            this.$progressBar.css('width', n + '%');
         }
     }]);
 
@@ -254,7 +284,7 @@ $(function () {
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./class/X":130}],153:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./class/X":130}],175:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -377,5 +407,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[153,1])
+},{}]},{},[175,1])
 //# sourceMappingURL=/dist/index.map

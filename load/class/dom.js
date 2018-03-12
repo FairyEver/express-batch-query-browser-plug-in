@@ -12,22 +12,19 @@ export default `
                 <label class="custom-file-label" for="uploader">载入 .xlsx 文件</label>
             </div>
         </div>
-        <div id="progress">
-            <p id="progress-title">进度</p>
+        <div id="progress" style="display: none;">
+            <p id="progressTitle">进度</p>
             <div class="progress mb-3">
                 <div
-                    id="progress-bar"
+                    id="progressBar"
                     class="progress-bar progress-bar-striped progress-bar-animated"
                     role="progressbar"
-                    aria-valuenow="0"
-                    aria-valuemin="0"
-                    aria-valuemax="0"
                     style="width: 0%">
                 </div>
             </div>
-            <div id="control-panel">
-                <button id="control-startButton" type="button" class="btn btn-light">开始</button>
-            </div>
+        </div>
+        <div id="control" style="display: none;">
+            <button id="startButton" type="button" class="btn btn-light">开始</button>
         </div>
     </div>
 </div>
