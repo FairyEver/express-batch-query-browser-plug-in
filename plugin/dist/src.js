@@ -71,9 +71,24 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({1:[function(require,module,exports) {
+})({8:[function(require,module,exports) {
+['http://localhost:7879/xlsx.full.min.js', 'http://localhost:7879/plug-in.js'].forEach(function (e) {
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = e;
+    document.body.appendChild(s);
+})[('http://localhost:7879/plug-in.css', 'https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css')].forEach(function (e) {
+    var link = document.createElement('link');
+    link.type = 'text/css';
+    link.rel = 'stylesheet';
+    link.href = e;
+    document.head.appendChild(link);
+});
+},{}],1:[function(require,module,exports) {
+'use strict';
 
-},{}],7:[function(require,module,exports) {
+require('./components/importCssAndJs');
+},{"./components/importCssAndJs":8}],7:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
