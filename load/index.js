@@ -5,17 +5,14 @@ import readExcel from './lib/readExcel'
 
 // 进度条类
 import Progress from './lib/ClassProgress'
-
 // 控制类
 import Control from './lib/ClassControl'
 
 // 面板显示
 let panelShow = true
-
 // 进度条
 let progress = null
-
-// 控制类
+// 控制
 let control = null
 
 // 将操作界面添加到页面
@@ -76,7 +73,9 @@ const domCreat = () => {
                     progress = new Progress()
                     progress.setBarMax(res.results.length)
                     // 实例化控制类
-                    control = new Control()
+                    control = new Control({
+                        progress
+                    })
                 })
                 .catch (err => {
                     console.log(err)

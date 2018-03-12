@@ -30583,15 +30583,20 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Control = function () {
-    function Control() {
+    function Control(_ref) {
+        var progress = _ref.progress;
+
         _classCallCheck(this, Control);
 
+        // 注册元素
         this.panel = $('#control-panel');
         this.startBtn = $('#control-startButton');
-        this.show();
+        // 按钮绑定事件
         this.startBtn.on('click', function () {
-            console.log('Hello');
+            console.log(progress);
         });
+        // 显示
+        this.show();
     }
 
     _createClass(Control, [{
@@ -30631,14 +30636,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // 进度条类
 var panelShow = true;
-
 // 进度条
-
 
 // 控制类
 var progress = null;
-
-// 控制类
+// 控制
 var control = null;
 
 // 将操作界面添加到页面
@@ -30666,7 +30668,9 @@ var domCreat = function domCreat() {
                 progress = new _ClassProgress2.default();
                 progress.setBarMax(res.results.length);
                 // 实例化控制类
-                control = new _ClassControl2.default();
+                control = new _ClassControl2.default({
+                    progress: progress
+                });
             }).catch(function (err) {
                 console.log(err);
             });
@@ -30683,7 +30687,7 @@ $(function () {
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/readExcel":25,"./lib/ClassProgress":108,"./lib/ClassControl":110}],113:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/readExcel":25,"./lib/ClassProgress":108,"./lib/ClassControl":110}],120:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30806,5 +30810,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[113,1])
+},{}]},{},[120,1])
 //# sourceMappingURL=/dist/index.map

@@ -1,11 +1,14 @@
 export default class Control {
-    constructor () {
+    constructor ({progress}) {
+        // 注册元素
         this.panel = $('#control-panel')
         this.startBtn = $('#control-startButton')
-        this.show()
+        // 按钮绑定事件
         this.startBtn.on('click', () => {
-            console.log('Hello')
+            console.log(progress)
         })
+        // 显示
+        this.show()
     }
     show () {
         this.panel.show()
