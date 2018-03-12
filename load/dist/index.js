@@ -144,19 +144,55 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":14}],1:[function(require,module,exports) {
+},{"_css_loader":14}],132:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C\n        <span class=\"toggle\" id=\"panelToggleButton\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panelBody\">\n        <div class=\"input-group mb-3\">\n            <div class=\"custom-file\">\n                <input type=\"file\" class=\"custom-file-input\" id=\"excelUploader\">\n                <label class=\"custom-file-label\" for=\"excelUploader\">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n            </div>\n        </div>\n        <div id=\"progress-panel\">\n            <p id=\"progress-title\">\u8FDB\u5EA6</p>\n            <div class=\"progress mb-3\">\n                <div\n                    id=\"progress-bar\"\n                    class=\"progress-bar progress-bar-striped progress-bar-animated\"\n                    role=\"progressbar\"\n                    aria-valuenow=\"0\"\n                    aria-valuemin=\"0\"\n                    aria-valuemax=\"0\"\n                    style=\"width: 0%\">\n                </div>\n            </div>\n            <div id=\"control-panel\">\n                <button id=\"control-startButton\" type=\"button\" class=\"btn btn-light\">\u5F00\u59CB</button>\n            </div>\n        </div>\n    </div>\n</div>\n\n".trim();
+},{}],130:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _dom = require('./dom');
+
+var _dom2 = _interopRequireDefault(_dom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var X = function X() {
+    _classCallCheck(this, X);
+
+    $('body').append($(_dom2.default));
+};
+
+exports.default = X;
+},{"./dom":132}],1:[function(require,module,exports) {
 'use strict';
 
 require('./style/bootstrap.min.css');
 
 require('./style/plug-in.scss');
 
+var _X = require('./class/X');
+
+var _X2 = _interopRequireDefault(_X);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // 面板显示
 var panelShow = true;
 
+var x = new _X2.default();
+
 // 将操作界面添加到页面
 var domCreat = function domCreat() {
-    $('body').append($('\n    <div class="x">\n        <div class="x-header">\n            \u6279\u91CF\u64CD\u4F5C\n            <span class="toggle" id="panelToggleButton">\u9690\u85CF</span>\n        </div>\n        <div class="x-body" id="panelBody">\n            <div class="input-group mb-3">\n                <div class="custom-file">\n                    <input type="file" class="custom-file-input" id="excelUploader">\n                    <label class="custom-file-label" for="excelUploader">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n                </div>\n            </div>\n            <div id="progress-panel">\n                <p id="progress-title">\u8FDB\u5EA6</p>\n                <div class="progress mb-3">\n                    <div\n                        id="progress-bar"\n                        class="progress-bar progress-bar-striped progress-bar-animated"\n                        role="progressbar"\n                        aria-valuenow="0"\n                        aria-valuemin="0"\n                        aria-valuemax="0"\n                        style="width: 0%">\n                    </div>\n                </div>\n                <div id="control-panel">\n                    <button id="control-startButton" type="button" class="btn btn-light">\u5F00\u59CB</button>\n                </div>\n            </div>\n        </div>\n    </div>\n    '.trim()));
     // 面板切换按钮
     $('#panelToggleButton').on('click', function () {
         if (panelShow) {
@@ -188,7 +224,7 @@ $(function () {
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17}],129:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./class/X":130}],137:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -311,5 +347,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[129,1])
+},{}]},{},[137,1])
 //# sourceMappingURL=/dist/index.map
