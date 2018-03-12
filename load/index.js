@@ -25,7 +25,7 @@ const domCreat = () => {
                     <label class="custom-file-label" for="excelUploader">载入 .xlsx 文件</label>
                 </div>
                 <div class="input-group-append">
-                    <button class="btn btn-success" type="button">开始查询</button>
+                    <button id="startSearchBtn" class="btn btn-secondary" type="button" disabled>查询</button>
                 </div>
             </div>
 
@@ -51,7 +51,8 @@ const domCache = () => {
     [
         'panelToggleButton',
         'panelBody',
-        'excelUploader'
+        'excelUploader',
+        'startSearchBtn'
     ].forEach(e => {
         x.dom[e] = $(`#${e}`)
     })
@@ -70,13 +71,18 @@ const domRegistMethod = () => {
             x.dom.panelToggleButton.text('隐藏')
         }
     })
-    // 打开Excel文件输入框
+    // Excel载入
     x.dom.excelUploader.on('change', () => {
         const file = x.dom.excelUploader.get(0).files[0]
         if (file) {
             readExcel(file)
                 .then(res => {
                     console.log(res)
+                    x.dom.startSearchBtn
+                        .removeAttr('disabled')
+                        .removeClass('btn-secondary')
+                        .addClass('btn-success')
+                        .text(`开始查询 ${res.results.length} 条单号`)
                 })
         } else {
             alert('文件读取失败')
