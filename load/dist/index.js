@@ -151,14 +151,8 @@ require('./style/bootstrap.min.css');
 
 require('./style/plug-in.scss');
 
-// import readExcel from './lib/readExcel'
-
 // 面板显示
 var panelShow = true;
-// 进度条
-var progress = null;
-// 控制
-var control = null;
 
 // 将操作界面添加到页面
 var domCreat = function domCreat() {
@@ -194,7 +188,7 @@ $(function () {
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17}],127:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17}],129:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -317,5 +311,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[127,1])
+},{}]},{},[129,1])
 //# sourceMappingURL=/dist/index.map

@@ -1,14 +1,8 @@
 import './style/bootstrap.min.css'
 import './style/plug-in.scss'
 
-// import readExcel from './lib/readExcel'
-
 // 面板显示
 let panelShow = true
-// 进度条
-let progress = null
-// 控制
-let control = null
 
 // 将操作界面添加到页面
 const domCreat = () => {
