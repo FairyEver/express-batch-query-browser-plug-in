@@ -9,9 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "xlsx": "^0.12.4"
-  },
+  "dependencies": {},
   "devDependencies": {
     "node-sass": "^4.7.2"
   }

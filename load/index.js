@@ -1,12 +1,7 @@
 import './style/bootstrap.min.css'
 import './style/plug-in.scss'
 
-import readExcel from './lib/readExcel'
-
-// 进度条类
-import Progress from './lib/ClassProgress'
-// 控制类
-import Control from './lib/ClassControl'
+// import readExcel from './lib/readExcel'
 
 // 面板显示
 let panelShow = true
@@ -30,7 +25,7 @@ const domCreat = () => {
                     <label class="custom-file-label" for="excelUploader">载入 .xlsx 文件</label>
                 </div>
             </div>
-            <div id="progress-panel" style="display: none;">
+            <div id="progress-panel">
                 <p id="progress-title">进度</p>
                 <div class="progress mb-3">
                     <div
@@ -43,7 +38,7 @@ const domCreat = () => {
                         style="width: 0%">
                     </div>
                 </div>
-                <div id="control-panel" style="display: none;">
+                <div id="control-panel">
                     <button id="control-startButton" type="button" class="btn btn-light">开始</button>
                 </div>
             </div>
@@ -64,24 +59,12 @@ const domCreat = () => {
     })
     // Excel载入
     $('#excelUploader').on('change', () => {
-        // 获取文件
         const file = $('#excelUploader').get(0).files[0]
-        if (file) {
-            readExcel (file)
-                .then (res => {
-                    // 实例化进度条对象
-                    progress = new Progress()
-                    progress.setBarMax(res.results.length)
-                    // 实例化控制类
-                    control = new Control({
-                        progress
-                    })
-                })
-                .catch (err => {
-                    console.log(err)
-                })
-        } else {
-            alert('文件读取失败')
+        var reader = new FileReader();
+        reader.readAsText(file, 'utf-8');
+        reader.onload = function (e) {
+            var fileText = e.target.result.split("\n");
+            console.log(fileText)
         }
     })
 }
