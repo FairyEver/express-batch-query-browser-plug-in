@@ -71,30 +71,9 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({2:[function(require,module,exports) {
-var js = ['http://localhost:7879/xlsx.full.min.js', 'http://localhost:7879/plug-in.js'];
-js.forEach(function (e) {
-    var s = document.createElement("script");
-    s.type = "text/javascript";
-    s.src = e;
-    document.body.appendChild(s);
-});
+})({1:[function(require,module,exports) {
 
-var link = ['http://localhost:7879/plug-in.css', 'http://localhost:7879/bootstrap.min.css'];
-link.forEach(function (e) {
-    var link = document.createElement('link');
-    link.type = 'text/css';
-    link.rel = 'stylesheet';
-    link.href = e;
-    document.head.appendChild(link);
-});
-},{}],1:[function(require,module,exports) {
-'use strict';
-
-require('./components/importCssAndJs');
-
-console.log('Hello');
-},{"./components/importCssAndJs":2}],3:[function(require,module,exports) {
+},{}],3:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -116,7 +95,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59315' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59112' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -218,4 +197,4 @@ function hmrAccept(bundle, id) {
   });
 }
 },{}]},{},[3,1])
-//# sourceMappingURL=/dist/src.map
+//# sourceMappingURL=/dist/index.map
