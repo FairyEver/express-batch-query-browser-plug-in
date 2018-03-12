@@ -42,8 +42,8 @@ const domCreat = () => {
                         style="width: 0%">
                     </div>
                 </div>
-                <div>
-                    <button id="startButton" type="button" class="btn btn-light">开始</button>
+                <div id="control-panel" style="display: none;">
+                    <button id="control-startButton" type="button" class="btn btn-light">开始</button>
                 </div>
             </div>
         </div>
@@ -71,7 +71,6 @@ const domCreat = () => {
                     // 实例化进度条对象
                     progress = new Progress()
                     progress.setBarMax(res.results.length)
-                    progress.show()
                     // 实例化控制类
                     control = new Control()
                     console.log(control)
@@ -94,6 +93,7 @@ class Progress {
         this.max = 0
         this.min = 0
         this.now = 0
+        this.show()
     }
     show () {
         this.panel.show()
@@ -119,10 +119,11 @@ class Progress {
 // 控制类
 class Control {
     constructor () {
-        this.name = 'Hello'
+        this.panel = $('#control-panel')
+        this.show()
     }
-    start () {
-        alert(start)
+    show () {
+        this.panel.show()
     }
 }
 

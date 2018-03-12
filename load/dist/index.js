@@ -30568,7 +30568,7 @@ var control = null;
 
 // 将操作界面添加到页面
 var domCreat = function domCreat() {
-    $('body').append($('\n    <div class="x">\n        <div class="x-header">\n            \u6279\u91CF\u64CD\u4F5C\n            <span class="toggle" id="panelToggleButton">\u9690\u85CF</span>\n        </div>\n        <div class="x-body" id="panelBody">\n\n            <div class="input-group mb-3">\n                <div class="custom-file">\n                    <input type="file" class="custom-file-input" id="excelUploader">\n                    <label class="custom-file-label" for="excelUploader">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n                </div>\n            </div>\n            <div id="progress-panel" style="display: none;">\n                <p id="progress-title">\u8FDB\u5EA6</p>\n                <div class="progress mb-3">\n                    <div\n                        id="progress-bar"\n                        class="progress-bar progress-bar-striped progress-bar-animated"\n                        role="progressbar"\n                        aria-valuenow="0"\n                        aria-valuemin="0"\n                        aria-valuemax="0"\n                        style="width: 0%">\n                    </div>\n                </div>\n                <div>\n                    <button id="startButton" type="button" class="btn btn-light">\u5F00\u59CB</button>\n                </div>\n            </div>\n        </div>\n    </div>\n    '.trim()));
+    $('body').append($('\n    <div class="x">\n        <div class="x-header">\n            \u6279\u91CF\u64CD\u4F5C\n            <span class="toggle" id="panelToggleButton">\u9690\u85CF</span>\n        </div>\n        <div class="x-body" id="panelBody">\n\n            <div class="input-group mb-3">\n                <div class="custom-file">\n                    <input type="file" class="custom-file-input" id="excelUploader">\n                    <label class="custom-file-label" for="excelUploader">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n                </div>\n            </div>\n            <div id="progress-panel" style="display: none;">\n                <p id="progress-title">\u8FDB\u5EA6</p>\n                <div class="progress mb-3">\n                    <div\n                        id="progress-bar"\n                        class="progress-bar progress-bar-striped progress-bar-animated"\n                        role="progressbar"\n                        aria-valuenow="0"\n                        aria-valuemin="0"\n                        aria-valuemax="0"\n                        style="width: 0%">\n                    </div>\n                </div>\n                <div id="control-panel" style="display: none;">\n                    <button id="control-startButton" type="button" class="btn btn-light">\u5F00\u59CB</button>\n                </div>\n            </div>\n        </div>\n    </div>\n    '.trim()));
     // 面板切换按钮
     $('#panelToggleButton').on('click', function () {
         if (panelShow) {
@@ -30590,7 +30590,6 @@ var domCreat = function domCreat() {
                 // 实例化进度条对象
                 progress = new Progress();
                 progress.setBarMax(res.results.length);
-                progress.show();
                 // 实例化控制类
                 control = new Control();
                 console.log(control);
@@ -30615,6 +30614,7 @@ var Progress = function () {
         this.max = 0;
         this.min = 0;
         this.now = 0;
+        this.show();
     }
 
     _createClass(Progress, [{
@@ -30658,24 +30658,15 @@ var Control = function () {
     function Control() {
         _classCallCheck(this, Control);
 
-        this.name = 'Hello';
+        this.panel = $('#control-panel');
+        this.show();
     }
 
     _createClass(Control, [{
-        key: 'start',
-        value: function (_start) {
-            function start() {
-                return _start.apply(this, arguments);
-            }
-
-            start.toString = function () {
-                return _start.toString();
-            };
-
-            return start;
-        }(function () {
-            alert(start);
-        })
+        key: 'show',
+        value: function show() {
+            this.panel.show();
+        }
     }]);
 
     return Control;
@@ -30690,7 +30681,7 @@ $(function () {
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],103:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./lib/log":19,"./lib/readExcel":25}],106:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -30813,5 +30804,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[103,1])
+},{}]},{},[106,1])
 //# sourceMappingURL=/dist/index.map
