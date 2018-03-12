@@ -1,4 +1,5 @@
 import domStr from './dom'
+
 export default class X {
     constructor () {
         // 在页面上添加面板
