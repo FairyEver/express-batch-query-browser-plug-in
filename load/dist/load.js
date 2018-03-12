@@ -316,6 +316,53 @@ var csv = {
 };
 
 exports.default = csv;
+},{}],50:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function () {
+    $(document).off("click", ".menu li").on("click", ".menu li", function () {
+        console.log('这是新的哦');
+        $(this).find("button").attr("disabled", "disabled").delay(100).animate({ disabled: '' });
+        var index = $(this).index();
+        var bill = $(this).find("button").attr("data-bill");
+        if ($(this).find("button").html() != "登记所有查询记录" && $(this).find("button").html() != "单号轨迹") {
+            if (!$(this).hasClass("curr")) {
+
+                var url = $(this).find("button").attr("data-url");
+                var id = $(this).find("button").attr("data-id");
+                var text = $(this).find("button").text().trim();
+                var queryParms = getUrlParmas(url);
+
+                var currentButton = this;
+                ztosec.billQueryPreauth({ bill: queryParms.id, billType: queryParms.type }, function (params) {
+                    ztoAjax({
+                        url: url + "&queryTicket=" + params.ticket,
+                        type: "get",
+                        data: "",
+                        index: index,
+                        bill: bill,
+                        id: id,
+                        text: text
+                    });
+
+                    $(currentButton).addClass("curr");
+                });
+            } else {
+                $(this).removeClass("curr");
+                var id = $(this).find("button").attr("data-id");
+                if ($(this).find("button").html() != "修改记录") {
+                    $("." + id).remove();
+                } else {
+                    $("." + id).removeClass("curr");
+                }
+            }
+        }
+    });
+};
 },{}],21:[function(require,module,exports) {
 "use strict";
 
@@ -376,7 +423,7 @@ exports.default = function (ids) {
                                 $("#ajaxdata").html("<div style=\"text-align:center; width:100%; line-height:150%;margin-top: 130px;\"><img src=\"/images/error.png\" width=\"150\" /><br/>" + rs.n + "</div>");
                             } else {
                                 $("#ajaxdata").html(rs.n);
-                                console.log(rs.n);
+                                $("button[data-id='taobaodingdan'][data-bill='" + list[0] + "_0']")[0].click();
                                 resolve();
                             }
                             dialogOnresizeparameters();
@@ -417,6 +464,10 @@ var _csvExport = require('../lib/csvExport');
 
 var _csvExport2 = _interopRequireDefault(_csvExport);
 
+var _rebind = require('./rebind');
+
+var _rebind2 = _interopRequireDefault(_rebind);
+
 var _search = require('./search');
 
 var _search2 = _interopRequireDefault(_search);
@@ -429,6 +480,8 @@ var X = function () {
     function X() {
         _classCallCheck(this, X);
 
+        // 重新注册事件
+        (0, _rebind2.default)();
         // 在页面上添加面板
         $('body').append($(_dom2.default));
         // 需要查询的列表
@@ -438,6 +491,8 @@ var X = function () {
         // 注册
         this.cache();
         this.register();
+        // 开发测试
+        this.startSearch();
     }
     // 缓存元素
 
@@ -557,7 +612,7 @@ var X = function () {
 }();
 
 exports.default = X;
-},{"./dom":9,"../lib/csv":10,"../lib/csvExport":11,"./search":21}],1:[function(require,module,exports) {
+},{"./dom":9,"../lib/csv":10,"../lib/csvExport":11,"./rebind":50,"./search":21}],1:[function(require,module,exports) {
 'use strict';
 
 require('./style/bootstrap.min.css');
@@ -576,7 +631,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/bootstrap.min.css":3,"./style/plug-in.scss":4,"./class/X":5}],28:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":3,"./style/plug-in.scss":4,"./class/X":5}],51:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -699,5 +754,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[28,1])
+},{}]},{},[51,1])
 //# sourceMappingURL=/dist/load.map

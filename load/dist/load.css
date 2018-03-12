@@ -19,3 +19,6 @@
       cursor: pointer; }
   .x .x-body {
     padding: 10px 30px; }
+
+#zto_unfreeze_div.hide .form-wrapper {
+  display: none; }

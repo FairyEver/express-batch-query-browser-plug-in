@@ -1,0 +1,21 @@
+.x {
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #FFF;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  .x .x-header {
+    padding: 10px 30px; }
+    .x .x-header .toggle {
+      float: right;
+      cursor: pointer; }
+  .x .x-body {
+    padding: 10px 30px; }
+
+#zto_unfreeze_div.hide .form-wrapper {
+  display: none; }

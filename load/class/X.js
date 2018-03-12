@@ -3,10 +3,13 @@ import domStr from './dom'
 import Csv from '../lib/csv'
 import ExportCsv from '../lib/csvExport'
 
+import rebind from './rebind'
 import search from './search'
 
 export default class X {
     constructor () {
+        // 重新注册事件
+        rebind()
         // 在页面上添加面板
         $('body').append($(domStr))
         // 需要查询的列表
@@ -29,6 +32,8 @@ export default class X {
         // 注册
         this.cache()
         this.register()
+        // 开发测试
+        this.startSearch()
     }
     // 缓存元素
     cache () {
