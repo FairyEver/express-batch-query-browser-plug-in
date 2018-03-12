@@ -150,13 +150,15 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C\n        <span class=\"toggle\" id=\"panelToggleButton\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panelBody\">\n        <div class=\"input-group mb-3\">\n            <div class=\"custom-file\">\n                <input type=\"file\" class=\"custom-file-input\" id=\"excelUploader\">\n                <label class=\"custom-file-label\" for=\"excelUploader\">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n            </div>\n        </div>\n        <div id=\"progress-panel\">\n            <p id=\"progress-title\">\u8FDB\u5EA6</p>\n            <div class=\"progress mb-3\">\n                <div\n                    id=\"progress-bar\"\n                    class=\"progress-bar progress-bar-striped progress-bar-animated\"\n                    role=\"progressbar\"\n                    aria-valuenow=\"0\"\n                    aria-valuemin=\"0\"\n                    aria-valuemax=\"0\"\n                    style=\"width: 0%\">\n                </div>\n            </div>\n            <div id=\"control-panel\">\n                <button id=\"control-startButton\" type=\"button\" class=\"btn btn-light\">\u5F00\u59CB</button>\n            </div>\n        </div>\n    </div>\n</div>\n\n".trim();
+exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"input-group mb-3\">\n            <div class=\"custom-file\">\n                <input type=\"file\" class=\"custom-file-input\" id=\"uploader\">\n                <label class=\"custom-file-label\" for=\"uploader\">\u8F7D\u5165 .xlsx \u6587\u4EF6</label>\n            </div>\n        </div>\n        <div id=\"progress\">\n            <p id=\"progress-title\">\u8FDB\u5EA6</p>\n            <div class=\"progress mb-3\">\n                <div\n                    id=\"progress-bar\"\n                    class=\"progress-bar progress-bar-striped progress-bar-animated\"\n                    role=\"progressbar\"\n                    aria-valuenow=\"0\"\n                    aria-valuemin=\"0\"\n                    aria-valuemax=\"0\"\n                    style=\"width: 0%\">\n                </div>\n            </div>\n            <div id=\"control-panel\">\n                <button id=\"control-startButton\" type=\"button\" class=\"btn btn-light\">\u5F00\u59CB</button>\n            </div>\n        </div>\n    </div>\n</div>\n\n".trim();
 },{}],130:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _dom = require('./dom');
 
@@ -166,11 +168,71 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var X = function X() {
-    _classCallCheck(this, X);
+var X = function () {
+    function X() {
+        _classCallCheck(this, X);
 
-    $('body').append($(_dom2.default));
-};
+        // 在页面上添加面板
+        $('body').append($(_dom2.default));
+        // 注册
+        this.cache();
+        this.register();
+    }
+    // 显示面板
+
+
+    _createClass(X, [{
+        key: 'panelShow',
+        value: function panelShow() {
+            this.$panel.show();
+            this.$panelToggleBtn.text('隐藏');
+        }
+        // 隐藏面板
+
+    }, {
+        key: 'panelHide',
+        value: function panelHide() {
+            this.$panel.hide();
+            this.$panelToggleBtn.text('显示');
+        }
+        // 缓存元素
+
+    }, {
+        key: 'cache',
+        value: function cache() {
+            this.$panel = $('#panel');
+            this.$panelToggleBtn = $('#panelToggleBtn');
+            this.$uploader = $('#uploader');
+        }
+        // 注册事件
+
+    }, {
+        key: 'register',
+        value: function register() {
+            var _this = this;
+
+            this.$panelToggleBtn.on('click', function () {
+                if (_this.$panel.is(":hidden")) {
+                    _this.panelShow();
+                } else {
+                    _this.panelHide();
+                }
+            });
+            // Excel载入
+            this.$uploader.on('change', function () {
+                var file = _this.$uploader.get(0).files[0];
+                var reader = new FileReader();
+                reader.readAsText(file, 'utf-8');
+                reader.onload = function (e) {
+                    var fileText = e.target.result.split("\n");
+                    console.log(fileText);
+                };
+            });
+        }
+    }]);
+
+    return X;
+}();
 
 exports.default = X;
 },{"./dom":132}],1:[function(require,module,exports) {
@@ -186,45 +248,13 @@ var _X2 = _interopRequireDefault(_X);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// 面板显示
-var panelShow = true;
-
-var x = new _X2.default();
-
-// 将操作界面添加到页面
-var domCreat = function domCreat() {
-    // 面板切换按钮
-    $('#panelToggleButton').on('click', function () {
-        if (panelShow) {
-            panelShow = false;
-            $('#panelBody').hide();
-            $('#panelToggleButton').text('显示');
-        } else {
-            panelShow = true;
-            $('#panelBody').show();
-            $('#panelToggleButton').text('隐藏');
-        }
-    });
-    // Excel载入
-    $('#excelUploader').on('change', function () {
-        var file = $('#excelUploader').get(0).files[0];
-        var reader = new FileReader();
-        reader.readAsText(file, 'utf-8');
-        reader.onload = function (e) {
-            var fileText = e.target.result.split("\n");
-            console.log(fileText);
-        };
-    });
-};
-
 // jquery加载后执行
 $(function () {
-    // 将操作界面添加到页面
-    domCreat();
+    var x = new _X2.default();
     // 操作页面中的函数 载入数据
     loadData();
 });
-},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./class/X":130}],137:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":13,"./style/plug-in.scss":17,"./class/X":130}],153:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -347,5 +377,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[137,1])
+},{}]},{},[153,1])
 //# sourceMappingURL=/dist/index.map

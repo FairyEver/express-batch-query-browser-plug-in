@@ -3,16 +3,16 @@ export default `
 <div class="x">
     <div class="x-header">
         批量操作
-        <span class="toggle" id="panelToggleButton">隐藏</span>
+        <span class="toggle" id="panelToggleBtn">隐藏</span>
     </div>
-    <div class="x-body" id="panelBody">
+    <div class="x-body" id="panel">
         <div class="input-group mb-3">
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="excelUploader">
-                <label class="custom-file-label" for="excelUploader">载入 .xlsx 文件</label>
+                <input type="file" class="custom-file-input" id="uploader">
+                <label class="custom-file-label" for="uploader">载入 .xlsx 文件</label>
             </div>
         </div>
-        <div id="progress-panel">
+        <div id="progress">
             <p id="progress-title">进度</p>
             <div class="progress mb-3">
                 <div
