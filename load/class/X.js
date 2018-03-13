@@ -219,6 +219,7 @@ export default class X {
         this.$panel = $('#panel')
         this.$panelToggleBtn = $('#panelToggleBtn')
         this.$uploader = $('#uploader')
+        this.$helpButton = $('#helpButton')
         this.$startButton = $('#startButton')
         this.$downloadButton = $('#downloadButton')
     }
@@ -249,6 +250,15 @@ export default class X {
                 return
             }
             this.startSearch()
+        })
+        // 帮助按钮
+        this.$helpButton.on('click', () => {
+            alert(`
+1
+2
+3
+4
+            `.trim())
         })
         // 下载按钮
         this.$downloadButton.on('click', () => {

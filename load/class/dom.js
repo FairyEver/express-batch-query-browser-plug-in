@@ -11,6 +11,7 @@ export default `
             选择单号文件 <input type="file" id="uploader">
         </div>
         <div id="control">
+            <button id="helpButton" type="button" class="btn btn-x">如何使用</button>
             <button id="startButton" type="button" class="btn btn-x">开始</button>
             <button id="downloadButton" type="button" class="btn btn-x">下载结果</button>
         </div>

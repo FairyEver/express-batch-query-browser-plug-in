@@ -144,7 +144,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div id=\"control\">\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
+exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div id=\"control\">\n            <button id=\"helpButton\" type=\"button\" class=\"btn btn-x\">\u5982\u4F55\u4F7F\u7528</button>\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
 },{}],10:[function(require,module,exports) {
 'use strict';
 
@@ -556,6 +556,7 @@ var X = function () {
             this.$panel = $('#panel');
             this.$panelToggleBtn = $('#panelToggleBtn');
             this.$uploader = $('#uploader');
+            this.$helpButton = $('#helpButton');
             this.$startButton = $('#startButton');
             this.$downloadButton = $('#downloadButton');
         }
@@ -591,6 +592,10 @@ var X = function () {
                     return;
                 }
                 _this2.startSearch();
+            });
+            // 帮助按钮
+            this.$helpButton.on('click', function () {
+                alert('\n1\n2\n3\n4\n            '.trim());
             });
             // 下载按钮
             this.$downloadButton.on('click', function () {
@@ -665,7 +670,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],148:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],151:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -788,5 +793,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[148,1])
+},{}]},{},[151,1])
 //# sourceMappingURL=/dist/load.map
