@@ -390,7 +390,7 @@ var X = function () {
                                     billType: queryParms.type
                                 }, function (params) {
                                     ticket = params.ticket;
-                                    $('#log').text('\u83B7\u53D6\u51ED\u8BC1 \u5355\u53F7\uFF1A' + queryParms.id + ' \u6210\u529F \u51ED\u8BC1\uFF1A' + ticket);
+                                    $('#log').text('\u83B7\u53D6\u51ED\u8BC1 \u5355\u53F7\uFF1A' + queryParms.id + ' \u6210\u529F \u51ED\u8BC1\uFF1A' + ticket + ' \u5171\u67E5\u8BE2' + count + '\u6B21');
                                     resolve(ticket);
                                 });
                                 setTimeout(function () {
@@ -419,7 +419,6 @@ var X = function () {
                             text: text
                         });
                         $(currentButton).addClass("curr");
-                        alert(1);
                     });
                 } else {
                     $(this).removeClass("curr");
@@ -631,7 +630,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],109:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],111:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -754,5 +753,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[109,1])
+},{}]},{},[111,1])
 //# sourceMappingURL=/dist/load.map

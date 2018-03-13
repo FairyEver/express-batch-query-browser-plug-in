@@ -63,7 +63,7 @@ export default class X {
                                 billType: queryParms.type
                             }, function (params) {
                                 ticket = params.ticket
-                                $('#log').text(`获取凭证 单号：${queryParms.id} 成功 凭证：${ticket}`)
+                                $('#log').text(`获取凭证 单号：${queryParms.id} 成功 凭证：${ticket} 共查询${count}次`)
                                 resolve(ticket)
                             })
                             setTimeout(() => {
@@ -92,7 +92,6 @@ export default class X {
                             text: text
                         });
                         $(currentButton).addClass("curr");
-                        alert(1)
                     })
             } else {
                 $(this).removeClass("curr");
