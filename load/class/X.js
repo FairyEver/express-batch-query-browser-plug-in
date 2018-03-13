@@ -111,11 +111,11 @@ export default class X {
                         $(currentButton).addClass("curr");
                         // 上面的操作结束后，如果有结果的话 就该到页面里了
                         setTimeout(() => {
+                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 开始分析数据`)
                             // 分析表格数据
-                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 开始分析表格数据`)
                             _this.getDataFromTable(queryParms.id)
                             _this.idIndex ++
-                            // 判断是否还要继续
+                            // 下一步 判断是否还要继续
                             if (_this.play) {
                                 if (_this.idIndex < _this.ids.length) {
                                     _this.startSearch()
