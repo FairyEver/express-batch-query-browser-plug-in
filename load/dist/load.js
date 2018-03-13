@@ -310,79 +310,6 @@ var csv = {
 };
 
 exports.default = csv;
-},{}],50:[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function () {
-    $(document).off("click", ".menu li").on("click", ".menu li", function () {
-        // 临时禁用这个按钮
-        $(this).find("button").attr("disabled", "disabled").delay(100).animate({ disabled: '' });
-        // 在 ztoAjax 中用到
-        var index = $(this).index();
-        // 单号 类似于 630644632616_0 这个数据是绑定在按钮上的
-        var bill = $(this).find("button").attr("data-bill");
-        // 忽略这两个按钮
-        if ($(this).find("button").html() === "登记所有查询记录" || $(this).find("button").html() === "单号轨迹") {
-            return;
-        }
-        if (!$(this).hasClass("curr")) {
-            // 从这个按钮上获取数据
-            var url = $(this).find("button").attr("data-url");
-            var id = $(this).find("button").attr("data-id");
-            var text = $(this).find("button").text().trim();
-            var queryParms = getUrlParmas(url);
-            var currentButton = this;
-            // 给我刷！
-            var billQueryPreauthFn = function billQueryPreauthFn() {
-                return new Promise(function (resolve, reject) {
-                    var ticket = '';
-                    var doIt = function doIt() {
-                        ztosec.billQueryPreauth({
-                            bill: queryParms.id,
-                            billType: queryParms.type
-                        }, function (params) {
-                            ticket = params.ticket;
-                        });
-                        setTimeout(function () {
-                            if (ticket) {
-                                resolve(ticket);
-                            } else {
-                                doIt();
-                            }
-                        }, 1000);
-                    };
-                    doIt();
-                });
-            };
-            billQueryPreauthFn()
-            // 好 刷到了
-            .then(function (ticket) {
-                ztoAjax({
-                    url: url + "&queryTicket=" + ticket,
-                    type: "get",
-                    data: "",
-                    index: index,
-                    bill: bill,
-                    id: id,
-                    text: text
-                });
-                $(currentButton).addClass("curr");
-            });
-        } else {
-            $(this).removeClass("curr");
-            var id = $(this).find("button").attr("data-id");
-            if ($(this).find("button").html() != "修改记录") {
-                $("." + id).remove();
-            } else {
-                $("." + id).removeClass("curr");
-            }
-        }
-    });
-};
 },{}],21:[function(require,module,exports) {
 "use strict";
 
@@ -484,10 +411,6 @@ var _csvExport = require('../lib/csvExport');
 
 var _csvExport2 = _interopRequireDefault(_csvExport);
 
-var _rebind = require('./rebind');
-
-var _rebind2 = _interopRequireDefault(_rebind);
-
 var _search = require('./search');
 
 var _search2 = _interopRequireDefault(_search);
@@ -501,7 +424,7 @@ var X = function () {
         _classCallCheck(this, X);
 
         // 重新注册事件
-        (0, _rebind2.default)();
+        this.rebind();
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
@@ -527,10 +450,78 @@ var X = function () {
         // 开发测试
         // this.startSearch()
     }
-    // 缓存元素
-
 
     _createClass(X, [{
+        key: 'rebind',
+        value: function rebind() {
+            $(document).off("click", ".menu li").on("click", ".menu li", function () {
+                // 临时禁用这个按钮
+                $(this).find("button").attr("disabled", "disabled").delay(100).animate({ disabled: '' });
+                // 在 ztoAjax 中用到
+                var index = $(this).index();
+                // 单号 类似于 630644632616_0 这个数据是绑定在按钮上的
+                var bill = $(this).find("button").attr("data-bill");
+                // 忽略这两个按钮
+                if ($(this).find("button").html() === "登记所有查询记录" || $(this).find("button").html() === "单号轨迹") {
+                    return;
+                }
+                if (!$(this).hasClass("curr")) {
+                    // 从这个按钮上获取数据
+                    var url = $(this).find("button").attr("data-url");
+                    var id = $(this).find("button").attr("data-id");
+                    var text = $(this).find("button").text().trim();
+                    var queryParms = getUrlParmas(url);
+                    var currentButton = this;
+                    // 给我刷！
+                    var billQueryPreauthFn = function billQueryPreauthFn() {
+                        return new Promise(function (resolve, reject) {
+                            var ticket = '';
+                            var doIt = function doIt() {
+                                ztosec.billQueryPreauth({
+                                    bill: queryParms.id,
+                                    billType: queryParms.type
+                                }, function (params) {
+                                    ticket = params.ticket;
+                                });
+                                setTimeout(function () {
+                                    if (ticket) {
+                                        resolve(ticket);
+                                    } else {
+                                        doIt();
+                                    }
+                                }, 1000);
+                            };
+                            doIt();
+                        });
+                    };
+                    billQueryPreauthFn()
+                    // 好 刷到了
+                    .then(function (ticket) {
+                        ztoAjax({
+                            url: url + "&queryTicket=" + ticket,
+                            type: "get",
+                            data: "",
+                            index: index,
+                            bill: bill,
+                            id: id,
+                            text: text
+                        });
+                        $(currentButton).addClass("curr");
+                    });
+                } else {
+                    $(this).removeClass("curr");
+                    var id = $(this).find("button").attr("data-id");
+                    if ($(this).find("button").html() != "修改记录") {
+                        $("." + id).remove();
+                    } else {
+                        $("." + id).removeClass("curr");
+                    }
+                }
+            });
+        }
+        // 缓存元素
+
+    }, {
         key: 'cache',
         value: function cache() {
             // 原页面带的元素
@@ -634,7 +625,7 @@ var X = function () {
 }();
 
 exports.default = X;
-},{"./dom":9,"../lib/csv":10,"../lib/csvExport":11,"./rebind":50,"./search":21}],1:[function(require,module,exports) {
+},{"./dom":9,"../lib/csv":10,"../lib/csvExport":11,"./search":21}],1:[function(require,module,exports) {
 'use strict';
 
 require('./style/plug-in.scss');
@@ -652,7 +643,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],93:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],96:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -775,5 +766,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[93,1])
+},{}]},{},[96,1])
 //# sourceMappingURL=/dist/load.map
