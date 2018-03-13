@@ -1,18 +1,3 @@
 {
-  "files.exclude": {
-    "*.DS_Store": true,
-    "*.DS_Store.*": true,
-    "*.git": true,
-    "*.git.*": true,
-    "*.gitignore": true,
-    "*.gitignore.*": true,
-    "*.vscode": true,
-    "*.vscode.*": true,
-    "*README": true,
-    "*README.*": true,
-    "*plugin": true,
-    "*plugin.*": true,
-    "*测试": true,
-    "*测试.*": true
-  }
+  "files.exclude": {}
 }
