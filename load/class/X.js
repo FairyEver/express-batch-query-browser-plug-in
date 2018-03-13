@@ -163,7 +163,6 @@ export default class X {
                                     resolve()
                                 }
                                 dialogOnresizeparameters();
-    
                             }
                             var date2 = new Date();    //结束时间
                             var date3 = date2.getTime() - date1.getTime();  //时间差的毫秒数

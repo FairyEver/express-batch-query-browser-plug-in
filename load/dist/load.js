@@ -634,7 +634,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],116:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],117:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -757,5 +757,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[116,1])
+},{}]},{},[117,1])
 //# sourceMappingURL=/dist/load.map
