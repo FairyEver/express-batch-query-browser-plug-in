@@ -428,28 +428,17 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = []
-        // '630644632616',
-        // '630644632566',
-        // '630644632458',
-        // '630644632433',
-        // '630644632340',
-        // '630644632256',
-        // '630644625936',
-        // '630644625861',
-        // '630644625714',
-        // '630644619477',
-        // '630644619460',
-        // '630644619452'
-
+        this.ids = ['630644632616', '630644632566', '630644632458', '630644632433', '630644632340', '630644632256', '630644625936', '630644625861', '630644625714', '630644619477', '630644619460', '630644619452'];
         // 已经完成的
-        ;this.finish = [];
+        this.finish = [];
         // 注册
         this.cache();
         this.register();
         // 开发测试
         // this.startSearch()
     }
+    // 重新绑定事件
+
 
     _createClass(X, [{
         key: 'rebind',
@@ -465,6 +454,7 @@ var X = function () {
                 if ($(this).find("button").html() === "登记所有查询记录" || $(this).find("button").html() === "单号轨迹") {
                     return;
                 }
+                // 需要处理事件的按钮
                 if (!$(this).hasClass("curr")) {
                     // 从这个按钮上获取数据
                     var url = $(this).find("button").attr("data-url");
@@ -477,17 +467,21 @@ var X = function () {
                         return new Promise(function (resolve, reject) {
                             var ticket = '';
                             var doIt = function doIt() {
+                                $('#log').text('\u5C1D\u8BD5\u83B7\u53D6\u51ED\u8BC1 ' + queryParms.id);
                                 ztosec.billQueryPreauth({
                                     bill: queryParms.id,
                                     billType: queryParms.type
                                 }, function (params) {
                                     ticket = params.ticket;
+                                    $('#log').text('\u6210\u529F\u83B7\u53D6\u51ED\u8BC1 ' + ticket);
+                                    resolve(ticket);
                                 });
                                 setTimeout(function () {
-                                    if (ticket) {
-                                        resolve(ticket);
-                                    } else {
-                                        doIt();
+                                    if (ticket === '') {
+                                        $('#log').text('\u83B7\u53D6\u51ED\u8BC1\u5931\u8D25 ' + queryParms.id);
+                                        setTimeout(function () {
+                                            doIt();
+                                        }, 300);
                                     }
                                 }, 1000);
                             };
@@ -643,7 +637,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],96:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],100:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -766,5 +760,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[96,1])
+},{}]},{},[100,1])
 //# sourceMappingURL=/dist/load.map

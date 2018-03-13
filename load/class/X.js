@@ -12,18 +12,18 @@ export default class X {
         $('#ajaxdata').before($(domStr))
         // 需要查询的列表
         this.ids = [
-            // '630644632616',
-            // '630644632566',
-            // '630644632458',
-            // '630644632433',
-            // '630644632340',
-            // '630644632256',
-            // '630644625936',
-            // '630644625861',
-            // '630644625714',
-            // '630644619477',
-            // '630644619460',
-            // '630644619452'
+            '630644632616',
+            '630644632566',
+            '630644632458',
+            '630644632433',
+            '630644632340',
+            '630644632256',
+            '630644625936',
+            '630644625861',
+            '630644625714',
+            '630644619477',
+            '630644619460',
+            '630644619452'
         ]
         // 已经完成的
         this.finish = []
@@ -33,7 +33,7 @@ export default class X {
         // 开发测试
         // this.startSearch()
     }
-    重新
+    // 重新绑定事件
     rebind () {
         $(document).off("click", ".menu li").on("click", ".menu li", function () {
             // 临时禁用这个按钮
@@ -59,17 +59,21 @@ export default class X {
                     return new Promise((resolve, reject) => {
                         let ticket = ''
                         const doIt = () => {
+                            $('#log').text(`尝试获取凭证 ${queryParms.id}`)
                             ztosec.billQueryPreauth({
                                 bill: queryParms.id,
                                 billType: queryParms.type
                             }, function (params) {
                                 ticket = params.ticket
+                                $('#log').text(`成功获取凭证 ${ticket}`)
+                                resolve(ticket)
                             })
                             setTimeout(() => {
-                                if (ticket) {
-                                    resolve(ticket)
-                                } else {
-                                    doIt()
+                                if (ticket === '') {
+                                    $('#log').text(`获取凭证失败 ${queryParms.id}`)
+                                    setTimeout(() => {
+                                        doIt()
+                                    }, 300)
                                 }
                             }, 1000)
                         }
