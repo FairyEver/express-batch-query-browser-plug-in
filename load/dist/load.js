@@ -509,7 +509,7 @@ var X = function () {
         // 重新注册事件
         (0, _rebind2.default)();
         // 在页面上添加面板
-        $('body').append($(_dom2.default));
+        $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
         this.ids = ['630644632616', '630644632566', '630644632458', '630644632433', '630644632340', '630644632256', '630644625936', '630644625861', '630644625714', '630644619477', '630644619460', '630644619452'];
         // 已经完成的
@@ -657,7 +657,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/bootstrap.min.css":3,"./style/plug-in.scss":4,"./class/X":5}],74:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":3,"./style/plug-in.scss":4,"./class/X":5}],80:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -780,5 +780,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[74,1])
+},{}]},{},[80,1])
 //# sourceMappingURL=/dist/load.map

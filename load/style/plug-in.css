@@ -1,18 +1,19 @@
 .x {
   width: 100%;
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
   color: #FFF;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; }
+  user-select: none;
+  margin-top: 100px;
+  margin-bottom: -100px; }
   .x .x-header {
-    padding: 10px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0px 30px;
     background-color: #5393DD; }
     .x .x-header .toggle {
       float: right;
       cursor: pointer; }
   .x .x-body {
-    padding: 10px; }
+    padding: 30px; }
