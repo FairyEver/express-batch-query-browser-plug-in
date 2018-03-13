@@ -126,9 +126,13 @@ export default class X {
                                 console.log('一般的按钮')
                                 break;
                         }
-                        // _this.getDataFromTable(queryParms.id)
                         // 1 这里要分为两个步骤 先取订单信息
+                        let dingdan = _this.getDingdanDataFromTable(queryParms.id)
+                        console.log(dingdan)
                         // 2 然后是取录单记录
+                        let ludan = _this.getLudanDataFromTable(queryParms.id)
+                        console.log(ludan)
+                        // 然后index加1
                         _this.idIndex ++
                         // 下一步 判断是否还要继续
                         if (_this.play) {
@@ -161,8 +165,9 @@ export default class X {
             }
         })
     }
-    // 从页面上获取数据
-    getDataFromTable (id) {
+    // 从页面上的订单表格中获取数据
+    getDingdanDataFromTable (id) {
+        let res = []
         const ul = $(`#route${id}_0`)
         const trs = ul.find('.curr.taobaodingdan table').children(1).children()
         for (let index = 1; index < trs.length; index++) {
@@ -179,8 +184,9 @@ export default class X {
                 shoujianwangdian: tds[8].innerHTML,
                 dingdanlaiyuan: $(tds[9]).text()
             }
-            this.finish.push(row)
+            res.push(row)
         }
+        return res
     }
     // 搜索 这一步只是返回列表
     search (id = '') {

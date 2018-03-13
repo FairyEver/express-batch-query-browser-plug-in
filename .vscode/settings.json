@@ -10,8 +10,6 @@
     "*.vscode.*": true,
     "*README": true,
     "*README.*": true,
-    "*plugin": true,
-    "*plugin.*": true,
     "*测试": true,
     "*测试.*": true,
     "load/node_modules": true,

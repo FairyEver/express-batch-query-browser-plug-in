@@ -450,9 +450,13 @@ var X = function () {
                                     console.log('一般的按钮');
                                     break;
                             }
-                            // _this.getDataFromTable(queryParms.id)
                             // 1 这里要分为两个步骤 先取订单信息
+                            var dingdan = _this.getDingdanDataFromTable(queryParms.id);
+                            console.log(dingdan);
                             // 2 然后是取录单记录
+                            var ludan = _this.getLudanDataFromTable(queryParms.id);
+                            console.log(ludan);
+                            // 然后index加1
                             _this.idIndex++;
                             // 下一步 判断是否还要继续
                             if (_this.play) {
@@ -485,11 +489,12 @@ var X = function () {
                 }
             });
         }
-        // 从页面上获取数据
+        // 从页面上的订单表格中获取数据
 
     }, {
-        key: 'getDataFromTable',
-        value: function getDataFromTable(id) {
+        key: 'getDingdanDataFromTable',
+        value: function getDingdanDataFromTable(id) {
+            var res = [];
             var ul = $('#route' + id + '_0');
             var trs = ul.find('.curr.taobaodingdan table').children(1).children();
             for (var index = 1; index < trs.length; index++) {
@@ -506,8 +511,9 @@ var X = function () {
                     shoujianwangdian: tds[8].innerHTML,
                     dingdanlaiyuan: $(tds[9]).text()
                 };
-                this.finish.push(row);
+                res.push(row);
             }
+            return res;
         }
         // 搜索 这一步只是返回列表
 
@@ -727,7 +733,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],199:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],204:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -850,5 +856,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[199,1])
+},{}]},{},[204,1])
 //# sourceMappingURL=/dist/load.map
