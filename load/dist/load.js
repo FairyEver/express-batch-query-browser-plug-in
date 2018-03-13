@@ -345,7 +345,7 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = ['630644632616', '630644632566', '630644632458', '630644632433', '630644632340', '630644632256', '630644625936', '630644625861', '630644625714', '630644619477', '630644619460', '630644619452'];
+        this.ids = ['630644632616', '630644632566', '630644632458'];
         // 当前正在查的ID的index
         this.idIndex = 0;
         // 已经完成的
@@ -362,7 +362,8 @@ var X = function () {
     _createClass(X, [{
         key: 'hackPage',
         value: function hackPage() {
-            this.$Panel1.html('<img id="hack-img" src="http://fairyever.qiniudn.com/zto-hack-ready.png">');
+            // this.$Panel1.html('<img id="hack-img" src="http://fairyever.qiniudn.com/zto-hack-ready.png">')
+            this.$Panel1.html('');
         }
         // 重新绑定事件
 
@@ -395,18 +396,18 @@ var X = function () {
                             var ticket = '';
                             var count = 1;
                             var doIt = function doIt() {
-                                $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6\u51ED\u8BC1 \u7B2C' + count + '\u6B21 \u6B63\u5728\u8BF7\u6C42');
+                                $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u6B63\u5728\u8BF7\u6C42');
                                 ztosec.billQueryPreauth({
                                     bill: queryParms.id,
                                     billType: queryParms.type
                                 }, function (params) {
                                     ticket = params.ticket;
-                                    $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6\u51ED\u8BC1 \u7B2C' + count + '\u6B21 \u6210\u529F \u51ED\u8BC1\uFF1A' + ticket);
+                                    $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u6210\u529F Ticket\uFF1A' + ticket);
                                     resolve(ticket);
                                 });
                                 setTimeout(function () {
                                     if (ticket === '') {
-                                        $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6\u51ED\u8BC1 \u7B2C' + count + '\u6B21 \u5931\u8D25');
+                                        $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u5931\u8D25');
                                         setTimeout(function () {
                                             count += 1;
                                             doIt();
@@ -704,7 +705,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],170:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],174:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -827,5 +828,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[170,1])
+},{}]},{},[174,1])
 //# sourceMappingURL=/dist/load.map

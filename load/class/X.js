@@ -15,15 +15,15 @@ export default class X {
             '630644632616',
             '630644632566',
             '630644632458',
-            '630644632433',
-            '630644632340',
-            '630644632256',
-            '630644625936',
-            '630644625861',
-            '630644625714',
-            '630644619477',
-            '630644619460',
-            '630644619452'
+            // '630644632433',
+            // '630644632340',
+            // '630644632256',
+            // '630644625936',
+            // '630644625861',
+            // '630644625714',
+            // '630644619477',
+            // '630644619460',
+            // '630644619452'
         ]
         // 当前正在查的ID的index
         this.idIndex = 0
@@ -38,7 +38,8 @@ export default class X {
         // this.startSearch()
     }
     hackPage () {
-        this.$Panel1.html('<img id="hack-img" src="http://fairyever.qiniudn.com/zto-hack-ready.png">')
+        // this.$Panel1.html('<img id="hack-img" src="http://fairyever.qiniudn.com/zto-hack-ready.png">')
+        this.$Panel1.html('')
     }
     // 重新绑定事件
     rebind () {
@@ -66,18 +67,18 @@ export default class X {
                         let ticket = ''
                         let count = 1
                         const doIt = () => {
-                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取凭证 第${count}次 正在请求`)
+                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取Ticket 第${count}次 正在请求`)
                             ztosec.billQueryPreauth({
                                 bill: queryParms.id,
                                 billType: queryParms.type
                             }, function (params) {
                                 ticket = params.ticket
-                                $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取凭证 第${count}次 成功 凭证：${ticket}`)
+                                $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取Ticket 第${count}次 成功 Ticket：${ticket}`)
                                 resolve(ticket)
                             })
                             setTimeout(() => {
                                 if (ticket === '') {
-                                    $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取凭证 第${count}次 失败`)
+                                    $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取Ticket 第${count}次 失败`)
                                     setTimeout(() => {
                                         count += 1
                                         doIt()
