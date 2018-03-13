@@ -38,8 +38,8 @@ export default class X {
         // this.startSearch()
     }
     hackPage () {
-        // this.$Panel1.html('<img id="hack-img" src="http://fairyever.qiniudn.com/zto-hack-ready.png">')
-        this.$Panel1.html('')
+        $('#Panel1').html('')
+        $('.taskBar').hide()
     }
     // 重新绑定事件
     rebind () {
@@ -232,7 +232,6 @@ export default class X {
     cache () {
         // 原页面带的元素
         this.$ZTO_input = $('#txtJobNoList')
-        this.$Panel1 = $('#Panel1')
         // 新增的元素
         this.$panel = $('#panel')
         this.$panelToggleBtn = $('#panelToggleBtn')

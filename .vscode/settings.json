@@ -1,3 +1,22 @@
 {
-  "files.exclude": {}
+  "files.exclude": {
+    "*.DS_Store": true,
+    "*.DS_Store.*": true,
+    "*.git": true,
+    "*.git.*": true,
+    "*.gitignore": true,
+    "*.gitignore.*": true,
+    "*.vscode": true,
+    "*.vscode.*": true,
+    "*README": true,
+    "*README.*": true,
+    "*plugin": true,
+    "*plugin.*": true,
+    "*测试": true,
+    "*测试.*": true,
+    "load/node_modules": true,
+    "load/dist": true,
+    "load/.cache": true,
+    "load/prepros-6.config": true
+  }
 }

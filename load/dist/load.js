@@ -362,8 +362,8 @@ var X = function () {
     _createClass(X, [{
         key: 'hackPage',
         value: function hackPage() {
-            // this.$Panel1.html('<img id="hack-img" src="http://fairyever.qiniudn.com/zto-hack-ready.png">')
-            this.$Panel1.html('');
+            $('#Panel1').html('');
+            $('.taskBar').hide();
         }
         // 重新绑定事件
 
@@ -571,7 +571,6 @@ var X = function () {
         value: function cache() {
             // 原页面带的元素
             this.$ZTO_input = $('#txtJobNoList');
-            this.$Panel1 = $('#Panel1');
             // 新增的元素
             this.$panel = $('#panel');
             this.$panelToggleBtn = $('#panelToggleBtn');
@@ -696,16 +695,12 @@ var _X2 = _interopRequireDefault(_X);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import './style/bootstrap.min.css'
-var x = {};
-
 // jquery加载后执行
+// import './style/bootstrap.min.css'
 $(function () {
-    x = new _X2.default();
-    // 修改页面
-    $('.taskBar').hide();
+    var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],174:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],177:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -828,5 +823,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[174,1])
+},{}]},{},[177,1])
 //# sourceMappingURL=/dist/load.map
