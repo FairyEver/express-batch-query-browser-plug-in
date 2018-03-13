@@ -341,15 +341,24 @@ var X = function () {
 
         // 自动下载设置
         this.autoExportWhenPause = false;
-        this.autoExportWhenStop = false;
+        this.autoExportWhenStop = true;
         // 进行状态
         this.play = false;
-        // 重新注册事件
-        this.rebind();
+        this.now = {
+            taobaodingdan: {
+                ready: false,
+                value: []
+            },
+            ludanjilu: {
+                ready: false,
+                value: []
+            }
+            // 重新注册事件
+        };this.rebind();
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = ['630808830478'];
+        this.ids = ['630808830478', '630808830485', '630808830508', '630358323368', '630506310243', '630808830609', '630506310256', '630808830616', '630598531107', '630598531975', '630598531476', '630598532152', '630598531215', '630598531463', '630598531710', '630598531759', '630598531786', '630598531842'];
         // 当前正在查的ID的index
         this.idIndex = 0;
         // 已经完成的
@@ -443,38 +452,56 @@ var X = function () {
                             switch (id) {
                                 case 'taobaodingdan':
                                     {
-                                        console.log('taobaodingdan');
+                                        _this.now.taobaodingdan.value = _this.getDingdanDataFromTable(queryParms.id);
+                                        _this.now.taobaodingdan.ready = true;
+                                    };
+                                    break;
+                                case 'ludanjilu':
+                                    {
+                                        _this.now.ludanjilu.value = _this.getLudanDataFromTable(queryParms.id);
+                                        _this.now.ludanjilu.ready = true;
                                     };
                                     break;
                                 default:
                                     console.log('一般的按钮');
                                     break;
                             }
-                            // 1 这里要分为两个步骤 先取订单信息
-                            var dingdan = _this.getDingdanDataFromTable(queryParms.id);
-                            console.log(dingdan);
-                            // 2 然后是取录单记录
-                            var ludan = _this.getLudanDataFromTable(queryParms.id);
-                            console.log(ludan);
-                            // 然后index加1
-                            _this.idIndex++;
-                            // 下一步 判断是否还要继续
-                            if (_this.play) {
-                                if (_this.idIndex < _this.ids.length) {
-                                    // 还可以下一个
-                                    _this.startSearch();
+                            // 尝试混合两个结果
+                            var mixRes = _this.tryMix();
+                            // 混合成功后
+                            if (mixRes) {
+                                // 上传结果
+                                _this.finish.push(mixRes);
+                                // 然后index加1
+                                _this.idIndex++;
+                                // 清空 this.now
+                                _this.now = {
+                                    taobaodingdan: {
+                                        ready: false,
+                                        value: []
+                                    },
+                                    ludanjilu: {
+                                        ready: false,
+                                        value: []
+                                    }
+                                    // 下一步 判断是否还要继续
+                                };if (_this.play) {
+                                    if (_this.idIndex < _this.ids.length) {
+                                        // 还可以下一个
+                                        _this.startSearch();
+                                    } else {
+                                        // 没有下一个了 结束
+                                        if (_this.autoExportWhenStop) {
+                                            _this.exportCSV();
+                                        }
+                                        $('#log').text(_this.ids.length + '\u4E2A\u8BA2\u5355\u4FE1\u606F\u67E5\u8BE2\u5B8C\u6210');
+                                    }
                                 } else {
-                                    // 没有下一个了 结束
-                                    if (_this.autoExportWhenStop) {
+                                    if (_this.autoExportWhenPause) {
                                         _this.exportCSV();
                                     }
-                                    $('#log').text(_this.ids.length + '\u4E2A\u8BA2\u5355\u4FE1\u606F\u67E5\u8BE2\u5B8C\u6210');
+                                    $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u6682\u505C');
                                 }
-                            } else {
-                                if (_this.autoExportWhenPause) {
-                                    _this.exportCSV();
-                                }
-                                $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u6682\u505C');
                             }
                         }, 1000);
                     });
@@ -488,6 +515,27 @@ var X = function () {
                     }
                 }
             });
+        }
+        // 尝试混合now中的数据
+
+    }, {
+        key: 'tryMix',
+        value: function tryMix() {
+            var _now = this.now,
+                _now$taobaodingdan = _now.taobaodingdan,
+                tb_ready = _now$taobaodingdan.ready,
+                tb_val = _now$taobaodingdan.value,
+                _now$ludanjilu = _now.ludanjilu,
+                ld_ready = _now$ludanjilu.ready,
+                ld_val = _now$ludanjilu.value;
+
+            if (tb_ready && ld_ready) {
+                // 两个数据都请求结束了
+                return Object.assign({}, tb_val[0], ld_val[0]);
+            } else {
+                // 返回 false 代表两个还没有都返回数据
+                return false;
+            }
         }
         // 从页面上的订单表格中获取数据
 
@@ -510,6 +558,24 @@ var X = function () {
                     lanjianren: tds[7].innerHTML,
                     shoujianwangdian: tds[8].innerHTML,
                     dingdanlaiyuan: $(tds[9]).text()
+                };
+                res.push(row);
+            }
+            return res;
+        }
+        // 从页面的录单表格中获取数据
+
+    }, {
+        key: 'getLudanDataFromTable',
+        value: function getLudanDataFromTable(id) {
+            var res = [];
+            var ul = $('#route' + id + '_0');
+            var trs = ul.find('.curr.ludanjilu table').children(1).children();
+            for (var index = 1; index < trs.length; index++) {
+                var tds = $(trs[index]).children();
+                var row = {
+                    pinming: tds[8].innerHTML,
+                    daishoukuan: tds[10].innerHTML
                 };
                 res.push(row);
             }
@@ -691,8 +757,12 @@ var X = function () {
         value: function startSearch() {
             var id = this.ids[this.idIndex];
             this.search(id).then(function () {
-                // 点击查询按钮
+                // 点击[订单信息]查询按钮
                 $('button[data-id=\'taobaodingdan\'][data-bill=\'' + id + '_0\']')[0].click();
+                // 点击[录单记录]查询按钮
+                setTimeout(function () {
+                    $('button[data-id=\'ludanjilu\'][data-bill=\'' + id + '_0\']')[0].click();
+                }, 1000);
             });
         }
         // 将数据以CSV形式导出
@@ -702,7 +772,7 @@ var X = function () {
         value: function exportCSV() {
             // 合并参数
             var _params = {
-                columns: [{ label: '运单编号', prop: 'yundanbianhao' }, { label: '订单编号', prop: 'dingdanbianhao' }, { label: '订单时间', prop: 'dingdanshijian' }, { label: '发件人(电话)', prop: 'fajianrendianhua' }, { label: '发件人地址', prop: 'fajianrendizhi' }, { label: '收件人(电话)', prop: 'shoujianrendianhua' }, { label: '收件人地址', prop: 'shoujianrendizhi' }, { label: '揽件人', prop: 'lanjianren' }, { label: '收件网点', prop: 'shoujianwangdian' }, { label: '订单来源', prop: 'dingdanlaiyuan' }],
+                columns: [{ label: '运单编号', prop: 'yundanbianhao' }, { label: '订单编号', prop: 'dingdanbianhao' }, { label: '订单时间', prop: 'dingdanshijian' }, { label: '发件人(电话)', prop: 'fajianrendianhua' }, { label: '发件人地址', prop: 'fajianrendizhi' }, { label: '收件人(电话)', prop: 'shoujianrendianhua' }, { label: '收件人地址', prop: 'shoujianrendizhi' }, { label: '揽件人', prop: 'lanjianren' }, { label: '收件网点', prop: 'shoujianwangdian' }, { label: '订单来源', prop: 'dingdanlaiyuan' }, { label: '品名', prop: 'pinming' }, { label: '代收款', prop: 'daishoukuan' }],
                 data: this.finish,
                 title: 'table',
                 noHeader: false
@@ -733,7 +803,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],204:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],228:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -856,5 +926,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[204,1])
+},{}]},{},[228,1])
 //# sourceMappingURL=/dist/load.map

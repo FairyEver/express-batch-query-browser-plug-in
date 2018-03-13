@@ -7,9 +7,19 @@ export default class X {
     constructor () {
         // 自动下载设置
         this.autoExportWhenPause = false
-        this.autoExportWhenStop = false
+        this.autoExportWhenStop = true
         // 进行状态
         this.play = false
+        this.now = {
+            taobaodingdan: {
+                ready: false,
+                value: []
+            },
+            ludanjilu: {
+                ready: false,
+                value: []
+            }
+        }
         // 重新注册事件
         this.rebind()
         // 在页面上添加面板
@@ -17,23 +27,23 @@ export default class X {
         // 需要查询的列表
         this.ids = [
             '630808830478',
-            // '630808830485',
-            // '630808830508',
-            // '630358323368',
-            // '630506310243',
-            // '630808830609',
-            // '630506310256',
-            // '630808830616',
-            // '630598531107',
-            // '630598531975',
-            // '630598531476',
-            // '630598532152',
-            // '630598531215',
-            // '630598531463',
-            // '630598531710',
-            // '630598531759',
-            // '630598531786',
-            // '630598531842'
+            '630808830485',
+            '630808830508',
+            '630358323368',
+            '630506310243',
+            '630808830609',
+            '630506310256',
+            '630808830616',
+            '630598531107',
+            '630598531975',
+            '630598531476',
+            '630598532152',
+            '630598531215',
+            '630598531463',
+            '630598531710',
+            '630598531759',
+            '630598531786',
+            '630598531842'
         ]
         // 当前正在查的ID的index
         this.idIndex = 0
@@ -119,38 +129,56 @@ export default class X {
                         // 分析表格数据
                         switch (id) {
                             case 'taobaodingdan': {
-                                console.log('taobaodingdan')
+                                _this.now.taobaodingdan.value = _this.getDingdanDataFromTable(queryParms.id)
+                                _this.now.taobaodingdan.ready = true
+                            };
+                                break;
+                            case 'ludanjilu': {
+                                _this.now.ludanjilu.value = _this.getLudanDataFromTable(queryParms.id)
+                                _this.now.ludanjilu.ready = true
                             };
                                 break;
                             default:
                                 console.log('一般的按钮')
                                 break;
                         }
-                        // 1 这里要分为两个步骤 先取订单信息
-                        let dingdan = _this.getDingdanDataFromTable(queryParms.id)
-                        console.log(dingdan)
-                        // 2 然后是取录单记录
-                        let ludan = _this.getLudanDataFromTable(queryParms.id)
-                        console.log(ludan)
-                        // 然后index加1
-                        _this.idIndex ++
-                        // 下一步 判断是否还要继续
-                        if (_this.play) {
-                            if (_this.idIndex < _this.ids.length) {
-                                // 还可以下一个
-                                _this.startSearch()
+                        // 尝试混合两个结果
+                        const mixRes = _this.tryMix()
+                        // 混合成功后
+                        if (mixRes) {
+                            // 上传结果
+                            _this.finish.push(mixRes)
+                            // 然后index加1
+                            _this.idIndex ++
+                            // 清空 this.now
+                            _this.now = {
+                                taobaodingdan: {
+                                    ready: false,
+                                    value: []
+                                },
+                                ludanjilu: {
+                                    ready: false,
+                                    value: []
+                                }
+                            }
+                            // 下一步 判断是否还要继续
+                            if (_this.play) {
+                                if (_this.idIndex < _this.ids.length) {
+                                    // 还可以下一个
+                                    _this.startSearch()
+                                } else {
+                                    // 没有下一个了 结束
+                                    if (_this.autoExportWhenStop) {
+                                        _this.exportCSV()
+                                    }
+                                    $('#log').text(`${_this.ids.length}个订单信息查询完成`)
+                                }
                             } else {
-                                // 没有下一个了 结束
-                                if (_this.autoExportWhenStop) {
+                                if (_this.autoExportWhenPause) {
                                     _this.exportCSV()
                                 }
-                                $('#log').text(`${_this.ids.length}个订单信息查询完成`)
+                                $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 暂停`)
                             }
-                        } else {
-                            if (_this.autoExportWhenPause) {
-                                _this.exportCSV()
-                            }
-                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 暂停`)
                         }
                     }, 1000);
                 })
@@ -164,6 +192,26 @@ export default class X {
                 }
             }
         })
+    }
+    // 尝试混合now中的数据
+    tryMix () {
+        const {
+            taobaodingdan: {
+                ready: tb_ready,
+                value: tb_val
+            },
+            ludanjilu: {
+                ready: ld_ready,
+                value: ld_val
+            }
+        } = this.now
+        if (tb_ready && ld_ready) {
+            // 两个数据都请求结束了
+            return Object.assign({}, tb_val[0], ld_val[0])
+        } else {
+            // 返回 false 代表两个还没有都返回数据
+            return false
+        }
     }
     // 从页面上的订单表格中获取数据
     getDingdanDataFromTable (id) {
@@ -183,6 +231,21 @@ export default class X {
                 lanjianren: tds[7].innerHTML,
                 shoujianwangdian: tds[8].innerHTML,
                 dingdanlaiyuan: $(tds[9]).text()
+            }
+            res.push(row)
+        }
+        return res
+    }
+    // 从页面的录单表格中获取数据
+    getLudanDataFromTable (id) {
+        let res = []
+        const ul = $(`#route${id}_0`)
+        const trs = ul.find('.curr.ludanjilu table').children(1).children()
+        for (let index = 1; index < trs.length; index++) {
+            const tds = $(trs[index]).children()
+            const row = {
+                pinming: tds[8].innerHTML,
+                daishoukuan: tds[10].innerHTML
             }
             res.push(row)
         }
@@ -348,8 +411,12 @@ export default class X {
     startSearch () {
         const id = this.ids[this.idIndex]
         this.search(id).then(() => {
-            // 点击查询按钮
+            // 点击[订单信息]查询按钮
             $(`button[data-id='taobaodingdan'][data-bill='${id}_0']`)[0].click()
+            // 点击[录单记录]查询按钮
+            setTimeout(() => {
+                $(`button[data-id='ludanjilu'][data-bill='${id}_0']`)[0].click()
+            }, 1000);
         })
     }
     // 将数据以CSV形式导出
@@ -366,7 +433,9 @@ export default class X {
                 {label: '收件人地址', prop: 'shoujianrendizhi'},
                 {label: '揽件人', prop: 'lanjianren'},
                 {label: '收件网点', prop: 'shoujianwangdian'},
-                {label: '订单来源', prop: 'dingdanlaiyuan'}
+                {label: '订单来源', prop: 'dingdanlaiyuan'},
+                {label: '品名', prop: 'pinming'},
+                {label: '代收款', prop: 'daishoukuan'}
             ],
             data: this.finish,
             title: 'table',
