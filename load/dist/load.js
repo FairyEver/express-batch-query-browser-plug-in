@@ -450,7 +450,9 @@ var X = function () {
                                     console.log('一般的按钮');
                                     break;
                             }
-                            _this.getDataFromTable(queryParms.id);
+                            // _this.getDataFromTable(queryParms.id)
+                            // 1 这里要分为两个步骤 先取订单信息
+                            // 2 然后是取录单记录
                             _this.idIndex++;
                             // 下一步 判断是否还要继续
                             if (_this.play) {
@@ -725,7 +727,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],198:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],199:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -848,5 +850,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[198,1])
+},{}]},{},[199,1])
 //# sourceMappingURL=/dist/load.map

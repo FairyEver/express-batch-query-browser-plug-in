@@ -126,7 +126,9 @@ export default class X {
                                 console.log('一般的按钮')
                                 break;
                         }
-                        _this.getDataFromTable(queryParms.id)
+                        // _this.getDataFromTable(queryParms.id)
+                        // 1 这里要分为两个步骤 先取订单信息
+                        // 2 然后是取录单记录
                         _this.idIndex ++
                         // 下一步 判断是否还要继续
                         if (_this.play) {
