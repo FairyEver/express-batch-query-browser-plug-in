@@ -24,6 +24,8 @@ export default class X {
             '630644619460',
             '630644619452'
         ]
+        // 当前正在查的ID的index
+        this.idIndex = 0
         // 已经完成的
         this.finish = []
         // 注册
@@ -104,8 +106,9 @@ export default class X {
             }
         })
     }
-    search () {
+    search (id = '') {
         return new Promise((resolve, reject) => {
+            $("#txtJobNoList").val(id)
             var txtbill = document.getElementById("txtJobNoList");
             var list = txtbill.value.trim().split("\n");
             ztosec.queryReport({ bill_ids: list }, function () {
@@ -157,7 +160,6 @@ export default class X {
                                     $("#ajaxdata").html("<div style=\"text-align:center; width:100%; line-height:150%;margin-top: 130px;\"><img src=\"/images/error.png\" width=\"150\" /><br/>" + rs.n + "</div>");
                                 } else {
                                     $("#ajaxdata").html(rs.n);
-                                    $(`button[data-id='taobaodingdan'][data-bill='${list[0]}_0']`)[0].click()
                                     resolve()
                                 }
                                 dialogOnresizeparameters();
@@ -234,10 +236,10 @@ export default class X {
     }
     // 开始搜索数据
     startSearch () {
-        $("#txtJobNoList").val(this.ids[0])
-        this.search()
+        const id = this.ids[this.idIndex]
+        this.search(id)
             .then(() => {
-                console.log('OK')
+                $(`button[data-id='taobaodingdan'][data-bill='${id}_0']`)[0].click()
             })
     }
     // 将数据以CSV形式导出

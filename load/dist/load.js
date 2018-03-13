@@ -345,6 +345,8 @@ var X = function () {
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
         this.ids = ['630644632616', '630644632566', '630644632458', '630644632433', '630644632340', '630644632256', '630644625936', '630644625861', '630644625714', '630644619477', '630644619460', '630644619452'];
+        // 当前正在查的ID的index
+        this.idIndex = 0;
         // 已经完成的
         this.finish = [];
         // 注册
@@ -434,7 +436,10 @@ var X = function () {
     }, {
         key: 'search',
         value: function search() {
+            var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
             return new Promise(function (resolve, reject) {
+                $("#txtJobNoList").val(id);
                 var txtbill = document.getElementById("txtJobNoList");
                 var list = txtbill.value.trim().split("\n");
                 ztosec.queryReport({ bill_ids: list }, function () {
@@ -486,7 +491,6 @@ var X = function () {
                                         $("#ajaxdata").html("<div style=\"text-align:center; width:100%; line-height:150%;margin-top: 130px;\"><img src=\"/images/error.png\" width=\"150\" /><br/>" + rs.n + "</div>");
                                     } else {
                                         $("#ajaxdata").html(rs.n);
-                                        $('button[data-id=\'taobaodingdan\'][data-bill=\'' + list[0] + '_0\']')[0].click();
                                         resolve();
                                     }
                                     dialogOnresizeparameters();
@@ -579,9 +583,9 @@ var X = function () {
     }, {
         key: 'startSearch',
         value: function startSearch() {
-            $("#txtJobNoList").val(this.ids[0]);
-            this.search().then(function () {
-                console.log('OK');
+            var id = this.ids[this.idIndex];
+            this.search(id).then(function () {
+                $('button[data-id=\'taobaodingdan\'][data-bill=\'' + id + '_0\']')[0].click();
             });
         }
         // 将数据以CSV形式导出
@@ -630,7 +634,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],112:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],116:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -753,5 +757,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[112,1])
+},{}]},{},[116,1])
 //# sourceMappingURL=/dist/load.map
