@@ -10,7 +10,7 @@ export default `
         <div class="uploader-group">
             选择单号文件 <input type="file" id="uploader">
         </div>
-        <div id="control" style="display: block;">
+        <div id="control">
             <button id="startButton" type="button" class="btn btn-x">开始</button>
             <button id="downloadButton" type="button" class="btn btn-x">下载结果</button>
         </div>

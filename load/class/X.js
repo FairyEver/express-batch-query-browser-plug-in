@@ -13,16 +13,16 @@ export default class X {
         this.ids = [
             '630644632616',
             '630644632566',
-            '630644632458',
-            '630644632433',
-            '630644632340',
-            '630644632256',
-            '630644625936',
-            '630644625861',
-            '630644625714',
-            '630644619477',
-            '630644619460',
-            '630644619452'
+            // '630644632458',
+            // '630644632433',
+            // '630644632340',
+            // '630644632256',
+            // '630644625936',
+            // '630644625861',
+            // '630644625714',
+            // '630644619477',
+            // '630644619460',
+            // '630644619452'
         ]
         // 当前正在查的ID的index
         this.idIndex = 0
@@ -60,18 +60,18 @@ export default class X {
                         let ticket = ''
                         let count = 1
                         const doIt = () => {
-                            $('#log').text(`获取凭证 单号：${queryParms.id} 第${count}次`)
+                            $('#log').text(`${_this.idIndex + 1} / ${_this.ids.length} 获取凭证 单号：${queryParms.id} 第${count}次`)
                             ztosec.billQueryPreauth({
                                 bill: queryParms.id,
                                 billType: queryParms.type
                             }, function (params) {
                                 ticket = params.ticket
-                                $('#log').text(`获取凭证 单号：${queryParms.id} 成功 凭证：${ticket} 共查询${count}次`)
+                                $('#log').text(`${_this.idIndex + 1} / ${_this.ids.length} 获取凭证 单号：${queryParms.id} 成功 凭证：${ticket} 共查询${count}次`)
                                 resolve(ticket)
                             })
                             setTimeout(() => {
                                 if (ticket === '') {
-                                    $('#log').text(`获取凭证 单号：${queryParms.id} 失败`)
+                                    $('#log').text(`${_this.idIndex + 1} / ${_this.ids.length} 获取凭证 单号：${queryParms.id} 失败`)
                                     setTimeout(() => {
                                         count += 1
                                         doIt()
@@ -102,6 +102,7 @@ export default class X {
                                 _this.startSearch()
                             } else {
                                 _this.exportCSV()
+                                $('#log').text(`${_this.ids.length}个订单信息查询完成 结果已导出`)
                             }
                         }, 1000);
                     })
@@ -218,7 +219,6 @@ export default class X {
         this.$panel = $('#panel')
         this.$panelToggleBtn = $('#panelToggleBtn')
         this.$uploader = $('#uploader')
-        this.$control = $('#control')
         this.$startButton = $('#startButton')
         this.$downloadButton = $('#downloadButton')
     }
@@ -239,14 +239,15 @@ export default class X {
             reader.readAsText(file, 'utf-8')
             reader.onload = e => {
                 this.ids = e.target.result.split("\n")
-                if (this.ids.length > 0) {
-                    this.$control.show()
-                }
-                console.log(this.ids)
+                $('#log').text(`导入${this.ids.length}个订单查询任务 现在可以点击[开始]按钮开始自动处理`)
             }
         })
         // 开始按钮
         this.$startButton.on('click', () => {
+            if (this.ids.length === 0) {
+                alert('请先导入待处理的单号文件')
+                return
+            }
             this.startSearch()
         })
         // 下载按钮

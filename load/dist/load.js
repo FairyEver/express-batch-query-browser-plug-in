@@ -144,7 +144,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div id=\"control\" style=\"display: block;\">\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
+exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div id=\"control\">\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
 },{}],10:[function(require,module,exports) {
 'use strict';
 
@@ -344,7 +344,7 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = ['630644632616', '630644632566', '630644632458', '630644632433', '630644632340', '630644632256', '630644625936', '630644625861', '630644625714', '630644619477', '630644619460', '630644619452'];
+        this.ids = ['630644632616', '630644632566'];
         // 当前正在查的ID的index
         this.idIndex = 0;
         // 已经完成的
@@ -387,18 +387,18 @@ var X = function () {
                             var ticket = '';
                             var count = 1;
                             var doIt = function doIt() {
-                                $('#log').text('\u83B7\u53D6\u51ED\u8BC1 \u5355\u53F7\uFF1A' + queryParms.id + ' \u7B2C' + count + '\u6B21');
+                                $('#log').text(_this.idIndex + 1 + ' / ' + _this.ids.length + ' \u83B7\u53D6\u51ED\u8BC1 \u5355\u53F7\uFF1A' + queryParms.id + ' \u7B2C' + count + '\u6B21');
                                 ztosec.billQueryPreauth({
                                     bill: queryParms.id,
                                     billType: queryParms.type
                                 }, function (params) {
                                     ticket = params.ticket;
-                                    $('#log').text('\u83B7\u53D6\u51ED\u8BC1 \u5355\u53F7\uFF1A' + queryParms.id + ' \u6210\u529F \u51ED\u8BC1\uFF1A' + ticket + ' \u5171\u67E5\u8BE2' + count + '\u6B21');
+                                    $('#log').text(_this.idIndex + 1 + ' / ' + _this.ids.length + ' \u83B7\u53D6\u51ED\u8BC1 \u5355\u53F7\uFF1A' + queryParms.id + ' \u6210\u529F \u51ED\u8BC1\uFF1A' + ticket + ' \u5171\u67E5\u8BE2' + count + '\u6B21');
                                     resolve(ticket);
                                 });
                                 setTimeout(function () {
                                     if (ticket === '') {
-                                        $('#log').text('\u83B7\u53D6\u51ED\u8BC1 \u5355\u53F7\uFF1A' + queryParms.id + ' \u5931\u8D25');
+                                        $('#log').text(_this.idIndex + 1 + ' / ' + _this.ids.length + ' \u83B7\u53D6\u51ED\u8BC1 \u5355\u53F7\uFF1A' + queryParms.id + ' \u5931\u8D25');
                                         setTimeout(function () {
                                             count += 1;
                                             doIt();
@@ -429,6 +429,7 @@ var X = function () {
                                 _this.startSearch();
                             } else {
                                 _this.exportCSV();
+                                $('#log').text(_this.ids.length + '\u4E2A\u8BA2\u5355\u4FE1\u606F\u67E5\u8BE2\u5B8C\u6210 \u7ED3\u679C\u5DF2\u5BFC\u51FA');
                             }
                         }, 1000);
                     });
@@ -555,7 +556,6 @@ var X = function () {
             this.$panel = $('#panel');
             this.$panelToggleBtn = $('#panelToggleBtn');
             this.$uploader = $('#uploader');
-            this.$control = $('#control');
             this.$startButton = $('#startButton');
             this.$downloadButton = $('#downloadButton');
         }
@@ -581,14 +581,15 @@ var X = function () {
                 reader.readAsText(file, 'utf-8');
                 reader.onload = function (e) {
                     _this2.ids = e.target.result.split("\n");
-                    if (_this2.ids.length > 0) {
-                        _this2.$control.show();
-                    }
-                    console.log(_this2.ids);
+                    $('#log').text('\u5BFC\u5165' + _this2.ids.length + '\u4E2A\u8BA2\u5355\u67E5\u8BE2\u4EFB\u52A1 \u73B0\u5728\u53EF\u4EE5\u70B9\u51FB[\u5F00\u59CB]\u6309\u94AE\u5F00\u59CB\u81EA\u52A8\u5904\u7406');
                 };
             });
             // 开始按钮
             this.$startButton.on('click', function () {
+                if (_this2.ids.length === 0) {
+                    alert('请先导入待处理的单号文件');
+                    return;
+                }
                 _this2.startSearch();
             });
             // 下载按钮
@@ -664,7 +665,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],142:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],148:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -787,5 +788,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[142,1])
+},{}]},{},[148,1])
 //# sourceMappingURL=/dist/load.map
