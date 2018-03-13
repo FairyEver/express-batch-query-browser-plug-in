@@ -3,6 +3,10 @@
   user-select: none;
   margin-top: 100px;
   margin-bottom: -100px; }
+  .x .hello {
+    display: block;
+    padding: 10px 30px;
+    font-size: 16px; }
   .x .x-header {
     height: 30px;
     line-height: 30px;
@@ -28,4 +32,19 @@
       cursor: pointer; }
 
 #zto_unfreeze_div .form-wrapper {
+  display: none; }
+
+#Panel1 {
+  margin-top: 100px; }
+
+#hack-img {
+  width: 200px;
+  display: block;
+  margin: 100px auto;
+  opacity: .2;
+  transition: all .3s; }
+  #hack-img:hover {
+    opacity: 1; }
+
+div.iframe {
   display: none; }

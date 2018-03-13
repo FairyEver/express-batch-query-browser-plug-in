@@ -3,6 +3,11 @@
     user-select: none;
     margin-top: 100px;
     margin-bottom: -100px;
+    .hello {
+        display: block;
+        padding: 10px 30px;
+        font-size: 16px;
+    }
     .x-header {
         height: 30px;
         line-height: 30px;
@@ -36,4 +41,23 @@
     .form-wrapper {
         display: none;
     }
+}
+
+#Panel1 {
+    margin-top: 100px;
+}
+
+#hack-img {
+    width: 200px;
+    display: block;
+    margin: 100px auto;
+    opacity: .2;
+    transition: all .3s;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+div.iframe {
+    display: none;
 }

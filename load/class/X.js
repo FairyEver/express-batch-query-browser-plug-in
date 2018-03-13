@@ -5,6 +5,7 @@ import ExportCsv from '../lib/csvExport'
 
 export default class X {
     constructor () {
+        this.play = false
         // 重新注册事件
         this.rebind()
         // 在页面上添加面板
@@ -31,8 +32,13 @@ export default class X {
         // 注册
         this.cache()
         this.register()
+        // hack
+        this.hackPage()
         // 开发测试
         // this.startSearch()
+    }
+    hackPage () {
+        this.$Panel1.html('<img id="hack-img" src="http://fairyever.qiniudn.com/zto-hack-ready.png">')
     }
     // 重新绑定事件
     rebind () {
@@ -97,14 +103,21 @@ export default class X {
                         });
                         $(currentButton).addClass("curr");
                         setTimeout(() => {
+                            // 分析表格数据
                             $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 开始分析表格数据`)
                             _this.getDataFromTable(queryParms.id)
                             _this.idIndex ++
-                            if (_this.idIndex < _this.ids.length) {
-                                _this.startSearch()
+                            // 判断是否还要继续
+                            if (_this.play) {
+                                if (_this.idIndex < _this.ids.length) {
+                                    _this.startSearch()
+                                } else {
+                                    _this.exportCSV()
+                                    $('#log').text(`${_this.ids.length}个订单信息查询完成 结果已导出`)
+                                }
                             } else {
                                 _this.exportCSV()
-                                $('#log').text(`${_this.ids.length}个订单信息查询完成 结果已导出`)
+                                $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 暂停`)
                             }
                         }, 1000);
                     })
@@ -218,12 +231,15 @@ export default class X {
     cache () {
         // 原页面带的元素
         this.$ZTO_input = $('#txtJobNoList')
+        this.$Panel1 = $('#Panel1')
         // 新增的元素
         this.$panel = $('#panel')
         this.$panelToggleBtn = $('#panelToggleBtn')
         this.$uploader = $('#uploader')
         this.$helpButton = $('#helpButton')
         this.$startButton = $('#startButton')
+        this.$pauseButton = $('#pauseButton')
+        this.$goonButton = $('#goonButton')
         this.$downloadButton = $('#downloadButton')
     }
     // 注册事件
@@ -252,6 +268,18 @@ export default class X {
                 alert('请先导入待处理的单号文件')
                 return
             }
+            this.play = true
+            this.startSearch()
+        })
+        this.$pauseButton.on('click', () => {
+            this.play = false
+        })
+        this.$goonButton.on('click', () => {
+            if (this.ids.length === 0) {
+                alert('请先导入待处理的单号文件')
+                return
+            }
+            this.play = true
             this.startSearch()
         })
         // 帮助按钮
@@ -261,6 +289,7 @@ export default class X {
 2. 加载完成后会显示单号条数
 3. 确认无误后点击开始按钮
 4. 全部查询完毕后会自动导出表格，也可以手动导出
+5. 刷新页面可重置插件
             `.trim())
         })
         // 下载按钮
@@ -278,13 +307,13 @@ export default class X {
         this.$panel.hide()
         this.$panelToggleBtn.text('显示')
     }
-    // 开始搜索数据
+    // 搜索数据
     startSearch () {
         const id = this.ids[this.idIndex]
-        this.search(id)
-            .then(() => {
-                $(`button[data-id='taobaodingdan'][data-bill='${id}_0']`)[0].click()
-            })
+        this.search(id).then(() => {
+            // 点击查询按钮
+            $(`button[data-id='taobaodingdan'][data-bill='${id}_0']`)[0].click()
+        })
     }
     // 将数据以CSV形式导出
     exportCSV () {
