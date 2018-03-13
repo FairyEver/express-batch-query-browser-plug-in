@@ -339,6 +339,10 @@ var X = function () {
     function X() {
         _classCallCheck(this, X);
 
+        // 自动下载设置
+        this.autoExportWhenPause = false;
+        this.autoExportWhenStop = false;
+        // 进行状态
         this.play = false;
         // 重新注册事件
         this.rebind();
@@ -451,13 +455,19 @@ var X = function () {
                             // 下一步 判断是否还要继续
                             if (_this.play) {
                                 if (_this.idIndex < _this.ids.length) {
+                                    // 还可以下一个
                                     _this.startSearch();
                                 } else {
-                                    _this.exportCSV();
-                                    $('#log').text(_this.ids.length + '\u4E2A\u8BA2\u5355\u4FE1\u606F\u67E5\u8BE2\u5B8C\u6210 \u7ED3\u679C\u5DF2\u5BFC\u51FA');
+                                    // 没有下一个了 结束
+                                    if (_this.autoExportWhenStop) {
+                                        _this.exportCSV();
+                                    }
+                                    $('#log').text(_this.ids.length + '\u4E2A\u8BA2\u5355\u4FE1\u606F\u67E5\u8BE2\u5B8C\u6210');
                                 }
                             } else {
-                                _this.exportCSV();
+                                if (_this.autoExportWhenPause) {
+                                    _this.exportCSV();
+                                }
                                 $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u6682\u505C');
                             }
                         }, 1000);
@@ -715,7 +725,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],194:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],198:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -838,5 +848,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[194,1])
+},{}]},{},[198,1])
 //# sourceMappingURL=/dist/load.map

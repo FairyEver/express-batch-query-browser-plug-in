@@ -5,6 +5,10 @@ import ExportCsv from '../lib/csvExport'
 
 export default class X {
     constructor () {
+        // 自动下载设置
+        this.autoExportWhenPause = false
+        this.autoExportWhenStop = false
+        // 进行状态
         this.play = false
         // 重新注册事件
         this.rebind()
@@ -127,13 +131,19 @@ export default class X {
                         // 下一步 判断是否还要继续
                         if (_this.play) {
                             if (_this.idIndex < _this.ids.length) {
+                                // 还可以下一个
                                 _this.startSearch()
                             } else {
-                                _this.exportCSV()
-                                $('#log').text(`${_this.ids.length}个订单信息查询完成 结果已导出`)
+                                // 没有下一个了 结束
+                                if (_this.autoExportWhenStop) {
+                                    _this.exportCSV()
+                                }
+                                $('#log').text(`${_this.ids.length}个订单信息查询完成`)
                             }
                         } else {
-                            _this.exportCSV()
+                            if (_this.autoExportWhenPause) {
+                                _this.exportCSV()
+                            }
                             $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 暂停`)
                         }
                     }, 1000);
