@@ -2,7 +2,8 @@ export default `
 
 <div class="x">
     <div class="x-header">
-        批量操作
+        批量操作 | 当前状态：
+        <span id="log">就绪</span>
         <span class="toggle" id="panelToggleBtn">隐藏</span>
     </div>
     <div class="x-body" id="panel">
