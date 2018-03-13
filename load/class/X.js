@@ -13,23 +13,23 @@ export default class X {
         // 需要查询的列表
         this.ids = [
             '630808830478',
-            '630808830485',
-            '630808830508',
-            '630358323368',
-            '630506310243',
-            '630808830609',
-            '630506310256',
-            '630808830616',
-            '630598531107',
-            '630598531975',
-            '630598531476',
-            '630598532152',
-            '630598531215',
-            '630598531463',
-            '630598531710',
-            '630598531759',
-            '630598531786',
-            '630598531842'
+            // '630808830485',
+            // '630808830508',
+            // '630358323368',
+            // '630506310243',
+            // '630808830609',
+            // '630506310256',
+            // '630808830616',
+            // '630598531107',
+            // '630598531975',
+            // '630598531476',
+            // '630598532152',
+            // '630598531215',
+            // '630598531463',
+            // '630598531710',
+            // '630598531759',
+            // '630598531786',
+            // '630598531842'
         ]
         // 当前正在查的ID的index
         this.idIndex = 0
@@ -96,39 +96,48 @@ export default class X {
                     })
                 }
                 billQueryPreauthFn()
-                    // 好 刷到了
-                    .then(ticket => {
-                        $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 开始请求订单信息`)
-                        ztoAjax({
-                            url: url + "&queryTicket=" + ticket,
-                            type: "get",
-                            data: "",
-                            index: index,
-                            bill: bill,
-                            id: id,
-                            text: text
-                        });
-                        $(currentButton).addClass("curr");
-                        // 上面的操作结束后，如果有结果的话 就该到页面里了
-                        setTimeout(() => {
-                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 开始分析数据`)
-                            // 分析表格数据
-                            _this.getDataFromTable(queryParms.id)
-                            _this.idIndex ++
-                            // 下一步 判断是否还要继续
-                            if (_this.play) {
-                                if (_this.idIndex < _this.ids.length) {
-                                    _this.startSearch()
-                                } else {
-                                    _this.exportCSV()
-                                    $('#log').text(`${_this.ids.length}个订单信息查询完成 结果已导出`)
-                                }
+                // 好 刷到了
+                .then(ticket => {
+                    $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 开始请求订单信息`)
+                    ztoAjax({
+                        url: url + "&queryTicket=" + ticket,
+                        type: "get",
+                        data: "",
+                        index: index,
+                        bill: bill,
+                        id: id,
+                        text: text
+                    });
+                    $(currentButton).addClass("curr");
+                    // 上面的操作结束后，如果有结果的话 在 setTimeout 到时间后页面里就有相关内容了
+                    setTimeout(() => {
+                        $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 开始分析数据`)
+                        // 分析表格数据
+                        switch (id) {
+                            case 'taobaodingdan': {
+                                console.log('taobaodingdan')
+                            };
+                                break;
+                            default:
+                                console.log('一般的按钮')
+                                break;
+                        }
+                        _this.getDataFromTable(queryParms.id)
+                        _this.idIndex ++
+                        // 下一步 判断是否还要继续
+                        if (_this.play) {
+                            if (_this.idIndex < _this.ids.length) {
+                                _this.startSearch()
                             } else {
                                 _this.exportCSV()
-                                $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 暂停`)
+                                $('#log').text(`${_this.ids.length}个订单信息查询完成 结果已导出`)
                             }
-                        }, 1000);
-                    })
+                        } else {
+                            _this.exportCSV()
+                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 暂停`)
+                        }
+                    }, 1000);
+                })
             } else {
                 $(this).removeClass("curr");
                 var id = $(this).find("button").attr("data-id");
