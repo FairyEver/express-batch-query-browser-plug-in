@@ -387,18 +387,18 @@ var X = function () {
                             var ticket = '';
                             var count = 1;
                             var doIt = function doIt() {
-                                $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u83B7\u53D6\u51ED\u8BC1 \u5355\u53F7\uFF1A' + queryParms.id + ' \u7B2C' + count + '\u6B21');
+                                $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6\u51ED\u8BC1 \u7B2C' + count + '\u6B21 \u6B63\u5728\u8BF7\u6C42');
                                 ztosec.billQueryPreauth({
                                     bill: queryParms.id,
                                     billType: queryParms.type
                                 }, function (params) {
                                     ticket = params.ticket;
-                                    $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u83B7\u53D6\u51ED\u8BC1 \u5355\u53F7\uFF1A' + queryParms.id + ' \u6210\u529F \u51ED\u8BC1\uFF1A' + ticket + ' \u5171\u67E5\u8BE2' + count + '\u6B21');
+                                    $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6\u51ED\u8BC1 \u7B2C' + count + '\u6B21 \u6210\u529F \u51ED\u8BC1\uFF1A' + ticket);
                                     resolve(ticket);
                                 });
                                 setTimeout(function () {
                                     if (ticket === '') {
-                                        $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u83B7\u53D6\u51ED\u8BC1 \u5355\u53F7\uFF1A' + queryParms.id + ' \u5931\u8D25');
+                                        $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6\u51ED\u8BC1 \u7B2C' + count + '\u6B21 \u5931\u8D25');
                                         setTimeout(function () {
                                             count += 1;
                                             doIt();
@@ -412,6 +412,7 @@ var X = function () {
                     billQueryPreauthFn()
                     // 好 刷到了
                     .then(function (ticket) {
+                        $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u5F00\u59CB\u8BF7\u6C42\u8BA2\u5355\u4FE1\u606F');
                         ztoAjax({
                             url: url + "&queryTicket=" + ticket,
                             type: "get",
@@ -423,6 +424,7 @@ var X = function () {
                         });
                         $(currentButton).addClass("curr");
                         setTimeout(function () {
+                            $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u5F00\u59CB\u5206\u6790\u8868\u683C\u6570\u636E');
                             _this.getDataFromTable(queryParms.id);
                             _this.idIndex++;
                             if (_this.idIndex < _this.ids.length) {
@@ -473,6 +475,7 @@ var X = function () {
         value: function search() {
             var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
+            $('#log').text('\u7B2C' + (this.idIndex + 1) + '\u4E2A / \u5171' + this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + id + ' \u5F00\u59CB\u8BF7\u6C42\u5217\u8868');
             return new Promise(function (resolve, reject) {
                 $("#txtJobNoList").val(id);
                 var txtbill = document.getElementById("txtJobNoList");
@@ -670,7 +673,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],154:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],157:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -793,5 +796,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[154,1])
+},{}]},{},[157,1])
 //# sourceMappingURL=/dist/load.map

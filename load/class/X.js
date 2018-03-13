@@ -60,18 +60,18 @@ export default class X {
                         let ticket = ''
                         let count = 1
                         const doIt = () => {
-                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 获取凭证 单号：${queryParms.id} 第${count}次`)
+                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取凭证 第${count}次 正在请求`)
                             ztosec.billQueryPreauth({
                                 bill: queryParms.id,
                                 billType: queryParms.type
                             }, function (params) {
                                 ticket = params.ticket
-                                $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 获取凭证 单号：${queryParms.id} 成功 凭证：${ticket} 共查询${count}次`)
+                                $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取凭证 第${count}次 成功 凭证：${ticket}`)
                                 resolve(ticket)
                             })
                             setTimeout(() => {
                                 if (ticket === '') {
-                                    $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 获取凭证 单号：${queryParms.id} 失败`)
+                                    $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取凭证 第${count}次 失败`)
                                     setTimeout(() => {
                                         count += 1
                                         doIt()
@@ -85,6 +85,7 @@ export default class X {
                 billQueryPreauthFn()
                     // 好 刷到了
                     .then(ticket => {
+                        $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 开始请求订单信息`)
                         ztoAjax({
                             url: url + "&queryTicket=" + ticket,
                             type: "get",
@@ -96,6 +97,7 @@ export default class X {
                         });
                         $(currentButton).addClass("curr");
                         setTimeout(() => {
+                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 开始分析表格数据`)
                             _this.getDataFromTable(queryParms.id)
                             _this.idIndex ++
                             if (_this.idIndex < _this.ids.length) {
@@ -139,6 +141,7 @@ export default class X {
         }
     }
     search (id = '') {
+        $('#log').text(`第${this.idIndex + 1}个 / 共${this.ids.length}个 单号：${id} 开始请求列表`)
         return new Promise((resolve, reject) => {
             $("#txtJobNoList").val(id)
             var txtbill = document.getElementById("txtJobNoList");
