@@ -345,7 +345,7 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = ['630644632616', '630644632566', '630644632458'];
+        this.ids = ['630808830478', '630808830485', '630808830508', '630358323368', '630506310243', '630808830609', '630506310256', '630808830616', '630598531107', '630598531975', '630598531476', '630598532152', '630598531215', '630598531463', '630598531710', '630598531759', '630598531786', '630598531842'];
         // 当前正在查的ID的index
         this.idIndex = 0;
         // 已经完成的
@@ -432,6 +432,7 @@ var X = function () {
                             text: text
                         });
                         $(currentButton).addClass("curr");
+                        // 上面的操作结束后，如果有结果的话 就该到页面里了
                         setTimeout(function () {
                             // 分析表格数据
                             $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u5F00\u59CB\u5206\u6790\u8868\u683C\u6570\u636E');
@@ -704,7 +705,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],182:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],184:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -827,5 +828,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[182,1])
+},{}]},{},[184,1])
 //# sourceMappingURL=/dist/load.map
