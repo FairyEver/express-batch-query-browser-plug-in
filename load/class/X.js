@@ -13,16 +13,16 @@ export default class X {
         this.ids = [
             '630644632616',
             '630644632566',
-            '630644632458',
-            '630644632433',
-            '630644632340',
-            '630644632256',
-            '630644625936',
-            '630644625861',
-            '630644625714',
-            '630644619477',
-            '630644619460',
-            '630644619452'
+            '630644632458'
+            // '630644632433',
+            // '630644632340',
+            // '630644632256',
+            // '630644625936',
+            // '630644625861',
+            // '630644625714',
+            // '630644619477',
+            // '630644619460',
+            // '630644619452'
         ]
         // 当前正在查的ID的index
         this.idIndex = 0
@@ -36,6 +36,7 @@ export default class X {
     }
     // 重新绑定事件
     rebind () {
+        let _this = this
         $(document).off("click", ".menu li").on("click", ".menu li", function () {
             // 临时禁用这个按钮
             $(this).find("button").attr("disabled", "disabled").delay(100).animate({ disabled: '' });
@@ -94,6 +95,14 @@ export default class X {
                             text: text
                         });
                         $(currentButton).addClass("curr");
+                        setTimeout(() => {
+                            _this.idIndex ++
+                            if (_this.idIndex < _this.ids.length) {
+                                _this.startSearch()
+                            } else {
+                                _this.exportCSV()
+                            }
+                        }, 2000);
                     })
             } else {
                 $(this).removeClass("curr");

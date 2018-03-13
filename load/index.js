@@ -2,9 +2,11 @@
 import './style/plug-in.scss'
 import X from './class/X'
 
+let x = {}
+
 // jquery加载后执行
 $(() => {
-    const x = new X()
+    x = new X()
     // 修改页面
     $('.taskBar').hide()
 })

@@ -344,7 +344,17 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = ['630644632616', '630644632566', '630644632458', '630644632433', '630644632340', '630644632256', '630644625936', '630644625861', '630644625714', '630644619477', '630644619460', '630644619452'];
+        this.ids = ['630644632616', '630644632566', '630644632458'
+        // '630644632433',
+        // '630644632340',
+        // '630644632256',
+        // '630644625936',
+        // '630644625861',
+        // '630644625714',
+        // '630644619477',
+        // '630644619460',
+        // '630644619452'
+        ];
         // 当前正在查的ID的index
         this.idIndex = 0;
         // 已经完成的
@@ -361,6 +371,7 @@ var X = function () {
     _createClass(X, [{
         key: 'rebind',
         value: function rebind() {
+            var _this = this;
             $(document).off("click", ".menu li").on("click", ".menu li", function () {
                 // 临时禁用这个按钮
                 $(this).find("button").attr("disabled", "disabled").delay(100).animate({ disabled: '' });
@@ -421,6 +432,14 @@ var X = function () {
                             text: text
                         });
                         $(currentButton).addClass("curr");
+                        setTimeout(function () {
+                            _this.idIndex++;
+                            if (_this.idIndex < _this.ids.length) {
+                                _this.startSearch();
+                            } else {
+                                _this.exportCSV();
+                            }
+                        }, 2000);
                     });
                 } else {
                     $(this).removeClass("curr");
@@ -530,36 +549,36 @@ var X = function () {
     }, {
         key: 'register',
         value: function register() {
-            var _this = this;
+            var _this2 = this;
 
             // 切换显示隐藏面板
             this.$panelToggleBtn.on('click', function () {
-                if (_this.$panel.is(":hidden")) {
-                    _this.panelShow();
+                if (_this2.$panel.is(":hidden")) {
+                    _this2.panelShow();
                 } else {
-                    _this.panelHide();
+                    _this2.panelHide();
                 }
             });
             // Excel载入
             this.$uploader.on('change', function () {
-                var file = _this.$uploader.get(0).files[0];
+                var file = _this2.$uploader.get(0).files[0];
                 var reader = new FileReader();
                 reader.readAsText(file, 'utf-8');
                 reader.onload = function (e) {
-                    _this.ids = e.target.result.split("\n");
-                    if (_this.ids.length > 0) {
-                        _this.$control.show();
+                    _this2.ids = e.target.result.split("\n");
+                    if (_this2.ids.length > 0) {
+                        _this2.$control.show();
                     }
-                    console.log(_this.ids);
+                    console.log(_this2.ids);
                 };
             });
             // 开始按钮
             this.$startButton.on('click', function () {
-                _this.startSearch();
+                _this2.startSearch();
             });
             // 下载按钮
             this.$downloadButton.on('click', function () {
-                _this.exportCSV();
+                _this2.exportCSV();
             });
         }
         // 显示面板
@@ -627,14 +646,16 @@ var _X2 = _interopRequireDefault(_X);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// jquery加载后执行
 // import './style/bootstrap.min.css'
+var x = {};
+
+// jquery加载后执行
 $(function () {
-    var x = new _X2.default();
+    x = new _X2.default();
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],117:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],130:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -757,5 +778,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[117,1])
+},{}]},{},[130,1])
 //# sourceMappingURL=/dist/load.map
