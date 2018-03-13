@@ -43,9 +43,6 @@ export default class X {
         this.$panel = $('#panel')
         this.$panelToggleBtn = $('#panelToggleBtn')
         this.$uploader = $('#uploader')
-        this.$progress = $('#progress')
-        this.$progressTitle = $('#progressTitle')
-        this.$progressBar = $('#progressBar')
         this.$control = $('#control')
         this.$startButton = $('#startButton')
         this.$downloadButton = $('#downloadButton')
@@ -68,9 +65,9 @@ export default class X {
             reader.onload = e => {
                 this.ids = e.target.result.split("\n")
                 if (this.ids.length > 0) {
-                    this.$progress.show()
                     this.$control.show()
                 }
+                console.log(this.ids)
             }
         })
         // 开始按钮
@@ -91,11 +88,6 @@ export default class X {
     panelHide () {
         this.$panel.hide()
         this.$panelToggleBtn.text('显示')
-    }
-    // 更新进度条
-    progressUpdate () {
-        const n = Math.round(this.finish.length / this.ids.length * 100)
-        this.$progressBar.css('width', `${n}%`)
     }
     // 开始搜索数据
     startSearch () {

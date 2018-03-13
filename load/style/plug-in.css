@@ -1,6 +1,5 @@
 .x {
   width: 100%;
-  color: #FFF;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -11,9 +10,22 @@
     height: 30px;
     line-height: 30px;
     padding: 0px 30px;
-    background-color: #5393DD; }
+    background-color: #5393DD;
+    color: #FFF;
+    font-size: 16px; }
     .x .x-header .toggle {
       float: right;
       cursor: pointer; }
   .x .x-body {
     padding: 30px; }
+    .x .x-body .uploader-group {
+      padding: 10px 0px; }
+    .x .x-body .btn-x {
+      padding: 5px 12px 5px 12px;
+      font-size: 14px;
+      color: #fff;
+      background: #ADC8DD;
+      border: 0px;
+      margin: 0px;
+      border-radius: 5px;
+      cursor: pointer; }

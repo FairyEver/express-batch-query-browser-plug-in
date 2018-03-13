@@ -132,13 +132,7 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":15}],3:[function(require,module,exports) {
-
-        var reloadCSS = require('_css_loader');
-        module.hot.dispose(reloadCSS);
-        module.hot.accept(reloadCSS);
-      
-},{"_css_loader":7}],4:[function(require,module,exports) {
+},{"./bundle-url":15}],4:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
@@ -150,7 +144,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"input-group mb-3\">\n            <div class=\"custom-file\">\n                <input type=\"file\" class=\"custom-file-input\" id=\"uploader\">\n                <label class=\"custom-file-label\" for=\"uploader\">\u9009\u62E9\u5355\u53F7\u5217\u8868</label>\n            </div>\n        </div>\n        <div id=\"progress\" style=\"display: none;\">\n            <p id=\"progressTitle\">\u8FDB\u5EA6</p>\n            <div class=\"progress mb-3\">\n                <div\n                    id=\"progressBar\"\n                    class=\"progress-bar progress-bar-striped progress-bar-animated\"\n                    role=\"progressbar\"\n                    style=\"width: 0%\">\n                </div>\n            </div>\n        </div>\n        <div id=\"control\" style=\"display: block;\">\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-primary\">\u5F00\u59CB</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-primary\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
+exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div id=\"control\" style=\"display: block;\">\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
 },{}],10:[function(require,module,exports) {
 'use strict';
 
@@ -532,9 +526,6 @@ var X = function () {
             this.$panel = $('#panel');
             this.$panelToggleBtn = $('#panelToggleBtn');
             this.$uploader = $('#uploader');
-            this.$progress = $('#progress');
-            this.$progressTitle = $('#progressTitle');
-            this.$progressBar = $('#progressBar');
             this.$control = $('#control');
             this.$startButton = $('#startButton');
             this.$downloadButton = $('#downloadButton');
@@ -562,9 +553,9 @@ var X = function () {
                 reader.onload = function (e) {
                     _this.ids = e.target.result.split("\n");
                     if (_this.ids.length > 0) {
-                        _this.$progress.show();
                         _this.$control.show();
                     }
+                    console.log(_this.ids);
                 };
             });
             // 开始按钮
@@ -591,14 +582,6 @@ var X = function () {
         value: function panelHide() {
             this.$panel.hide();
             this.$panelToggleBtn.text('显示');
-        }
-        // 更新进度条
-
-    }, {
-        key: 'progressUpdate',
-        value: function progressUpdate() {
-            var n = Math.round(this.finish.length / this.ids.length * 100);
-            this.$progressBar.css('width', n + '%');
         }
         // 开始搜索数据
 
@@ -641,8 +624,6 @@ exports.default = X;
 },{"./dom":9,"../lib/csv":10,"../lib/csvExport":11,"./rebind":50,"./search":21}],1:[function(require,module,exports) {
 'use strict';
 
-require('./style/bootstrap.min.css');
-
 require('./style/plug-in.scss');
 
 var _X = require('./class/X');
@@ -652,12 +633,13 @@ var _X2 = _interopRequireDefault(_X);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // jquery加载后执行
+// import './style/bootstrap.min.css'
 $(function () {
     var x = new _X2.default();
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/bootstrap.min.css":3,"./style/plug-in.scss":4,"./class/X":5}],80:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],87:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -780,5 +762,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[80,1])
+},{}]},{},[87,1])
 //# sourceMappingURL=/dist/load.map
