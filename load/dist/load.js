@@ -344,17 +344,7 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = ['630644632616', '630644632566', '630644632458'
-        // '630644632433',
-        // '630644632340',
-        // '630644632256',
-        // '630644625936',
-        // '630644625861',
-        // '630644625714',
-        // '630644619477',
-        // '630644619460',
-        // '630644619452'
-        ];
+        this.ids = ['630644632616', '630644632566', '630644632458', '630644632433', '630644632340', '630644632256', '630644625936', '630644625861', '630644625714', '630644619477', '630644619460', '630644619452'];
         // 当前正在查的ID的index
         this.idIndex = 0;
         // 已经完成的
@@ -433,13 +423,14 @@ var X = function () {
                         });
                         $(currentButton).addClass("curr");
                         setTimeout(function () {
+                            _this.getDataFromTable(queryParms.id);
                             _this.idIndex++;
                             if (_this.idIndex < _this.ids.length) {
                                 _this.startSearch();
                             } else {
                                 _this.exportCSV();
                             }
-                        }, 2000);
+                        }, 1000);
                     });
                 } else {
                     $(this).removeClass("curr");
@@ -451,6 +442,30 @@ var X = function () {
                     }
                 }
             });
+        }
+        // 从页面上获取数据
+
+    }, {
+        key: 'getDataFromTable',
+        value: function getDataFromTable(id) {
+            var ul = $('#route' + id + '_0');
+            var trs = ul.find('.curr.taobaodingdan table').children(1).children();
+            for (var index = 1; index < trs.length; index++) {
+                var tds = $(trs[index]).children();
+                var row = {
+                    yundanbianhao: tds[0].innerHTML,
+                    dingdanbianhao: tds[1].innerHTML,
+                    dingdanshijian: tds[2].innerHTML,
+                    fajianrendianhua: tds[3].innerHTML,
+                    fajianrendizhi: tds[4].innerHTML,
+                    shoujianrendianhua: tds[5].innerHTML,
+                    shoujianrendizhi: tds[6].innerHTML,
+                    lanjianren: tds[7].innerHTML,
+                    shoujianwangdian: tds[8].innerHTML,
+                    dingdanlaiyuan: $(tds[9]).text()
+                };
+                this.finish.push(row);
+            }
         }
     }, {
         key: 'search',
@@ -559,7 +574,7 @@ var X = function () {
                     _this2.panelHide();
                 }
             });
-            // Excel载入
+            // 载入
             this.$uploader.on('change', function () {
                 var file = _this2.$uploader.get(0).files[0];
                 var reader = new FileReader();
@@ -615,13 +630,7 @@ var X = function () {
             // 合并参数
             var _params = {
                 columns: [{ label: '运单编号', prop: 'yundanbianhao' }, { label: '订单编号', prop: 'dingdanbianhao' }, { label: '订单时间', prop: 'dingdanshijian' }, { label: '发件人(电话)', prop: 'fajianrendianhua' }, { label: '发件人地址', prop: 'fajianrendizhi' }, { label: '收件人(电话)', prop: 'shoujianrendianhua' }, { label: '收件人地址', prop: 'shoujianrendizhi' }, { label: '揽件人', prop: 'lanjianren' }, { label: '收件网点', prop: 'shoujianwangdian' }, { label: '订单来源', prop: 'dingdanlaiyuan' }],
-                data: [{
-                    name: 'lucy',
-                    age: 24
-                }, {
-                    name: 'bob',
-                    age: 26
-                }],
+                data: this.finish,
                 title: 'table',
                 noHeader: false
                 // 生成数据
@@ -655,7 +664,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],130:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],142:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -778,5 +787,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[130,1])
+},{}]},{},[142,1])
 //# sourceMappingURL=/dist/load.map

@@ -13,16 +13,16 @@ export default class X {
         this.ids = [
             '630644632616',
             '630644632566',
-            '630644632458'
-            // '630644632433',
-            // '630644632340',
-            // '630644632256',
-            // '630644625936',
-            // '630644625861',
-            // '630644625714',
-            // '630644619477',
-            // '630644619460',
-            // '630644619452'
+            '630644632458',
+            '630644632433',
+            '630644632340',
+            '630644632256',
+            '630644625936',
+            '630644625861',
+            '630644625714',
+            '630644619477',
+            '630644619460',
+            '630644619452'
         ]
         // 当前正在查的ID的index
         this.idIndex = 0
@@ -96,13 +96,14 @@ export default class X {
                         });
                         $(currentButton).addClass("curr");
                         setTimeout(() => {
+                            _this.getDataFromTable(queryParms.id)
                             _this.idIndex ++
                             if (_this.idIndex < _this.ids.length) {
                                 _this.startSearch()
                             } else {
                                 _this.exportCSV()
                             }
-                        }, 2000);
+                        }, 1000);
                     })
             } else {
                 $(this).removeClass("curr");
@@ -114,6 +115,27 @@ export default class X {
                 }
             }
         })
+    }
+    // 从页面上获取数据
+    getDataFromTable (id) {
+        const ul = $(`#route${id}_0`)
+        const trs = ul.find('.curr.taobaodingdan table').children(1).children()
+        for (let index = 1; index < trs.length; index++) {
+            const tds = $(trs[index]).children()
+            const row = {
+                yundanbianhao: tds[0].innerHTML,
+                dingdanbianhao: tds[1].innerHTML,
+                dingdanshijian: tds[2].innerHTML,
+                fajianrendianhua: tds[3].innerHTML,
+                fajianrendizhi: tds[4].innerHTML,
+                shoujianrendianhua: tds[5].innerHTML,
+                shoujianrendizhi: tds[6].innerHTML,
+                lanjianren: tds[7].innerHTML,
+                shoujianwangdian: tds[8].innerHTML,
+                dingdanlaiyuan: $(tds[9]).text()
+            }
+            this.finish.push(row)
+        }
     }
     search (id = '') {
         return new Promise((resolve, reject) => {
@@ -210,7 +232,7 @@ export default class X {
                 this.panelHide()
             }
         })
-        // Excel载入
+        // 载入
         this.$uploader.on('change', () => {
             const file = this.$uploader.get(0).files[0]
             const reader = new FileReader()
@@ -266,16 +288,7 @@ export default class X {
                 {label: '收件网点', prop: 'shoujianwangdian'},
                 {label: '订单来源', prop: 'dingdanlaiyuan'}
             ],
-            data: [
-                {
-                    name: 'lucy',
-                    age: 24
-                  },
-                  {
-                    name: 'bob',
-                    age: 26
-                  }
-            ],
+            data: this.finish,
             title: 'table',
             noHeader: false
         }
