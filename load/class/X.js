@@ -11,18 +11,18 @@ export default class X {
         $('#ajaxdata').before($(domStr))
         // 需要查询的列表
         this.ids = [
-            // '630644632616',
-            // '630644632566',
-            // '630644632458',
-            // '630644632433',
-            // '630644632340',
-            // '630644632256',
-            // '630644625936',
-            // '630644625861',
-            // '630644625714',
-            // '630644619477',
-            // '630644619460',
-            // '630644619452'
+            '630644632616',
+            '630644632566',
+            '630644632458',
+            '630644632433',
+            '630644632340',
+            '630644632256',
+            '630644625936',
+            '630644625861',
+            '630644625714',
+            '630644619477',
+            '630644619460',
+            '630644619452'
         ]
         // 当前正在查的ID的index
         this.idIndex = 0
@@ -124,8 +124,8 @@ export default class X {
         for (let index = 1; index < trs.length; index++) {
             const tds = $(trs[index]).children()
             const row = {
-                yundanbianhao: tds[0].innerHTML,
-                dingdanbianhao: tds[1].innerHTML,
+                yundanbianhao: "\t" + tds[0].innerHTML,
+                dingdanbianhao: "\t" + tds[1].innerHTML,
                 dingdanshijian: tds[2].innerHTML,
                 fajianrendianhua: tds[3].innerHTML,
                 fajianrendizhi: tds[4].innerHTML,
@@ -240,7 +240,7 @@ export default class X {
             reader.readAsText(file, 'utf-8')
             reader.onload = e => {
                 this.ids = e.target.result.split("\n")
-                $('#log').text(`导入${this.ids.length}个订单查询任务 现在可以点击[开始]按钮开始自动处理`)
+                $('#log').text(`导入${this.ids.length}个订单查询任务 现在可以点击 [开始] 按钮开始自动处理`)
             }
         })
         // 开始按钮
@@ -254,10 +254,10 @@ export default class X {
         // 帮助按钮
         this.$helpButton.on('click', () => {
             alert(`
-1
-2
-3
-4
+1. 点击“选择文件”，将保存有单号的记事本文件加载进来
+2. 加载完成后会显示单号条数
+3. 确认无误后点击开始按钮
+4. 全部查询完毕后会自动导出表格，也可以手动导出
             `.trim())
         })
         // 下载按钮

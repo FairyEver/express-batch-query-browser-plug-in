@@ -344,22 +344,9 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = []
-        // '630644632616',
-        // '630644632566',
-        // '630644632458',
-        // '630644632433',
-        // '630644632340',
-        // '630644632256',
-        // '630644625936',
-        // '630644625861',
-        // '630644625714',
-        // '630644619477',
-        // '630644619460',
-        // '630644619452'
-
+        this.ids = ['630644632616', '630644632566', '630644632458', '630644632433', '630644632340', '630644632256', '630644625936', '630644625861', '630644625714', '630644619477', '630644619460', '630644619452'];
         // 当前正在查的ID的index
-        ;this.idIndex = 0;
+        this.idIndex = 0;
         // 已经完成的
         this.finish = [];
         // 注册
@@ -467,8 +454,8 @@ var X = function () {
             for (var index = 1; index < trs.length; index++) {
                 var tds = $(trs[index]).children();
                 var row = {
-                    yundanbianhao: tds[0].innerHTML,
-                    dingdanbianhao: tds[1].innerHTML,
+                    yundanbianhao: "\t" + tds[0].innerHTML,
+                    dingdanbianhao: "\t" + tds[1].innerHTML,
                     dingdanshijian: tds[2].innerHTML,
                     fajianrendianhua: tds[3].innerHTML,
                     fajianrendizhi: tds[4].innerHTML,
@@ -595,7 +582,7 @@ var X = function () {
                 reader.readAsText(file, 'utf-8');
                 reader.onload = function (e) {
                     _this2.ids = e.target.result.split("\n");
-                    $('#log').text('\u5BFC\u5165' + _this2.ids.length + '\u4E2A\u8BA2\u5355\u67E5\u8BE2\u4EFB\u52A1 \u73B0\u5728\u53EF\u4EE5\u70B9\u51FB[\u5F00\u59CB]\u6309\u94AE\u5F00\u59CB\u81EA\u52A8\u5904\u7406');
+                    $('#log').text('\u5BFC\u5165' + _this2.ids.length + '\u4E2A\u8BA2\u5355\u67E5\u8BE2\u4EFB\u52A1 \u73B0\u5728\u53EF\u4EE5\u70B9\u51FB [\u5F00\u59CB] \u6309\u94AE\u5F00\u59CB\u81EA\u52A8\u5904\u7406');
                 };
             });
             // 开始按钮
@@ -608,7 +595,7 @@ var X = function () {
             });
             // 帮助按钮
             this.$helpButton.on('click', function () {
-                alert('\n1\n2\n3\n4\n            '.trim());
+                alert('\n1. \u70B9\u51FB\u201C\u9009\u62E9\u6587\u4EF6\u201D\uFF0C\u5C06\u4FDD\u5B58\u6709\u5355\u53F7\u7684\u8BB0\u4E8B\u672C\u6587\u4EF6\u52A0\u8F7D\u8FDB\u6765\n2. \u52A0\u8F7D\u5B8C\u6210\u540E\u4F1A\u663E\u793A\u5355\u53F7\u6761\u6570\n3. \u786E\u8BA4\u65E0\u8BEF\u540E\u70B9\u51FB\u5F00\u59CB\u6309\u94AE\n4. \u5168\u90E8\u67E5\u8BE2\u5B8C\u6BD5\u540E\u4F1A\u81EA\u52A8\u5BFC\u51FA\u8868\u683C\uFF0C\u4E5F\u53EF\u4EE5\u624B\u52A8\u5BFC\u51FA\n            '.trim());
             });
             // 下载按钮
             this.$downloadButton.on('click', function () {
@@ -683,7 +670,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],152:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],154:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -806,5 +793,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[152,1])
+},{}]},{},[154,1])
 //# sourceMappingURL=/dist/load.map
