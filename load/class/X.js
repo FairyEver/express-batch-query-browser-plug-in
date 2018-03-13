@@ -7,7 +7,7 @@ export default class X {
     constructor () {
         this.play = false
         // 重新注册事件
-        this.rebind()
+        // this.rebind()
         // 在页面上添加面板
         $('#ajaxdata').before($(domStr))
         // 需要查询的列表
@@ -244,6 +244,11 @@ export default class X {
     }
     // 注册事件
     register () {
+        $(document).ajaxComplete((event, jqXHR, ajaxOptions) => {
+            console.log(event)
+            console.log(jqXHR)
+            console.log(ajaxOptions)
+        })
         // 切换显示隐藏面板
         this.$panelToggleBtn.on('click', () => {
             if (this.$panel.is(":hidden")) {
@@ -271,9 +276,11 @@ export default class X {
             this.play = true
             this.startSearch()
         })
+        // 暂停按钮
         this.$pauseButton.on('click', () => {
             this.play = false
         })
+        // 继续按钮
         this.$goonButton.on('click', () => {
             if (this.ids.length === 0) {
                 alert('请先导入待处理的单号文件')

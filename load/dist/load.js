@@ -341,7 +341,7 @@ var X = function () {
 
         this.play = false;
         // 重新注册事件
-        this.rebind();
+        // this.rebind()
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
@@ -588,6 +588,11 @@ var X = function () {
         value: function register() {
             var _this2 = this;
 
+            $(document).ajaxComplete(function (event, jqXHR, ajaxOptions) {
+                console.log(event);
+                console.log(jqXHR);
+                console.log(ajaxOptions);
+            });
             // 切换显示隐藏面板
             this.$panelToggleBtn.on('click', function () {
                 if (_this2.$panel.is(":hidden")) {
@@ -615,9 +620,11 @@ var X = function () {
                 _this2.play = true;
                 _this2.startSearch();
             });
+            // 暂停按钮
             this.$pauseButton.on('click', function () {
                 _this2.play = false;
             });
+            // 继续按钮
             this.$goonButton.on('click', function () {
                 if (_this2.ids.length === 0) {
                     alert('请先导入待处理的单号文件');
@@ -700,7 +707,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],177:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],180:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -823,5 +830,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[177,1])
+},{}]},{},[180,1])
 //# sourceMappingURL=/dist/load.map
