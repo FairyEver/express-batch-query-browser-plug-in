@@ -11,8 +11,8 @@ export default class X {
         $('#ajaxdata').before($(domStr))
         // 需要查询的列表
         this.ids = [
-            '630644632616',
-            '630644632566',
+            // '630644632616',
+            // '630644632566',
             // '630644632458',
             // '630644632433',
             // '630644632340',
@@ -60,18 +60,18 @@ export default class X {
                         let ticket = ''
                         let count = 1
                         const doIt = () => {
-                            $('#log').text(`${_this.idIndex + 1} / ${_this.ids.length} 获取凭证 单号：${queryParms.id} 第${count}次`)
+                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 获取凭证 单号：${queryParms.id} 第${count}次`)
                             ztosec.billQueryPreauth({
                                 bill: queryParms.id,
                                 billType: queryParms.type
                             }, function (params) {
                                 ticket = params.ticket
-                                $('#log').text(`${_this.idIndex + 1} / ${_this.ids.length} 获取凭证 单号：${queryParms.id} 成功 凭证：${ticket} 共查询${count}次`)
+                                $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 获取凭证 单号：${queryParms.id} 成功 凭证：${ticket} 共查询${count}次`)
                                 resolve(ticket)
                             })
                             setTimeout(() => {
                                 if (ticket === '') {
-                                    $('#log').text(`${_this.idIndex + 1} / ${_this.ids.length} 获取凭证 单号：${queryParms.id} 失败`)
+                                    $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 获取凭证 单号：${queryParms.id} 失败`)
                                     setTimeout(() => {
                                         count += 1
                                         doIt()
