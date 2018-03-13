@@ -2,7 +2,6 @@ import domStr from './dom'
 
 import Csv from '../lib/csv'
 import ExportCsv from '../lib/csvExport'
-import search from './search'
 
 export default class X {
     constructor () {
@@ -43,9 +42,7 @@ export default class X {
             // 单号 类似于 630644632616_0 这个数据是绑定在按钮上的
             var bill = $(this).find("button").attr("data-bill");
             // 忽略这两个按钮
-            if ($(this).find("button").html() === "登记所有查询记录" || $(this).find("button").html() === "单号轨迹") {
-                return
-            }
+            if ($(this).find("button").html() === "登记所有查询记录" || $(this).find("button").html() === "单号轨迹") { return }
             // 需要处理事件的按钮
             if (!$(this).hasClass("curr")) {
                 // 从这个按钮上获取数据
@@ -58,20 +55,22 @@ export default class X {
                 const billQueryPreauthFn = () => {
                     return new Promise((resolve, reject) => {
                         let ticket = ''
+                        let count = 1
                         const doIt = () => {
-                            $('#log').text(`尝试获取凭证 ${queryParms.id}`)
+                            $('#log').text(`获取凭证 单号：${queryParms.id} 第${count}次`)
                             ztosec.billQueryPreauth({
                                 bill: queryParms.id,
                                 billType: queryParms.type
                             }, function (params) {
                                 ticket = params.ticket
-                                $('#log').text(`成功获取凭证 ${ticket}`)
+                                $('#log').text(`获取凭证 单号：${queryParms.id} 成功 凭证：${ticket}`)
                                 resolve(ticket)
                             })
                             setTimeout(() => {
                                 if (ticket === '') {
-                                    $('#log').text(`获取凭证失败 ${queryParms.id}`)
+                                    $('#log').text(`获取凭证 单号：${queryParms.id} 失败`)
                                     setTimeout(() => {
+                                        count += 1
                                         doIt()
                                     }, 300)
                                 }
@@ -93,6 +92,7 @@ export default class X {
                             text: text
                         });
                         $(currentButton).addClass("curr");
+                        alert(1)
                     })
             } else {
                 $(this).removeClass("curr");
@@ -103,6 +103,80 @@ export default class X {
                     $("." + id).removeClass("curr");
                 }
             }
+        })
+    }
+    search () {
+        return new Promise((resolve, reject) => {
+            var txtbill = document.getElementById("txtJobNoList");
+            var list = txtbill.value.trim().split("\n");
+            ztosec.queryReport({ bill_ids: list }, function () {
+                var billcode = $("#txtJobNoList").val();
+                $("#Panel1,.xubox_layer").hide();
+                var showdiv = $("#showdiv").val();
+                var history = "";
+                if (document.getElementById("chkzidou2").checked) {
+                    history = "true";
+                }
+                $(".taskBar li,.xubox_layer").removeClass("curr");
+                $(".docBubble").remove();
+                var date1 = new Date();  //开始时间
+                var loadLayer;
+                if (isSearch) {
+                    if (reqScanTips) {
+                        reqScanTips.abort();
+                        isSearch = true;
+                    }
+                    reqScanTips = $.ajax({
+                        type: "post",
+                        cache: false,
+                        timeout: 60000,
+                        url: "bills2.aspx",
+                        data: {
+                            Bill: billcode, showdiv: showdiv, history: history
+                        },
+                        beforeSend: function () {
+                            isSearch = false;
+                            $("#Button1").addClass("gray");
+                            $("#sxubox_layer20").show();
+                        },
+                        // dataType: "html",
+                        dataType: "jsonp",
+                        jsonp: "callbackfun",
+                        error: function (a, b, c) {
+                            isSearch = true;
+                            $("#Button1").removeClass("gray");
+                            $("#sxubox_layer20").hide();
+                            $("#ajaxdata").html("<div style=\"text-align:center; width:100%; line-height:150%;margin-top: 130px;\"><img src=\"/images/error.png\" width=\"150\" /><br/>数据加载出错，刷新页面重新查询一次。联系管理员：林毕成 QQ：1299450042</div>");
+                        },
+                        success: function (rs) {
+                            isSearch = true; 
+                            $("#Button1").removeClass("gray");
+                            if (rs.n == "" || rs.n == null) {
+                                $("#ajaxdata").html("<div style=\"text-align:center; width:100%; line-height:150%;margin-top: 130px;\"><img src=\"/images/error.png\" width=\"150\" /><br/>返回结果为空,请联系管理员。</div>");
+                            } else {
+                                if (rs.n.length < 300) {
+                                    $("#ajaxdata").html("<div style=\"text-align:center; width:100%; line-height:150%;margin-top: 130px;\"><img src=\"/images/error.png\" width=\"150\" /><br/>" + rs.n + "</div>");
+                                } else {
+                                    $("#ajaxdata").html(rs.n);
+                                    $(`button[data-id='taobaodingdan'][data-bill='${list[0]}_0']`)[0].click()
+                                    resolve()
+                                }
+                                dialogOnresizeparameters();
+    
+                            }
+                            var date2 = new Date();    //结束时间
+                            var date3 = date2.getTime() - date1.getTime();  //时间差的毫秒数
+                            $(".totalTime").html("耗时：" + date3 / 1000 + "秒");
+                            $("#sxubox_layer20").hide();
+                            setTimeout("getUserState()", 2000);//延时1秒  
+                        },
+                        complete: function () {
+                            isSearch = true;
+                            $("#sxubox_layer20").hide();
+                        }
+                    });
+                }
+            })
         })
     }
     // 缓存元素
@@ -162,7 +236,7 @@ export default class X {
     // 开始搜索数据
     startSearch () {
         $("#txtJobNoList").val(this.ids[0])
-        search()
+        this.search()
             .then(() => {
                 console.log('OK')
             })
