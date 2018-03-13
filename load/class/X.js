@@ -7,7 +7,7 @@ export default class X {
     constructor () {
         this.play = false
         // 重新注册事件
-        // this.rebind()
+        this.rebind()
         // 在页面上添加面板
         $('#ajaxdata').before($(domStr))
         // 需要查询的列表
@@ -154,6 +154,7 @@ export default class X {
             this.finish.push(row)
         }
     }
+    // 搜索 这一步只是返回列表
     search (id = '') {
         $('#log').text(`第${this.idIndex + 1}个 / 共${this.ids.length}个 单号：${id} 开始请求列表`)
         return new Promise((resolve, reject) => {
@@ -244,11 +245,6 @@ export default class X {
     }
     // 注册事件
     register () {
-        $(document).ajaxComplete((event, jqXHR, ajaxOptions) => {
-            console.log(event)
-            console.log(jqXHR)
-            console.log(ajaxOptions)
-        })
         // 切换显示隐藏面板
         this.$panelToggleBtn.on('click', () => {
             if (this.$panel.is(":hidden")) {
