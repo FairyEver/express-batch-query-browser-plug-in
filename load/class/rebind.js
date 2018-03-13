@@ -53,23 +53,6 @@ export default () => {
                     });
                     $(currentButton).addClass("curr");
                 })
-            // 请求凭证
-            // ztosec.billQueryPreauth({
-            //     bill: queryParms.id,
-            //     billType: queryParms.type
-            // }, function (params) {
-            //         ztoAjax({
-            //             url: url + "&queryTicket=" + params.ticket,
-            //             type: "get",
-            //             data: "",
-            //             index: index,
-            //             bill: bill,
-            //             id: id,
-            //             text: text
-            //         });
-            //         $(currentButton).addClass("curr");
-            //     }
-            // )
         } else {
             $(this).removeClass("curr");
             var id = $(this).find("button").attr("data-id");

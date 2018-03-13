@@ -24,8 +24,8 @@ export default `
             </div>
         </div>
         <div id="control" style="display: block;">
-            <button id="startButton" type="button" class="btn btn-light">开始</button>
-            <button id="downloadButton" type="button" class="btn btn-light">下载结果</button>
+            <button id="startButton" type="button" class="btn btn-primary">开始</button>
+            <button id="downloadButton" type="button" class="btn btn-primary">下载结果</button>
         </div>
     </div>
 </div>

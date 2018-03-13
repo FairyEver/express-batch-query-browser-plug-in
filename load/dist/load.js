@@ -150,7 +150,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"input-group mb-3\">\n            <div class=\"custom-file\">\n                <input type=\"file\" class=\"custom-file-input\" id=\"uploader\">\n                <label class=\"custom-file-label\" for=\"uploader\">\u9009\u62E9\u5355\u53F7\u5217\u8868</label>\n            </div>\n        </div>\n        <div id=\"progress\" style=\"display: none;\">\n            <p id=\"progressTitle\">\u8FDB\u5EA6</p>\n            <div class=\"progress mb-3\">\n                <div\n                    id=\"progressBar\"\n                    class=\"progress-bar progress-bar-striped progress-bar-animated\"\n                    role=\"progressbar\"\n                    style=\"width: 0%\">\n                </div>\n            </div>\n        </div>\n        <div id=\"control\" style=\"display: block;\">\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-light\">\u5F00\u59CB</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-light\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
+exports.default = "\n\n<div class=\"x\">\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"input-group mb-3\">\n            <div class=\"custom-file\">\n                <input type=\"file\" class=\"custom-file-input\" id=\"uploader\">\n                <label class=\"custom-file-label\" for=\"uploader\">\u9009\u62E9\u5355\u53F7\u5217\u8868</label>\n            </div>\n        </div>\n        <div id=\"progress\" style=\"display: none;\">\n            <p id=\"progressTitle\">\u8FDB\u5EA6</p>\n            <div class=\"progress mb-3\">\n                <div\n                    id=\"progressBar\"\n                    class=\"progress-bar progress-bar-striped progress-bar-animated\"\n                    role=\"progressbar\"\n                    style=\"width: 0%\">\n                </div>\n            </div>\n        </div>\n        <div id=\"control\" style=\"display: block;\">\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-primary\">\u5F00\u59CB</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-primary\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
 },{}],10:[function(require,module,exports) {
 'use strict';
 
@@ -378,23 +378,6 @@ exports.default = function () {
                 });
                 $(currentButton).addClass("curr");
             });
-            // 请求凭证
-            // ztosec.billQueryPreauth({
-            //     bill: queryParms.id,
-            //     billType: queryParms.type
-            // }, function (params) {
-            //         ztoAjax({
-            //             url: url + "&queryTicket=" + params.ticket,
-            //             type: "get",
-            //             data: "",
-            //             index: index,
-            //             bill: bill,
-            //             id: id,
-            //             text: text
-            //         });
-            //         $(currentButton).addClass("curr");
-            //     }
-            // )
         } else {
             $(this).removeClass("curr");
             var id = $(this).find("button").attr("data-id");
@@ -674,7 +657,7 @@ $(function () {
     // 修改页面
     $('.taskBar').hide();
 });
-},{"./style/bootstrap.min.css":3,"./style/plug-in.scss":4,"./class/X":5}],70:[function(require,module,exports) {
+},{"./style/bootstrap.min.css":3,"./style/plug-in.scss":4,"./class/X":5}],74:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -797,5 +780,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[70,1])
+},{}]},{},[74,1])
 //# sourceMappingURL=/dist/load.map

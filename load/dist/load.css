@@ -9,16 +9,13 @@
   position: fixed;
   bottom: 0px;
   left: 0px;
-  background-color: rgba(0, 0, 0, 0.8);
   color: #FFF;
   user-select: none; }
   .x .x-header {
-    padding: 10px 30px; }
+    padding: 10px;
+    background-color: #5393DD; }
     .x .x-header .toggle {
       float: right;
       cursor: pointer; }
   .x .x-body {
-    padding: 10px 30px; }
-
-#zto_unfreeze_div.hide .form-wrapper {
-  display: none; }
+    padding: 10px; }

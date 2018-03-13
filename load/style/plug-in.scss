@@ -3,22 +3,23 @@
     position: fixed;
     bottom: 0px;
     left: 0px;
-    background-color: rgba(#000, .8);
     color: #FFF;
     user-select: none;
     .x-header {
-        padding: 10px 30px;
+        padding: 10px;
+        background-color: #5393DD;
         .toggle {
             float: right;
             cursor: pointer;
         }
     }
     .x-body {
-        padding: 10px 30px;
+        padding: 10px;
+        // background-color: #AFDBFE;
     }
 }
-#zto_unfreeze_div.hide{
+#zto_unfreeze_div{
     .form-wrapper {
-        display: none;
+        // display: none;
     }
 }
