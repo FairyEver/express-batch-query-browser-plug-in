@@ -340,7 +340,7 @@ var X = function () {
         _classCallCheck(this, X);
 
         // 最大尝试次数
-        this.maxTry = 10;
+        this.ticketMaxTry = 10;
         // 自动下载设置
         this.autoExportWhenPause = false;
         this.autoExportWhenStop = true;
@@ -426,8 +426,12 @@ var X = function () {
                                     if (ticket === '') {
                                         $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' ' + btnText + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u5931\u8D25');
                                         setTimeout(function () {
-                                            count += 1;
-                                            doIt();
+                                            if (count < _this.ticketMaxTry) {
+                                                count += 1;
+                                                doIt();
+                                            } else {
+                                                reject();
+                                            }
                                         }, 300);
                                     }
                                 }, 1000);
@@ -508,6 +512,8 @@ var X = function () {
                                 }
                             }
                         }, 1000);
+                    }).catch(function () {
+                        console.log('没有找到凭证');
                     });
                 } else {
                     $(this).removeClass("curr");
@@ -807,7 +813,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],233:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],234:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -930,5 +936,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[233,1])
+},{}]},{},[234,1])
 //# sourceMappingURL=/dist/load.map

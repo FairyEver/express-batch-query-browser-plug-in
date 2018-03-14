@@ -6,7 +6,7 @@ import ExportCsv from '../lib/csvExport'
 export default class X {
     constructor () {
         // 最大尝试次数
-        this.maxTry = 10
+        this.ticketMaxTry = 10
         // 自动下载设置
         this.autoExportWhenPause = false
         this.autoExportWhenStop = true
@@ -104,8 +104,12 @@ export default class X {
                                 if (ticket === '') {
                                     $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} ${btnText} 获取Ticket 第${count}次 失败`)
                                     setTimeout(() => {
-                                        count += 1
-                                        doIt()
+                                        if (count < _this.ticketMaxTry) {
+                                            count += 1
+                                            doIt()
+                                        } else {
+                                            reject()
+                                        }
                                     }, 300)
                                 }
                             }, 1000)
@@ -185,6 +189,9 @@ export default class X {
                             }
                         }
                     }, 1000);
+                })
+                .catch(() => {
+                    console.log('没有找到凭证')
                 })
             } else {
                 $(this).removeClass("curr");
