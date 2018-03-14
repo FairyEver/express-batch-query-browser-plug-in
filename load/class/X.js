@@ -7,8 +7,8 @@ export default class X {
     constructor () {
         // 最大尝试次数
         this.ticketMaxTry = 10
-        this.ticketWait = 1
-        this.getDataWait = 1
+        this.ticketWait = 2
+        this.getDataWait = 2
         // 自动下载设置
         this.autoExportWhenPause = false
         this.autoExportWhenStop = true
@@ -100,18 +100,22 @@ export default class X {
                             }, function (params) {
                                 ticket = params.ticket
                                 $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} ${btnText} 获取Ticket 第${count}次 成功 Ticket：${ticket}`)
-                                resolve(ticket)
+                                setTimeout(() => {
+                                    resolve(ticket)
+                                }, 300);
                             })
                             setTimeout(() => {
                                 if (ticket === '') {
                                     $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} ${btnText} 获取Ticket 第${count}次 失败`)
-                                    // 如果在最大尝试范围内
-                                    if (count < _this.ticketMaxTry) {
-                                        count += 1
-                                        doIt()
-                                    } else {
-                                        resolve('0000')
-                                    }
+                                    setTimeout(() => {
+                                        // 如果在最大尝试范围内
+                                        if (count < _this.ticketMaxTry) {
+                                            count += 1
+                                            doIt()
+                                        } else {
+                                            resolve('0000')
+                                        }
+                                    }, 300);
                                 }
                             }, _this.ticketWait * 1000)
                         }
@@ -272,8 +276,8 @@ export default class X {
         }
         for (let index = 1; index < trs.length; index++) {
             const tds = $(trs[index]).children()
-            console.log(tds[8].innerHTML)
-            console.log(tds[10].innerHTML)
+            // console.log(tds[8].innerHTML)
+            // console.log(tds[10].innerHTML)
             const row = {
                 pinming: tds[8].innerHTML || '-',
                 daishoukuan: tds[10].innerHTML || '-'
@@ -380,8 +384,8 @@ export default class X {
     }
     // 获取用户设置
     refreshSetting () {
-        this.ticketWait = Number(this.$ticketWait.val() || 1)
-        this.getDataWait = Number(this.$getDataWait.val() || 1)
+        this.ticketWait = Number(this.$ticketWait.val() || 2)
+        this.getDataWait = Number(this.$getDataWait.val() || 2)
         this.ticketMaxTry = Number(this.$ticketMaxTry.val() || 10)
         console.log('ticketWait', this.ticketWait)
         console.log('getDataWait', this.getDataWait)
