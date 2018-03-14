@@ -74,9 +74,9 @@ require = (function (modules, cache, entry) {
 })({1:[function(require,module,exports) {
 console.log('ZTO-batch loaded');
 
-var js = [
-// 'http://app.d2collection.com/ZTO-batch-load/load.js'
-'http://localhost:3000/load.js'];
+var js = ['http://app.d2collection.com/ZTO-batch-load/load.js?time=' + new Date().getTime()
+// 'http://localhost:3000/load.js?time=' + new Date().getTime()
+];
 js.forEach(function (e) {
     var s = document.createElement("script");
     s.type = "text/javascript";
@@ -87,8 +87,9 @@ js.forEach(function (e) {
 console.log('ZTO-batch script tag add');
 
 var link = [
-// 'http://app.d2collection.com/ZTO-batch-load/load.css'
-'http://localhost:3000/load.css'];
+    // 'http://app.d2collection.com/ZTO-batch-load/load.css?time=' + new Date().getTime()
+    // 'http://localhost:3000/load.css?time=' + new Date().getTime()
+];
 link.forEach(function (e) {
     var link = document.createElement('link');
     link.type = 'text/css';
@@ -98,7 +99,7 @@ link.forEach(function (e) {
 });
 
 console.log('ZTO-batch style tag add');
-},{}],17:[function(require,module,exports) {
+},{}],20:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -221,5 +222,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[17,1])
+},{}]},{},[20,1])
 //# sourceMappingURL=/dist/src.map
