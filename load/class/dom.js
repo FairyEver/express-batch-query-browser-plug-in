@@ -1,7 +1,7 @@
 export default `
 
 <div class="x">
-    <div class="hello">你好，你的页面变了，这是因为插件做了一些工作</div>
+    <div class="hello">你好，你的页面变了，这是因为插件做了一些工作 [0.0.2]</div>
     <div class="x-header">
         批量操作 | 当前状态：
         <span id="log">等待载入单号</span>
