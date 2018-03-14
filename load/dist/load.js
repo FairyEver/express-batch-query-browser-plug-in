@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({15:[function(require,module,exports) {
+})({8:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -101,7 +101,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],7:[function(require,module,exports) {
+},{}],4:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -132,20 +132,20 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":15}],4:[function(require,module,exports) {
+},{"./bundle-url":8}],2:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":7}],9:[function(require,module,exports) {
+},{"_css_loader":4}],5:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = "\n\n<div class=\"x\">\n    <div class=\"hello\">\u4F60\u597D\uFF0C\u4F60\u7684\u9875\u9762\u53D8\u4E86\uFF0C\u8FD9\u662F\u56E0\u4E3A\u63D2\u4EF6\u505A\u4E86\u4E00\u4E9B\u5DE5\u4F5C</div>\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div id=\"control\">\n            <button id=\"helpButton\" type=\"button\" class=\"btn btn-x\">\u5982\u4F55\u4F7F\u7528</button>\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"pauseButton\" type=\"button\" class=\"btn btn-x\">\u6682\u505C</button>\n            <button id=\"goonButton\" type=\"button\" class=\"btn btn-x\">\u7EE7\u7EED</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
-},{}],10:[function(require,module,exports) {
+},{}],7:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -223,7 +223,7 @@ function csv(columns, datas, options) {
     }
     return content.join(newLine);
 }
-},{}],11:[function(require,module,exports) {
+},{}],6:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -310,7 +310,7 @@ var csv = {
 };
 
 exports.default = csv;
-},{}],5:[function(require,module,exports) {
+},{}],3:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -829,7 +829,7 @@ var X = function () {
 }();
 
 exports.default = X;
-},{"./dom":9,"../lib/csv":10,"../lib/csvExport":11}],1:[function(require,module,exports) {
+},{"./dom":5,"../lib/csv":7,"../lib/csvExport":6}],1:[function(require,module,exports) {
 'use strict';
 
 require('./style/plug-in.scss');
@@ -845,7 +845,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],257:[function(require,module,exports) {
+},{"./style/plug-in.scss":2,"./class/X":3}],9:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -867,7 +867,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58539' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56017' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -968,5 +968,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[257,1])
+},{}]},{},[9,1])
 //# sourceMappingURL=/dist/load.map
