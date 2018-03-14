@@ -21,11 +21,11 @@ export default `
         <div class="setting-group">
             <div class="setting-item">
                 <label>请求凭证等待时间(秒)</label>
-                <input id="ticketWait" type="text" value="2">
+                <input id="ticketWait" type="text" value="1">
             </div>
             <div class="setting-item">
                 <label>请求数据等待时间(秒)</label>
-                <input id="getDataWait" type="text" value="2">
+                <input id="getDataWait" type="text" value="1">
             </div>
             <div class="setting-item">
                 <label>请求凭证最大尝试次数</label>

@@ -7,8 +7,8 @@ export default class X {
     constructor () {
         // 最大尝试次数
         this.ticketMaxTry = 10
-        this.ticketWait = 2
-        this.getDataWait = 2
+        this.ticketWait = 1
+        this.getDataWait = 1
         // 自动下载设置
         this.autoExportWhenPause = false
         this.autoExportWhenStop = true
@@ -384,8 +384,8 @@ export default class X {
     }
     // 获取用户设置
     refreshSetting () {
-        this.ticketWait = Number(this.$ticketWait.val() || 2)
-        this.getDataWait = Number(this.$getDataWait.val() || 2)
+        this.ticketWait = Number(this.$ticketWait.val() || 1)
+        this.getDataWait = Number(this.$getDataWait.val() || 1)
         this.ticketMaxTry = Number(this.$ticketMaxTry.val() || 10)
         console.log('ticketWait', this.ticketWait)
         console.log('getDataWait', this.getDataWait)
