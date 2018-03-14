@@ -426,6 +426,7 @@ var X = function () {
                                     if (ticket === '') {
                                         $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' ' + btnText + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u5931\u8D25');
                                         setTimeout(function () {
+                                            // 如果在最大尝试范围内
                                             if (count < _this.ticketMaxTry) {
                                                 count += 1;
                                                 doIt();

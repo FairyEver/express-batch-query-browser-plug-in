@@ -104,6 +104,7 @@ export default class X {
                                 if (ticket === '') {
                                     $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} ${btnText} 获取Ticket 第${count}次 失败`)
                                     setTimeout(() => {
+                                        // 如果在最大尝试范围内
                                         if (count < _this.ticketMaxTry) {
                                             count += 1
                                             doIt()
