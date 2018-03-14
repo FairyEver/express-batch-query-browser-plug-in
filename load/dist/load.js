@@ -7695,7 +7695,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = "\n\n<div class=\"x\">\n    <div class=\"hello\">\u4F60\u597D\uFF0C\u4F60\u7684\u9875\u9762\u53D8\u4E86\uFF0C\u8FD9\u662F\u56E0\u4E3A\u63D2\u4EF6\u505A\u4E86\u4E00\u4E9B\u5DE5\u4F5C [0.0.2]</div>\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\" style=\"display: none;\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div class=\"uploader-textarea-group\">\n            <div>\u5728\u8FD9\u91CC\u7C98\u8D34\u5355\u53F7\uFF0C\u591A\u4E2A\u5355\u53F7\u6362\u884C\u5206\u5272\uFF0C\u4E0D\u9650\u5236\u6570\u91CF\uFF0C\u7136\u540E\u70B9\u51FB\u4E0B\u9762\u7684\u5BFC\u5165\u6309\u94AE</div>\n            <textarea id=\"uploaderTextarea\"></textarea>\n            <div>\n                <button id=\"uploaderTextareaOkBtn\">\u5BFC\u5165</button>\n            </div>\n        </div>\n        <div id=\"control\">\n            <button id=\"helpButton\" type=\"button\" class=\"btn btn-x\">\u5982\u4F55\u4F7F\u7528</button>\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"pauseButton\" type=\"button\" class=\"btn btn-x\">\u6682\u505C</button>\n            <button id=\"goonButton\" type=\"button\" class=\"btn btn-x\">\u7EE7\u7EED</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
+exports.default = "\n\n<div class=\"x\">\n    <div class=\"hello\">\u4F60\u597D\uFF0C\u4F60\u7684\u9875\u9762\u53D8\u4E86\uFF0C\u8FD9\u662F\u56E0\u4E3A\u63D2\u4EF6\u505A\u4E86\u4E00\u4E9B\u5DE5\u4F5C [0.0.2]</div>\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\" style=\"display: none;\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div class=\"uploader-textarea-group\">\n            <div>\u5728\u8FD9\u91CC\u7C98\u8D34\u5355\u53F7\uFF0C\u591A\u4E2A\u5355\u53F7\u6362\u884C\u5206\u5272\uFF0C\u4E0D\u9650\u5236\u6570\u91CF\uFF0C\u7136\u540E\u70B9\u51FB\u4E0B\u9762\u7684\u5BFC\u5165\u6309\u94AE</div>\n            <textarea id=\"uploaderTextarea\"></textarea>\n            <div>\n                <button id=\"uploaderTextareaOkBtn\">\u5BFC\u5165</button>\n            </div>\n        </div>\n        <div class=\"setting-group\">\n            <div class=\"setting-item\">\n                <label>\u8BF7\u6C42\u51ED\u8BC1\u7B49\u5F85\u65F6\u95F4</label>\n                <input type=\"text\" value=\"3\">\n            </div>\n            <div class=\"setting-item\">\n                <label>\u8BF7\u6C42\u51ED\u8BC1\u6700\u5927\u5C1D\u8BD5\u6B21\u6570</label>\n                <input type=\"text\" value=\"10\">\n            </div>\n        </div>\n        <div id=\"control\">\n            <button id=\"helpButton\" type=\"button\" class=\"btn btn-x\">\u5982\u4F55\u4F7F\u7528</button>\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"pauseButton\" type=\"button\" class=\"btn btn-x\">\u6682\u505C</button>\n            <button id=\"goonButton\" type=\"button\" class=\"btn btn-x\">\u7EE7\u7EED</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
 },{}],9:[function(require,module,exports) {
 'use strict';
 
@@ -8408,7 +8408,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"babel-polyfill":18,"./style/plug-in.scss":3,"./class/X":4}],385:[function(require,module,exports) {
+},{"babel-polyfill":18,"./style/plug-in.scss":3,"./class/X":4}],394:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -8531,5 +8531,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[385,1])
+},{}]},{},[394,1])
 //# sourceMappingURL=/dist/load.map

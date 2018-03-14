@@ -18,6 +18,16 @@ export default `
                 <button id="uploaderTextareaOkBtn">导入</button>
             </div>
         </div>
+        <div class="setting-group">
+            <div class="setting-item">
+                <label>请求凭证等待时间</label>
+                <input type="text" value="3">
+            </div>
+            <div class="setting-item">
+                <label>请求凭证最大尝试次数</label>
+                <input type="text" value="10">
+            </div>
+        </div>
         <div id="control">
             <button id="helpButton" type="button" class="btn btn-x">如何使用</button>
             <button id="startButton" type="button" class="btn btn-x">开始</button>
