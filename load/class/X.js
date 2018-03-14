@@ -28,16 +28,6 @@ export default class X {
         $('#ajaxdata').before($(domStr))
         // 需要查询的列表
         this.ids = [
-            // '630644632616',
-            // '630644632616',
-            // '630644632566',
-            // '630644632566',
-            // '630644632458',
-            // '630644632458',
-            // '630644632433',
-            // '630644632433',
-            // '630644632340',
-
             '630808830478',
             '630808830485',
             '630808830508',
@@ -375,6 +365,8 @@ export default class X {
         this.$panel = $('#panel')
         this.$panelToggleBtn = $('#panelToggleBtn')
         this.$uploader = $('#uploader')
+        this.$uploaderTextarea = $('#uploaderTextarea')
+        this.$uploaderTextareaOkBtn = $('#uploaderTextareaOkBtn')
         this.$helpButton = $('#helpButton')
         this.$startButton = $('#startButton')
         this.$pauseButton = $('#pauseButton')
@@ -397,9 +389,29 @@ export default class X {
             const reader = new FileReader()
             reader.readAsText(file, 'utf-8')
             reader.onload = e => {
+                console.log(e.target.result)
                 this.ids = e.target.result.split("\n")
+                console.log(this.ids)
                 $('#log').text(`导入${this.ids.length}个订单查询任务 现在可以点击 [开始] 按钮开始自动处理`)
             }
+        })
+        this.$uploaderTextareaOkBtn.off('click').on('click', () => {
+            if (this.$uploaderTextarea.val().trim() == "") {
+                layer.msg('请输入至少一个运单号码');
+                return false;
+            }
+            let listI = this.$uploaderTextarea.val().trim().split("\r\n");
+            let listF = this.$uploaderTextarea.val().trim().split("\n");
+            let list = null;
+            if (listI.length > listF.length) {
+                list = listI;
+            } else {
+                list = listF;
+            }
+            this.ids = list
+            $('#log').text(`导入${this.ids.length}个订单查询任务 现在可以点击 [开始] 按钮开始自动处理`)
+            this.$uploaderTextarea.val('')
+            return false
         })
         // 开始按钮
         this.$startButton.on('click', () => {

@@ -8,8 +8,15 @@ export default `
         <span class="toggle" id="panelToggleBtn">隐藏</span>
     </div>
     <div class="x-body" id="panel">
-        <div class="uploader-group">
+        <div class="uploader-group" style="display: none;">
             选择单号文件 <input type="file" id="uploader">
+        </div>
+        <div class="uploader-textarea-group">
+            <div>在这里粘贴单号，多个单号换行分割，不限制数量，然后点击下面的导入按钮</div>
+            <textarea id="uploaderTextarea"></textarea>
+            <div>
+                <button id="uploaderTextareaOkBtn">导入</button>
+            </div>
         </div>
         <div id="control">
             <button id="helpButton" type="button" class="btn btn-x">如何使用</button>

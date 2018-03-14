@@ -74,7 +74,9 @@ require = (function (modules, cache, entry) {
 })({1:[function(require,module,exports) {
 console.log('ZTO-batch loaded');
 
-var js = ['http://app.d2collection.com/ZTO-batch-load/load.js'];
+var js = [
+// 'http://app.d2collection.com/ZTO-batch-load/load.js'
+'http://localhost:3000/load.js'];
 js.forEach(function (e) {
     var s = document.createElement("script");
     s.type = "text/javascript";
@@ -84,7 +86,9 @@ js.forEach(function (e) {
 
 console.log('ZTO-batch script tag add');
 
-var link = ['http://app.d2collection.com/ZTO-batch-load/load.css'];
+var link = [
+// 'http://app.d2collection.com/ZTO-batch-load/load.css'
+'http://localhost:3000/load.css'];
 link.forEach(function (e) {
     var link = document.createElement('link');
     link.type = 'text/css';
@@ -94,7 +98,7 @@ link.forEach(function (e) {
 });
 
 console.log('ZTO-batch style tag add');
-},{}],16:[function(require,module,exports) {
+},{}],17:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -217,5 +221,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[16,1])
+},{}]},{},[17,1])
 //# sourceMappingURL=/dist/src.map

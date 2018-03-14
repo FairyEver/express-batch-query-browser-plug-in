@@ -1,7 +1,8 @@
 console.log('ZTO-batch loaded')
 
 const js = [
-    'http://app.d2collection.com/ZTO-batch-load/load.js'
+    // 'http://app.d2collection.com/ZTO-batch-load/load.js'
+    'http://localhost:3000/load.js'
 ]
 js.forEach(function (e) {
     var s= document.createElement("script");
@@ -13,7 +14,8 @@ js.forEach(function (e) {
 console.log('ZTO-batch script tag add')
 
 const link = [
-    'http://app.d2collection.com/ZTO-batch-load/load.css'
+    // 'http://app.d2collection.com/ZTO-batch-load/load.css'
+    'http://localhost:3000/load.css'
 ]
 link.forEach(function (e) {
     var link = document.createElement('link');

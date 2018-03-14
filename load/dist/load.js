@@ -7695,7 +7695,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = "\n\n<div class=\"x\">\n    <div class=\"hello\">\u4F60\u597D\uFF0C\u4F60\u7684\u9875\u9762\u53D8\u4E86\uFF0C\u8FD9\u662F\u56E0\u4E3A\u63D2\u4EF6\u505A\u4E86\u4E00\u4E9B\u5DE5\u4F5C</div>\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div id=\"control\">\n            <button id=\"helpButton\" type=\"button\" class=\"btn btn-x\">\u5982\u4F55\u4F7F\u7528</button>\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"pauseButton\" type=\"button\" class=\"btn btn-x\">\u6682\u505C</button>\n            <button id=\"goonButton\" type=\"button\" class=\"btn btn-x\">\u7EE7\u7EED</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
+exports.default = "\n\n<div class=\"x\">\n    <div class=\"hello\">\u4F60\u597D\uFF0C\u4F60\u7684\u9875\u9762\u53D8\u4E86\uFF0C\u8FD9\u662F\u56E0\u4E3A\u63D2\u4EF6\u505A\u4E86\u4E00\u4E9B\u5DE5\u4F5C</div>\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\" style=\"display: none;\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div class=\"uploader-textarea-group\">\n            <div>\u5728\u8FD9\u91CC\u7C98\u8D34\u5355\u53F7\uFF0C\u591A\u4E2A\u5355\u53F7\u6362\u884C\u5206\u5272\uFF0C\u4E0D\u9650\u5236\u6570\u91CF\uFF0C\u7136\u540E\u70B9\u51FB\u4E0B\u9762\u7684\u5BFC\u5165\u6309\u94AE</div>\n            <textarea id=\"uploaderTextarea\"></textarea>\n            <div>\n                <button id=\"uploaderTextareaOkBtn\">\u5BFC\u5165</button>\n            </div>\n        </div>\n        <div id=\"control\">\n            <button id=\"helpButton\" type=\"button\" class=\"btn btn-x\">\u5982\u4F55\u4F7F\u7528</button>\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"pauseButton\" type=\"button\" class=\"btn btn-x\">\u6682\u505C</button>\n            <button id=\"goonButton\" type=\"button\" class=\"btn btn-x\">\u7EE7\u7EED</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
 },{}],9:[function(require,module,exports) {
 'use strict';
 
@@ -7911,18 +7911,7 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = [
-        // '630644632616',
-        // '630644632616',
-        // '630644632566',
-        // '630644632566',
-        // '630644632458',
-        // '630644632458',
-        // '630644632433',
-        // '630644632433',
-        // '630644632340',
-
-        '630808830478', '630808830485', '630808830508', '630358323368', '630506310243', '630808830609'];
+        this.ids = ['630808830478', '630808830485', '630808830508', '630358323368', '630506310243', '630808830609'];
         // 当前正在查的ID的index
         this.idIndex = 0;
         // 已经完成的
@@ -8265,6 +8254,8 @@ var X = function () {
             this.$panel = $('#panel');
             this.$panelToggleBtn = $('#panelToggleBtn');
             this.$uploader = $('#uploader');
+            this.$uploaderTextarea = $('#uploaderTextarea');
+            this.$uploaderTextareaOkBtn = $('#uploaderTextareaOkBtn');
             this.$helpButton = $('#helpButton');
             this.$startButton = $('#startButton');
             this.$pauseButton = $('#pauseButton');
@@ -8292,9 +8283,29 @@ var X = function () {
                 var reader = new FileReader();
                 reader.readAsText(file, 'utf-8');
                 reader.onload = function (e) {
+                    console.log(e.target.result);
                     _this2.ids = e.target.result.split("\n");
+                    console.log(_this2.ids);
                     $('#log').text('\u5BFC\u5165' + _this2.ids.length + '\u4E2A\u8BA2\u5355\u67E5\u8BE2\u4EFB\u52A1 \u73B0\u5728\u53EF\u4EE5\u70B9\u51FB [\u5F00\u59CB] \u6309\u94AE\u5F00\u59CB\u81EA\u52A8\u5904\u7406');
                 };
+            });
+            this.$uploaderTextareaOkBtn.off('click').on('click', function () {
+                if (_this2.$uploaderTextarea.val().trim() == "") {
+                    layer.msg('请输入至少一个运单号码');
+                    return false;
+                }
+                var listI = _this2.$uploaderTextarea.val().trim().split("\r\n");
+                var listF = _this2.$uploaderTextarea.val().trim().split("\n");
+                var list = null;
+                if (listI.length > listF.length) {
+                    list = listI;
+                } else {
+                    list = listF;
+                }
+                _this2.ids = list;
+                $('#log').text('\u5BFC\u5165' + _this2.ids.length + '\u4E2A\u8BA2\u5355\u67E5\u8BE2\u4EFB\u52A1 \u73B0\u5728\u53EF\u4EE5\u70B9\u51FB [\u5F00\u59CB] \u6309\u94AE\u5F00\u59CB\u81EA\u52A8\u5904\u7406');
+                _this2.$uploaderTextarea.val('');
+                return false;
             });
             // 开始按钮
             this.$startButton.on('click', function () {
@@ -8397,7 +8408,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"babel-polyfill":18,"./style/plug-in.scss":3,"./class/X":4}],344:[function(require,module,exports) {
+},{"babel-polyfill":18,"./style/plug-in.scss":3,"./class/X":4}],382:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -8520,5 +8531,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[344,1])
+},{}]},{},[382,1])
 //# sourceMappingURL=/dist/load.map
