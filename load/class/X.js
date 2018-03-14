@@ -479,7 +479,7 @@ export default class X {
                 {label: '代收款', prop: 'daishoukuan'}
             ],
             data: this.finish,
-            title: 'table',
+            title: '单号查询结果',
             noHeader: false
         }
         // 生成数据

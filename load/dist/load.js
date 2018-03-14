@@ -8367,7 +8367,7 @@ var X = function () {
             var _params = {
                 columns: [{ label: '运单编号', prop: 'yundanbianhao' }, { label: '订单编号', prop: 'dingdanbianhao' }, { label: '订单时间', prop: 'dingdanshijian' }, { label: '发件人(电话)', prop: 'fajianrendianhua' }, { label: '发件人地址', prop: 'fajianrendizhi' }, { label: '收件人(电话)', prop: 'shoujianrendianhua' }, { label: '收件人地址', prop: 'shoujianrendizhi' }, { label: '揽件人', prop: 'lanjianren' }, { label: '收件网点', prop: 'shoujianwangdian' }, { label: '订单来源', prop: 'dingdanlaiyuan' }, { label: '品名', prop: 'pinming' }, { label: '代收款', prop: 'daishoukuan' }],
                 data: this.finish,
-                title: 'table',
+                title: '单号查询结果',
                 noHeader: false
                 // 生成数据
             };var data = (0, _csv2.default)(_params.columns, _params.data, {}, _params.noHeader);
@@ -8397,7 +8397,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"babel-polyfill":18,"./style/plug-in.scss":3,"./class/X":4}],16:[function(require,module,exports) {
+},{"babel-polyfill":18,"./style/plug-in.scss":3,"./class/X":4}],344:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -8520,5 +8520,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[16,1])
+},{}]},{},[344,1])
 //# sourceMappingURL=/dist/load.map
