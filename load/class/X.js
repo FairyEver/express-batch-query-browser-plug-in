@@ -6,7 +6,7 @@ import ExportCsv from '../lib/csvExport'
 export default class X {
     constructor () {
         // 最大尝试次数
-        this.ticketMaxTry = 2
+        this.ticketMaxTry = 10
         // 自动下载设置
         this.autoExportWhenPause = false
         this.autoExportWhenStop = true
@@ -28,22 +28,22 @@ export default class X {
         $('#ajaxdata').before($(domStr))
         // 需要查询的列表
         this.ids = [
-            '630644632616',
-            '630644632616',
-            '630644632566',
-            '630644632566',
-            '630644632458',
-            '630644632458',
-            '630644632433',
-            '630644632433',
-            '630644632340',
+            // '630644632616',
+            // '630644632616',
+            // '630644632566',
+            // '630644632566',
+            // '630644632458',
+            // '630644632458',
+            // '630644632433',
+            // '630644632433',
+            // '630644632340',
 
-            // '630808830478',
-            // '630808830485',
-            // '630808830508',
-            // '630358323368',
-            // '630506310243',
-            // '630808830609',
+            '630808830478',
+            '630808830485',
+            '630808830508',
+            '630358323368',
+            '630506310243',
+            '630808830609',
             // '630506310256',
             // '630808830616',
             // '630598531107',
@@ -237,19 +237,33 @@ export default class X {
         let res = []
         const ul = $(`#route${id}_0`)
         const trs = ul.find('.curr.taobaodingdan table').children(1).children()
+        if (trs.length <= 1) {
+            res.push({
+                yundanbianhao: id,
+                dingdanbianhao: '未找到',
+                dingdanshijian: '未找到',
+                fajianrendianhua: '未找到',
+                fajianrendizhi: '未找到',
+                shoujianrendianhua: '未找到',
+                shoujianrendizhi: '未找到',
+                lanjianren: '未找到',
+                shoujianwangdian: '未找到',
+                dingdanlaiyuan: '未找到'
+            })
+        }
         for (let index = 1; index < trs.length; index++) {
             const tds = $(trs[index]).children()
             const row = {
-                yundanbianhao: "\t" + tds[0].innerHTML,
-                dingdanbianhao: "\t" + tds[1].innerHTML,
-                dingdanshijian: tds[2].innerHTML,
-                fajianrendianhua: tds[3].innerHTML,
-                fajianrendizhi: tds[4].innerHTML,
-                shoujianrendianhua: tds[5].innerHTML,
-                shoujianrendizhi: tds[6].innerHTML,
-                lanjianren: tds[7].innerHTML,
-                shoujianwangdian: tds[8].innerHTML,
-                dingdanlaiyuan: $(tds[9]).text()
+                yundanbianhao: "\t" + tds[0].innerHTML || '-',
+                dingdanbianhao: "\t" + tds[1].innerHTML || '-',
+                dingdanshijian: tds[2].innerHTML || '-',
+                fajianrendianhua: tds[3].innerHTML || '-',
+                fajianrendizhi: tds[4].innerHTML || '-',
+                shoujianrendianhua: tds[5].innerHTML || '-',
+                shoujianrendizhi: tds[6].innerHTML || '-',
+                lanjianren: tds[7].innerHTML || '-',
+                shoujianwangdian: tds[8].innerHTML || '-',
+                dingdanlaiyuan: $(tds[9]).text() || '-'
             }
             res.push(row)
         }
@@ -260,11 +274,19 @@ export default class X {
         let res = []
         const ul = $(`#route${id}_0`)
         const trs = ul.find('.curr.ludanjilu table').children(1).children()
+        if (trs.length <= 1) {
+            res.push({
+                pinming: '未找到',
+                daishoukuan: '未找到'
+            })
+        }
         for (let index = 1; index < trs.length; index++) {
             const tds = $(trs[index]).children()
+            console.log(tds[8].innerHTML)
+            console.log(tds[10].innerHTML)
             const row = {
-                pinming: tds[8].innerHTML,
-                daishoukuan: tds[10].innerHTML
+                pinming: tds[8].innerHTML || '-',
+                daishoukuan: tds[10].innerHTML || '-'
             }
             res.push(row)
         }
@@ -435,7 +457,7 @@ export default class X {
             // 点击[录单记录]查询按钮
             setTimeout(() => {
                 $(`button[data-id='ludanjilu'][data-bill='${id}_0']`)[0].click()
-            }, 1000);
+            }, 3000);
         })
     }
     // 将数据以CSV形式导出

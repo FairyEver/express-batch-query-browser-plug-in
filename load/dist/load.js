@@ -340,7 +340,7 @@ var X = function () {
         _classCallCheck(this, X);
 
         // 最大尝试次数
-        this.ticketMaxTry = 2;
+        this.ticketMaxTry = 10;
         // 自动下载设置
         this.autoExportWhenPause = false;
         this.autoExportWhenStop = true;
@@ -360,7 +360,18 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = ['630644632616', '630644632616', '630644632566', '630644632566', '630644632458', '630644632458', '630644632433', '630644632433', '630644632340'];
+        this.ids = [
+        // '630644632616',
+        // '630644632616',
+        // '630644632566',
+        // '630644632566',
+        // '630644632458',
+        // '630644632458',
+        // '630644632433',
+        // '630644632433',
+        // '630644632340',
+
+        '630808830478', '630808830485', '630808830508', '630358323368', '630506310243', '630808830609'];
         // 当前正在查的ID的index
         this.idIndex = 0;
         // 已经完成的
@@ -554,19 +565,33 @@ var X = function () {
             var res = [];
             var ul = $('#route' + id + '_0');
             var trs = ul.find('.curr.taobaodingdan table').children(1).children();
+            if (trs.length <= 1) {
+                res.push({
+                    yundanbianhao: id,
+                    dingdanbianhao: '未找到',
+                    dingdanshijian: '未找到',
+                    fajianrendianhua: '未找到',
+                    fajianrendizhi: '未找到',
+                    shoujianrendianhua: '未找到',
+                    shoujianrendizhi: '未找到',
+                    lanjianren: '未找到',
+                    shoujianwangdian: '未找到',
+                    dingdanlaiyuan: '未找到'
+                });
+            }
             for (var index = 1; index < trs.length; index++) {
                 var tds = $(trs[index]).children();
                 var row = {
-                    yundanbianhao: "\t" + tds[0].innerHTML,
-                    dingdanbianhao: "\t" + tds[1].innerHTML,
-                    dingdanshijian: tds[2].innerHTML,
-                    fajianrendianhua: tds[3].innerHTML,
-                    fajianrendizhi: tds[4].innerHTML,
-                    shoujianrendianhua: tds[5].innerHTML,
-                    shoujianrendizhi: tds[6].innerHTML,
-                    lanjianren: tds[7].innerHTML,
-                    shoujianwangdian: tds[8].innerHTML,
-                    dingdanlaiyuan: $(tds[9]).text()
+                    yundanbianhao: "\t" + tds[0].innerHTML || '-',
+                    dingdanbianhao: "\t" + tds[1].innerHTML || '-',
+                    dingdanshijian: tds[2].innerHTML || '-',
+                    fajianrendianhua: tds[3].innerHTML || '-',
+                    fajianrendizhi: tds[4].innerHTML || '-',
+                    shoujianrendianhua: tds[5].innerHTML || '-',
+                    shoujianrendizhi: tds[6].innerHTML || '-',
+                    lanjianren: tds[7].innerHTML || '-',
+                    shoujianwangdian: tds[8].innerHTML || '-',
+                    dingdanlaiyuan: $(tds[9]).text() || '-'
                 };
                 res.push(row);
             }
@@ -580,11 +605,19 @@ var X = function () {
             var res = [];
             var ul = $('#route' + id + '_0');
             var trs = ul.find('.curr.ludanjilu table').children(1).children();
+            if (trs.length <= 1) {
+                res.push({
+                    pinming: '未找到',
+                    daishoukuan: '未找到'
+                });
+            }
             for (var index = 1; index < trs.length; index++) {
                 var tds = $(trs[index]).children();
+                console.log(tds[8].innerHTML);
+                console.log(tds[10].innerHTML);
                 var row = {
-                    pinming: tds[8].innerHTML,
-                    daishoukuan: tds[10].innerHTML
+                    pinming: tds[8].innerHTML || '-',
+                    daishoukuan: tds[10].innerHTML || '-'
                 };
                 res.push(row);
             }
@@ -771,7 +804,7 @@ var X = function () {
                 // 点击[录单记录]查询按钮
                 setTimeout(function () {
                     $('button[data-id=\'ludanjilu\'][data-bill=\'' + id + '_0\']')[0].click();
-                }, 1000);
+                }, 3000);
             });
         }
         // 将数据以CSV形式导出
@@ -812,7 +845,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],236:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],257:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -935,5 +968,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[236,1])
+},{}]},{},[257,1])
 //# sourceMappingURL=/dist/load.map
