@@ -1,4 +1,4 @@
-// import './style/bootstrap.min.css'
+import 'babel-polyfill'
 import './style/plug-in.scss'
 import X from './class/X'
 
