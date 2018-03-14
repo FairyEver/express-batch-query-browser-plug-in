@@ -7,6 +7,7 @@ export default class X {
     constructor () {
         // 最大尝试次数
         this.ticketMaxTry = 10
+        this.ticketWait = 1
         // 自动下载设置
         this.autoExportWhenPause = false
         this.autoExportWhenStop = true
@@ -28,12 +29,12 @@ export default class X {
         $('#ajaxdata').before($(domStr))
         // 需要查询的列表
         this.ids = [
-            '630808830478',
-            '630808830485',
-            '630808830508',
-            '630358323368',
-            '630506310243',
-            '630808830609',
+            // '630808830478',
+            // '630808830485',
+            // '630808830508',
+            // '630358323368',
+            // '630506310243',
+            // '630808830609',
             // '630506310256',
             // '630808830616',
             // '630598531107',
@@ -113,7 +114,7 @@ export default class X {
                                         }
                                     }, 300)
                                 }
-                            }, 1000)
+                            }, _this.ticketWait * 1000)
                         }
                         doIt()
                     })
@@ -416,7 +417,7 @@ export default class X {
         // 开始按钮
         this.$startButton.on('click', () => {
             if (this.ids.length === 0) {
-                alert('请先导入待处理的单号文件')
+                layer.msg('请先导入待处理的单号文件');
                 return
             }
             this.play = true
@@ -438,8 +439,8 @@ export default class X {
         // 帮助按钮
         this.$helpButton.on('click', () => {
             alert(`
-1. 点击“选择文件”，将保存有单号的记事本文件加载进来
-2. 加载完成后会显示单号条数
+1. 将单号列表复制进插件输入框
+2. 点击输入框下面的 [导入] 按钮
 3. 确认无误后点击开始按钮
 4. 全部查询完毕后会自动导出表格，也可以手动导出
 5. 刷新页面可重置插件

@@ -15,17 +15,17 @@ export default `
             <div>在这里粘贴单号，多个单号换行分割，不限制数量，然后点击下面的导入按钮</div>
             <textarea id="uploaderTextarea"></textarea>
             <div>
-                <button id="uploaderTextareaOkBtn">导入</button>
+                <button id="uploaderTextareaOkBtn" class="btn-x">导入</button>
             </div>
         </div>
         <div class="setting-group">
             <div class="setting-item">
-                <label>请求凭证等待时间</label>
-                <input type="text" value="3">
+                <label>请求凭证等待时间(秒)</label>
+                <input id="ticketWait" type="text" value="1">
             </div>
             <div class="setting-item">
                 <label>请求凭证最大尝试次数</label>
-                <input type="text" value="10">
+                <input id="ticketMaxTry" type="text" value="10">
             </div>
         </div>
         <div id="control">

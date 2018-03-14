@@ -7695,7 +7695,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = "\n\n<div class=\"x\">\n    <div class=\"hello\">\u4F60\u597D\uFF0C\u4F60\u7684\u9875\u9762\u53D8\u4E86\uFF0C\u8FD9\u662F\u56E0\u4E3A\u63D2\u4EF6\u505A\u4E86\u4E00\u4E9B\u5DE5\u4F5C [0.0.2]</div>\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\" style=\"display: none;\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div class=\"uploader-textarea-group\">\n            <div>\u5728\u8FD9\u91CC\u7C98\u8D34\u5355\u53F7\uFF0C\u591A\u4E2A\u5355\u53F7\u6362\u884C\u5206\u5272\uFF0C\u4E0D\u9650\u5236\u6570\u91CF\uFF0C\u7136\u540E\u70B9\u51FB\u4E0B\u9762\u7684\u5BFC\u5165\u6309\u94AE</div>\n            <textarea id=\"uploaderTextarea\"></textarea>\n            <div>\n                <button id=\"uploaderTextareaOkBtn\">\u5BFC\u5165</button>\n            </div>\n        </div>\n        <div class=\"setting-group\">\n            <div class=\"setting-item\">\n                <label>\u8BF7\u6C42\u51ED\u8BC1\u7B49\u5F85\u65F6\u95F4</label>\n                <input type=\"text\" value=\"3\">\n            </div>\n            <div class=\"setting-item\">\n                <label>\u8BF7\u6C42\u51ED\u8BC1\u6700\u5927\u5C1D\u8BD5\u6B21\u6570</label>\n                <input type=\"text\" value=\"10\">\n            </div>\n        </div>\n        <div id=\"control\">\n            <button id=\"helpButton\" type=\"button\" class=\"btn btn-x\">\u5982\u4F55\u4F7F\u7528</button>\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"pauseButton\" type=\"button\" class=\"btn btn-x\">\u6682\u505C</button>\n            <button id=\"goonButton\" type=\"button\" class=\"btn btn-x\">\u7EE7\u7EED</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
+exports.default = "\n\n<div class=\"x\">\n    <div class=\"hello\">\u4F60\u597D\uFF0C\u4F60\u7684\u9875\u9762\u53D8\u4E86\uFF0C\u8FD9\u662F\u56E0\u4E3A\u63D2\u4EF6\u505A\u4E86\u4E00\u4E9B\u5DE5\u4F5C [0.0.2]</div>\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\" style=\"display: none;\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div class=\"uploader-textarea-group\">\n            <div>\u5728\u8FD9\u91CC\u7C98\u8D34\u5355\u53F7\uFF0C\u591A\u4E2A\u5355\u53F7\u6362\u884C\u5206\u5272\uFF0C\u4E0D\u9650\u5236\u6570\u91CF\uFF0C\u7136\u540E\u70B9\u51FB\u4E0B\u9762\u7684\u5BFC\u5165\u6309\u94AE</div>\n            <textarea id=\"uploaderTextarea\"></textarea>\n            <div>\n                <button id=\"uploaderTextareaOkBtn\" class=\"btn-x\">\u5BFC\u5165</button>\n            </div>\n        </div>\n        <div class=\"setting-group\">\n            <div class=\"setting-item\">\n                <label>\u8BF7\u6C42\u51ED\u8BC1\u7B49\u5F85\u65F6\u95F4(\u79D2)</label>\n                <input id=\"ticketWait\" type=\"text\" value=\"1\">\n            </div>\n            <div class=\"setting-item\">\n                <label>\u8BF7\u6C42\u51ED\u8BC1\u6700\u5927\u5C1D\u8BD5\u6B21\u6570</label>\n                <input id=\"ticketMaxTry\" type=\"text\" value=\"10\">\n            </div>\n        </div>\n        <div id=\"control\">\n            <button id=\"helpButton\" type=\"button\" class=\"btn btn-x\">\u5982\u4F55\u4F7F\u7528</button>\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"pauseButton\" type=\"button\" class=\"btn btn-x\">\u6682\u505C</button>\n            <button id=\"goonButton\" type=\"button\" class=\"btn btn-x\">\u7EE7\u7EED</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
 },{}],9:[function(require,module,exports) {
 'use strict';
 
@@ -7892,6 +7892,7 @@ var X = function () {
 
         // 最大尝试次数
         this.ticketMaxTry = 10;
+        this.ticketWait = 1;
         // 自动下载设置
         this.autoExportWhenPause = false;
         this.autoExportWhenStop = true;
@@ -7911,9 +7912,28 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = ['630808830478', '630808830485', '630808830508', '630358323368', '630506310243', '630808830609'];
+        this.ids = []
+        // '630808830478',
+        // '630808830485',
+        // '630808830508',
+        // '630358323368',
+        // '630506310243',
+        // '630808830609',
+        // '630506310256',
+        // '630808830616',
+        // '630598531107',
+        // '630598531975',
+        // '630598531476',
+        // '630598532152',
+        // '630598531215',
+        // '630598531463',
+        // '630598531710',
+        // '630598531759',
+        // '630598531786',
+        // '630598531842'
+
         // 当前正在查的ID的index
-        this.idIndex = 0;
+        ;this.idIndex = 0;
         // 已经完成的
         this.finish = [];
         // 注册
@@ -7986,7 +8006,7 @@ var X = function () {
                                             }
                                         }, 300);
                                     }
-                                }, 1000);
+                                }, _this.ticketWait * 1000);
                             };
                             doIt();
                         });
@@ -8310,7 +8330,7 @@ var X = function () {
             // 开始按钮
             this.$startButton.on('click', function () {
                 if (_this2.ids.length === 0) {
-                    alert('请先导入待处理的单号文件');
+                    layer.msg('请先导入待处理的单号文件');
                     return;
                 }
                 _this2.play = true;
@@ -8331,7 +8351,7 @@ var X = function () {
             });
             // 帮助按钮
             this.$helpButton.on('click', function () {
-                alert('\n1. \u70B9\u51FB\u201C\u9009\u62E9\u6587\u4EF6\u201D\uFF0C\u5C06\u4FDD\u5B58\u6709\u5355\u53F7\u7684\u8BB0\u4E8B\u672C\u6587\u4EF6\u52A0\u8F7D\u8FDB\u6765\n2. \u52A0\u8F7D\u5B8C\u6210\u540E\u4F1A\u663E\u793A\u5355\u53F7\u6761\u6570\n3. \u786E\u8BA4\u65E0\u8BEF\u540E\u70B9\u51FB\u5F00\u59CB\u6309\u94AE\n4. \u5168\u90E8\u67E5\u8BE2\u5B8C\u6BD5\u540E\u4F1A\u81EA\u52A8\u5BFC\u51FA\u8868\u683C\uFF0C\u4E5F\u53EF\u4EE5\u624B\u52A8\u5BFC\u51FA\n5. \u5237\u65B0\u9875\u9762\u53EF\u91CD\u7F6E\u63D2\u4EF6\n            '.trim());
+                alert('\n1. \u5C06\u5355\u53F7\u5217\u8868\u590D\u5236\u8FDB\u63D2\u4EF6\u8F93\u5165\u6846\n2. \u70B9\u51FB\u8F93\u5165\u6846\u4E0B\u9762\u7684 [\u5BFC\u5165] \u6309\u94AE\n3. \u786E\u8BA4\u65E0\u8BEF\u540E\u70B9\u51FB\u5F00\u59CB\u6309\u94AE\n4. \u5168\u90E8\u67E5\u8BE2\u5B8C\u6BD5\u540E\u4F1A\u81EA\u52A8\u5BFC\u51FA\u8868\u683C\uFF0C\u4E5F\u53EF\u4EE5\u624B\u52A8\u5BFC\u51FA\n5. \u5237\u65B0\u9875\u9762\u53EF\u91CD\u7F6E\u63D2\u4EF6\n            '.trim());
             });
             // 下载按钮
             this.$downloadButton.on('click', function () {
@@ -8408,7 +8428,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"babel-polyfill":18,"./style/plug-in.scss":3,"./class/X":4}],394:[function(require,module,exports) {
+},{"babel-polyfill":18,"./style/plug-in.scss":3,"./class/X":4}],402:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -8531,5 +8551,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[394,1])
+},{}]},{},[402,1])
 //# sourceMappingURL=/dist/load.map
