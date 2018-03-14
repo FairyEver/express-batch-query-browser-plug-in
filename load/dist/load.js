@@ -511,7 +511,7 @@ var X = function () {
                                     $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u6682\u505C');
                                 }
                             }
-                        }, 1000);
+                        }, 2000);
                     }).catch(function () {
                         console.log('没有找到凭证');
                     });

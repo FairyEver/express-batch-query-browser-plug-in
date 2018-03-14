@@ -188,7 +188,7 @@ export default class X {
                                 $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 暂停`)
                             }
                         }
-                    }, 1000);
+                    }, 2000);
                 })
                 .catch(() => {
                     console.log('没有找到凭证')
