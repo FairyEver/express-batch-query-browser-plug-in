@@ -65,14 +65,5 @@
 #Panel1 {
   margin-top: 100px; }
 
-#hack-img {
-  width: 200px;
-  display: block;
-  margin: 100px auto;
-  opacity: .2;
-  transition: all .3s; }
-  #hack-img:hover {
-    opacity: 1; }
-
 div.iframe {
   display: none; }

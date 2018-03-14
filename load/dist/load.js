@@ -8450,7 +8450,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"babel-polyfill":10,"./style/plug-in.scss":3,"./class/X":4}],336:[function(require,module,exports) {
+},{"babel-polyfill":10,"./style/plug-in.scss":3,"./class/X":4}],341:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -8573,5 +8573,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[336,1])
+},{}]},{},[341,1])
 //# sourceMappingURL=/dist/load.map
