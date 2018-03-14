@@ -340,7 +340,7 @@ var X = function () {
         _classCallCheck(this, X);
 
         // 最大尝试次数
-        this.ticketMaxTry = 10;
+        this.ticketMaxTry = 2;
         // 自动下载设置
         this.autoExportWhenPause = false;
         this.autoExportWhenStop = true;
@@ -360,7 +360,7 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = ['630808830478', '630808830485', '630808830508', '630358323368', '630506310243', '630808830609', '630506310256', '630808830616', '630598531107', '630598531975', '630598531476', '630598532152', '630598531215', '630598531463', '630598531710', '630598531759', '630598531786', '630598531842'];
+        this.ids = ['630644632616', '630644632616', '630644632566', '630644632566', '630644632458', '630644632458', '630644632433', '630644632433', '630644632340'];
         // 当前正在查的ID的index
         this.idIndex = 0;
         // 已经完成的
@@ -431,7 +431,7 @@ var X = function () {
                                                 count += 1;
                                                 doIt();
                                             } else {
-                                                reject();
+                                                resolve('0000');
                                             }
                                         }, 300);
                                     }
@@ -513,8 +513,6 @@ var X = function () {
                                 }
                             }
                         }, 2000);
-                    }).catch(function () {
-                        console.log('没有找到凭证');
                     });
                 } else {
                     $(this).removeClass("curr");
@@ -814,7 +812,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],234:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],236:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -937,5 +935,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[234,1])
+},{}]},{},[236,1])
 //# sourceMappingURL=/dist/load.map
