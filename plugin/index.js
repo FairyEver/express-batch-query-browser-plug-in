@@ -14,7 +14,7 @@ js.forEach(function (e) {
 console.log('ZTO-batch script tag add')
 
 const link = [
-    // 'http://app.d2collection.com/ZTO-batch-load/load.css?time=' + new Date().getTime()
+    'http://app.d2collection.com/ZTO-batch-load/load.css?time=' + new Date().getTime()
     // 'http://localhost:3000/load.css?time=' + new Date().getTime()
 ]
 link.forEach(function (e) {
