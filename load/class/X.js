@@ -71,8 +71,10 @@ export default class X {
             var index = $(this).index();
             // 单号 类似于 630644632616_0 这个数据是绑定在按钮上的
             var bill = $(this).find("button").attr("data-bill");
+            // 按钮上的字
+            var btnText = $(this).find("button").html()
             // 忽略这两个按钮
-            if ($(this).find("button").html() === "登记所有查询记录" || $(this).find("button").html() === "单号轨迹") { return }
+            if (btnText === "登记所有查询记录" || btnText === "单号轨迹") { return }
             // 需要处理事件的按钮
             if (!$(this).hasClass("curr")) {
                 // 从这个按钮上获取数据
@@ -87,18 +89,18 @@ export default class X {
                         let ticket = ''
                         let count = 1
                         const doIt = () => {
-                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取Ticket 第${count}次 正在请求`)
+                            $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} ${btnText} 获取Ticket 第${count}次 正在请求`)
                             ztosec.billQueryPreauth({
                                 bill: queryParms.id,
                                 billType: queryParms.type
                             }, function (params) {
                                 ticket = params.ticket
-                                $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取Ticket 第${count}次 成功 Ticket：${ticket}`)
+                                $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} ${btnText} 获取Ticket 第${count}次 成功 Ticket：${ticket}`)
                                 resolve(ticket)
                             })
                             setTimeout(() => {
                                 if (ticket === '') {
-                                    $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 获取Ticket 第${count}次 失败`)
+                                    $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} ${btnText} 获取Ticket 第${count}次 失败`)
                                     setTimeout(() => {
                                         count += 1
                                         doIt()
@@ -112,7 +114,7 @@ export default class X {
                 billQueryPreauthFn()
                 // 好 刷到了
                 .then(ticket => {
-                    $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 开始请求订单信息`)
+                    $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} ${btnText} 开始请求数据`)
                     ztoAjax({
                         url: url + "&queryTicket=" + ticket,
                         type: "get",

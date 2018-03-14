@@ -391,8 +391,10 @@ var X = function () {
                 var index = $(this).index();
                 // 单号 类似于 630644632616_0 这个数据是绑定在按钮上的
                 var bill = $(this).find("button").attr("data-bill");
+                // 按钮上的字
+                var btnText = $(this).find("button").html();
                 // 忽略这两个按钮
-                if ($(this).find("button").html() === "登记所有查询记录" || $(this).find("button").html() === "单号轨迹") {
+                if (btnText === "登记所有查询记录" || btnText === "单号轨迹") {
                     return;
                 }
                 // 需要处理事件的按钮
@@ -409,18 +411,18 @@ var X = function () {
                             var ticket = '';
                             var count = 1;
                             var doIt = function doIt() {
-                                $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u6B63\u5728\u8BF7\u6C42');
+                                $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' ' + btnText + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u6B63\u5728\u8BF7\u6C42');
                                 ztosec.billQueryPreauth({
                                     bill: queryParms.id,
                                     billType: queryParms.type
                                 }, function (params) {
                                     ticket = params.ticket;
-                                    $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u6210\u529F Ticket\uFF1A' + ticket);
+                                    $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' ' + btnText + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u6210\u529F Ticket\uFF1A' + ticket);
                                     resolve(ticket);
                                 });
                                 setTimeout(function () {
                                     if (ticket === '') {
-                                        $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u5931\u8D25');
+                                        $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' ' + btnText + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u5931\u8D25');
                                         setTimeout(function () {
                                             count += 1;
                                             doIt();
@@ -434,7 +436,7 @@ var X = function () {
                     billQueryPreauthFn()
                     // 好 刷到了
                     .then(function (ticket) {
-                        $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u5F00\u59CB\u8BF7\u6C42\u8BA2\u5355\u4FE1\u606F');
+                        $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' ' + btnText + ' \u5F00\u59CB\u8BF7\u6C42\u6570\u636E');
                         ztoAjax({
                             url: url + "&queryTicket=" + ticket,
                             type: "get",
@@ -803,7 +805,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],228:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],232:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -926,5 +928,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[228,1])
+},{}]},{},[232,1])
 //# sourceMappingURL=/dist/load.map
