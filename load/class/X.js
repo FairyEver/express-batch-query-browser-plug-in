@@ -5,6 +5,8 @@ import ExportCsv from '../lib/csvExport'
 
 export default class X {
     constructor () {
+        // 最大尝试次数
+        this.maxTry = 10
         // 自动下载设置
         this.autoExportWhenPause = false
         this.autoExportWhenStop = true

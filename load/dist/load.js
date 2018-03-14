@@ -339,6 +339,8 @@ var X = function () {
     function X() {
         _classCallCheck(this, X);
 
+        // 最大尝试次数
+        this.maxTry = 10;
         // 自动下载设置
         this.autoExportWhenPause = false;
         this.autoExportWhenStop = true;
@@ -805,7 +807,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"./style/plug-in.scss":4,"./class/X":5}],232:[function(require,module,exports) {
+},{"./style/plug-in.scss":4,"./class/X":5}],233:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -928,5 +930,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[232,1])
+},{}]},{},[233,1])
 //# sourceMappingURL=/dist/load.map
