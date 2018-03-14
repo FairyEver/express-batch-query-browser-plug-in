@@ -8,6 +8,7 @@ export default class X {
         // 最大尝试次数
         this.ticketMaxTry = 10
         this.ticketWait = 1
+        this.getDataWait = 1
         // 自动下载设置
         this.autoExportWhenPause = false
         this.autoExportWhenStop = true
@@ -104,15 +105,13 @@ export default class X {
                             setTimeout(() => {
                                 if (ticket === '') {
                                     $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} ${btnText} 获取Ticket 第${count}次 失败`)
-                                    setTimeout(() => {
-                                        // 如果在最大尝试范围内
-                                        if (count < _this.ticketMaxTry) {
-                                            count += 1
-                                            doIt()
-                                        } else {
-                                            resolve('0000')
-                                        }
-                                    }, 300)
+                                    // 如果在最大尝试范围内
+                                    if (count < _this.ticketMaxTry) {
+                                        count += 1
+                                        doIt()
+                                    } else {
+                                        resolve('0000')
+                                    }
                                 }
                             }, _this.ticketWait * 1000)
                         }
@@ -190,7 +189,7 @@ export default class X {
                                 $('#log').text(`第${_this.idIndex + 1}个 / 共${_this.ids.length}个 单号：${queryParms.id} 暂停`)
                             }
                         }
-                    }, 2000);
+                    }, _this.getDataWait * 1000);
                 })
             } else {
                 $(this).removeClass("curr");
@@ -368,11 +367,25 @@ export default class X {
         this.$uploader = $('#uploader')
         this.$uploaderTextarea = $('#uploaderTextarea')
         this.$uploaderTextareaOkBtn = $('#uploaderTextareaOkBtn')
+
+        this.$ticketWait = $('#ticketWait')
+        this.$getDataWait = $('#getDataWait')
+        this.$ticketMaxTry = $('#ticketMaxTry')
+
         this.$helpButton = $('#helpButton')
         this.$startButton = $('#startButton')
         this.$pauseButton = $('#pauseButton')
         this.$goonButton = $('#goonButton')
         this.$downloadButton = $('#downloadButton')
+    }
+    // 获取用户设置
+    refreshSetting () {
+        this.ticketWait = Number(this.$ticketWait.val() || 1)
+        this.getDataWait = Number(this.$getDataWait.val() || 1)
+        this.ticketMaxTry = Number(this.$ticketMaxTry.val() || 10)
+        console.log('ticketWait', this.ticketWait)
+        console.log('getDataWait', this.getDataWait)
+        console.log('ticketMaxTry', this.ticketMaxTry)
     }
     // 注册事件
     register () {
@@ -420,6 +433,7 @@ export default class X {
                 layer.msg('请先导入待处理的单号文件');
                 return
             }
+            this.refreshSetting()
             this.play = true
             this.startSearch()
         })
@@ -433,6 +447,7 @@ export default class X {
                 alert('请先导入待处理的单号文件')
                 return
             }
+            this.refreshSetting()
             this.play = true
             this.startSearch()
         })

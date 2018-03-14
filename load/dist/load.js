@@ -7695,7 +7695,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = "\n\n<div class=\"x\">\n    <div class=\"hello\">\u4F60\u597D\uFF0C\u4F60\u7684\u9875\u9762\u53D8\u4E86\uFF0C\u8FD9\u662F\u56E0\u4E3A\u63D2\u4EF6\u505A\u4E86\u4E00\u4E9B\u5DE5\u4F5C [0.0.2]</div>\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\" style=\"display: none;\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div class=\"uploader-textarea-group\">\n            <div>\u5728\u8FD9\u91CC\u7C98\u8D34\u5355\u53F7\uFF0C\u591A\u4E2A\u5355\u53F7\u6362\u884C\u5206\u5272\uFF0C\u4E0D\u9650\u5236\u6570\u91CF\uFF0C\u7136\u540E\u70B9\u51FB\u4E0B\u9762\u7684\u5BFC\u5165\u6309\u94AE</div>\n            <textarea id=\"uploaderTextarea\"></textarea>\n            <div>\n                <button id=\"uploaderTextareaOkBtn\" class=\"btn-x\">\u5BFC\u5165</button>\n            </div>\n        </div>\n        <div class=\"setting-group\">\n            <div class=\"setting-item\">\n                <label>\u8BF7\u6C42\u51ED\u8BC1\u7B49\u5F85\u65F6\u95F4(\u79D2)</label>\n                <input id=\"ticketWait\" type=\"text\" value=\"1\">\n            </div>\n            <div class=\"setting-item\">\n                <label>\u8BF7\u6C42\u51ED\u8BC1\u6700\u5927\u5C1D\u8BD5\u6B21\u6570</label>\n                <input id=\"ticketMaxTry\" type=\"text\" value=\"10\">\n            </div>\n        </div>\n        <div id=\"control\">\n            <button id=\"helpButton\" type=\"button\" class=\"btn btn-x\">\u5982\u4F55\u4F7F\u7528</button>\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"pauseButton\" type=\"button\" class=\"btn btn-x\">\u6682\u505C</button>\n            <button id=\"goonButton\" type=\"button\" class=\"btn btn-x\">\u7EE7\u7EED</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
+exports.default = "\n\n<div class=\"x\">\n    <div class=\"hello\">\u4F60\u597D\uFF0C\u4F60\u7684\u9875\u9762\u53D8\u4E86\uFF0C\u8FD9\u662F\u56E0\u4E3A\u63D2\u4EF6\u505A\u4E86\u4E00\u4E9B\u5DE5\u4F5C [0.0.2]</div>\n    <div class=\"x-header\">\n        \u6279\u91CF\u64CD\u4F5C | \u5F53\u524D\u72B6\u6001\uFF1A\n        <span id=\"log\">\u7B49\u5F85\u8F7D\u5165\u5355\u53F7</span>\n        <span class=\"toggle\" id=\"panelToggleBtn\">\u9690\u85CF</span>\n    </div>\n    <div class=\"x-body\" id=\"panel\">\n        <div class=\"uploader-group\" style=\"display: none;\">\n            \u9009\u62E9\u5355\u53F7\u6587\u4EF6 <input type=\"file\" id=\"uploader\">\n        </div>\n        <div class=\"uploader-textarea-group\">\n            <div>\u5728\u8FD9\u91CC\u7C98\u8D34\u5355\u53F7\uFF0C\u591A\u4E2A\u5355\u53F7\u6362\u884C\u5206\u5272\uFF0C\u4E0D\u9650\u5236\u6570\u91CF\uFF0C\u7136\u540E\u70B9\u51FB\u4E0B\u9762\u7684\u5BFC\u5165\u6309\u94AE</div>\n            <textarea id=\"uploaderTextarea\"></textarea>\n            <div>\n                <button id=\"uploaderTextareaOkBtn\" class=\"btn-x\">\u5BFC\u5165</button>\n            </div>\n        </div>\n        <div class=\"setting-group\">\n            <div class=\"setting-item\">\n                <label>\u8BF7\u6C42\u51ED\u8BC1\u7B49\u5F85\u65F6\u95F4(\u79D2)</label>\n                <input id=\"ticketWait\" type=\"text\" value=\"1\">\n            </div>\n            <div class=\"setting-item\">\n                <label>\u8BF7\u6C42\u6570\u636E\u7B49\u5F85\u65F6\u95F4(\u79D2)</label>\n                <input id=\"getDataWait\" type=\"text\" value=\"1\">\n            </div>\n            <div class=\"setting-item\">\n                <label>\u8BF7\u6C42\u51ED\u8BC1\u6700\u5927\u5C1D\u8BD5\u6B21\u6570</label>\n                <input id=\"ticketMaxTry\" type=\"text\" value=\"10\">\n            </div>\n        </div>\n        <div id=\"control\">\n            <button id=\"helpButton\" type=\"button\" class=\"btn btn-x\">\u5982\u4F55\u4F7F\u7528</button>\n            <button id=\"startButton\" type=\"button\" class=\"btn btn-x\">\u5F00\u59CB</button>\n            <button id=\"pauseButton\" type=\"button\" class=\"btn btn-x\">\u6682\u505C</button>\n            <button id=\"goonButton\" type=\"button\" class=\"btn btn-x\">\u7EE7\u7EED</button>\n            <button id=\"downloadButton\" type=\"button\" class=\"btn btn-x\">\u4E0B\u8F7D\u7ED3\u679C</button>\n        </div>\n    </div>\n</div>\n\n".trim();
 },{}],9:[function(require,module,exports) {
 'use strict';
 
@@ -7893,6 +7893,7 @@ var X = function () {
         // 最大尝试次数
         this.ticketMaxTry = 10;
         this.ticketWait = 1;
+        this.getDataWait = 1;
         // 自动下载设置
         this.autoExportWhenPause = false;
         this.autoExportWhenStop = true;
@@ -7996,15 +7997,13 @@ var X = function () {
                                 setTimeout(function () {
                                     if (ticket === '') {
                                         $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' ' + btnText + ' \u83B7\u53D6Ticket \u7B2C' + count + '\u6B21 \u5931\u8D25');
-                                        setTimeout(function () {
-                                            // 如果在最大尝试范围内
-                                            if (count < _this.ticketMaxTry) {
-                                                count += 1;
-                                                doIt();
-                                            } else {
-                                                resolve('0000');
-                                            }
-                                        }, 300);
+                                        // 如果在最大尝试范围内
+                                        if (count < _this.ticketMaxTry) {
+                                            count += 1;
+                                            doIt();
+                                        } else {
+                                            resolve('0000');
+                                        }
                                     }
                                 }, _this.ticketWait * 1000);
                             };
@@ -8083,7 +8082,7 @@ var X = function () {
                                     $('#log').text('\u7B2C' + (_this.idIndex + 1) + '\u4E2A / \u5171' + _this.ids.length + '\u4E2A \u5355\u53F7\uFF1A' + queryParms.id + ' \u6682\u505C');
                                 }
                             }
-                        }, 2000);
+                        }, _this.getDataWait * 1000);
                     });
                 } else {
                     $(this).removeClass("curr");
@@ -8276,11 +8275,28 @@ var X = function () {
             this.$uploader = $('#uploader');
             this.$uploaderTextarea = $('#uploaderTextarea');
             this.$uploaderTextareaOkBtn = $('#uploaderTextareaOkBtn');
+
+            this.$ticketWait = $('#ticketWait');
+            this.$getDataWait = $('#getDataWait');
+            this.$ticketMaxTry = $('#ticketMaxTry');
+
             this.$helpButton = $('#helpButton');
             this.$startButton = $('#startButton');
             this.$pauseButton = $('#pauseButton');
             this.$goonButton = $('#goonButton');
             this.$downloadButton = $('#downloadButton');
+        }
+        // 获取用户设置
+
+    }, {
+        key: 'refreshSetting',
+        value: function refreshSetting() {
+            this.ticketWait = Number(this.$ticketWait.val() || 1);
+            this.getDataWait = Number(this.$getDataWait.val() || 1);
+            this.ticketMaxTry = Number(this.$ticketMaxTry.val() || 10);
+            console.log('ticketWait', this.ticketWait);
+            console.log('getDataWait', this.getDataWait);
+            console.log('ticketMaxTry', this.ticketMaxTry);
         }
         // 注册事件
 
@@ -8333,6 +8349,7 @@ var X = function () {
                     layer.msg('请先导入待处理的单号文件');
                     return;
                 }
+                _this2.refreshSetting();
                 _this2.play = true;
                 _this2.startSearch();
             });
@@ -8346,6 +8363,7 @@ var X = function () {
                     alert('请先导入待处理的单号文件');
                     return;
                 }
+                _this2.refreshSetting();
                 _this2.play = true;
                 _this2.startSearch();
             });
@@ -8428,7 +8446,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(function () {
     var x = new _X2.default();
 });
-},{"babel-polyfill":18,"./style/plug-in.scss":3,"./class/X":4}],402:[function(require,module,exports) {
+},{"babel-polyfill":18,"./style/plug-in.scss":3,"./class/X":4}],409:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -8551,5 +8569,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[402,1])
+},{}]},{},[409,1])
 //# sourceMappingURL=/dist/load.map

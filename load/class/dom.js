@@ -24,6 +24,10 @@ export default `
                 <input id="ticketWait" type="text" value="1">
             </div>
             <div class="setting-item">
+                <label>请求数据等待时间(秒)</label>
+                <input id="getDataWait" type="text" value="1">
+            </div>
+            <div class="setting-item">
                 <label>请求凭证最大尝试次数</label>
                 <input id="ticketMaxTry" type="text" value="10">
             </div>
