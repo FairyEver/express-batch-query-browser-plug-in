@@ -12,7 +12,7 @@
                 "https://www.baidu.com/",
                 "http://bills.zt-express.com/v3/index.aspx"
             ],
-            "js": ["/dist/src.js"]
+            "js": ["/dist/plugin.js"]
         }
     ]
 }

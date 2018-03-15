@@ -98,7 +98,7 @@ link.forEach(function (e) {
 });
 
 console.log('ZTO-batch style tag add');
-},{}],21:[function(require,module,exports) {
+},{}],7:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -120,7 +120,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59315' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56308' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -221,5 +221,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[21,1])
-//# sourceMappingURL=/dist/src.map
+},{}]},{},[7,1])
+//# sourceMappingURL=/dist/plugin.map
