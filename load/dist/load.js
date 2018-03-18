@@ -7913,28 +7913,9 @@ var X = function () {
         // 在页面上添加面板
         $('#ajaxdata').before($(_dom2.default));
         // 需要查询的列表
-        this.ids = []
-        // '630808830478',
-        // '630808830485',
-        // '630808830508',
-        // '630358323368',
-        // '630506310243',
-        // '630808830609',
-        // '630506310256',
-        // '630808830616',
-        // '630598531107',
-        // '630598531975',
-        // '630598531476',
-        // '630598532152',
-        // '630598531215',
-        // '630598531463',
-        // '630598531710',
-        // '630598531759',
-        // '630598531786',
-        // '630598531842'
-
+        this.ids = ['630808830478', '630808830485', '630808830508', '630358323368', '630506310243', '630808830609', '630506310256', '630808830616', '630598531107', '630598531975', '630598531476', '630598532152', '630598531215', '630598531463', '630598531710', '630598531759', '630598531786', '630598531842'];
         // 当前正在查的ID的index
-        ;this.idIndex = 0;
+        this.idIndex = 0;
         // 已经完成的
         this.finish = [];
         // 注册
@@ -8433,7 +8414,24 @@ var X = function () {
 }();
 
 exports.default = X;
-},{"./dom":6,"../lib/csv":8,"../lib/csvExport":7}],1:[function(require,module,exports) {
+},{"./dom":6,"../lib/csv":8,"../lib/csvExport":7}],343:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var XPLUS = function XPLUS() {
+    _classCallCheck(this, XPLUS);
+
+    console.log('你好 这已经是新版的插件');
+    this.ids = ['630808830478', '630808830485', '630808830508', '630358323368', '630506310243', '630808830609', '630506310256', '630808830616', '630598531107', '630598531975', '630598531476', '630598532152', '630598531215', '630598531463', '630598531710', '630598531759', '630598531786', '630598531842'];
+};
+
+exports.default = XPLUS;
+},{}],1:[function(require,module,exports) {
 'use strict';
 
 require('babel-polyfill');
@@ -8444,13 +8442,18 @@ var _X = require('./class/X');
 
 var _X2 = _interopRequireDefault(_X);
 
+var _XPLUS = require('./class/XPLUS');
+
+var _XPLUS2 = _interopRequireDefault(_XPLUS);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // jquery加载后执行
 $(function () {
-    var x = new _X2.default();
+    // const x = new X()
+    var xplus = new _XPLUS2.default();
 });
-},{"babel-polyfill":4,"./style/plug-in.scss":2,"./class/X":3}],341:[function(require,module,exports) {
+},{"babel-polyfill":4,"./style/plug-in.scss":2,"./class/X":3,"./class/XPLUS":343}],346:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -8573,5 +8576,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[341,1])
+},{}]},{},[346,1])
 //# sourceMappingURL=/dist/load.map
