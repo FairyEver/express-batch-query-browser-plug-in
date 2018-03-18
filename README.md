@@ -1,3 +1,1 @@
-# 某快递单号批量查询
-
-需要登陆某快递内部系统然后自动批量查询单号信息
+There are ten thousand reasons for not writing README
