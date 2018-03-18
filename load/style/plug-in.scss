@@ -68,11 +68,12 @@
         }
     }
 }
-#zto_unfreeze_div{
-    .form-wrapper {
-        display: none;
-    }
-}
+// 这样会把二次登陆界面隐藏掉
+// #zto_unfreeze_div{
+//     .form-wrapper {
+//         display: none;
+//     }
+// }
 #dialog {
     display: none;
 }
