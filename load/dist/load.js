@@ -8421,17 +8421,531 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _csv = require('../lib/csv');
+
+var _csv2 = _interopRequireDefault(_csv);
+
+var _csvExport = require('../lib/csvExport');
+
+var _csvExport2 = _interopRequireDefault(_csvExport);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var XPLUS = function XPLUS() {
-    _classCallCheck(this, XPLUS);
+var domStr = '\n<div class="x-plus">\n    <div id="log"></div>\n    <div class="uploader-textarea-group">\n        <div>\u5728\u8FD9\u91CC\u7C98\u8D34\u5355\u53F7\uFF0C\u591A\u4E2A\u5355\u53F7\u6362\u884C\u5206\u5272\uFF0C\u4E0D\u9650\u5236\u6570\u91CF\uFF0C\u7136\u540E\u70B9\u51FB\u4E0B\u9762\u7684\u5BFC\u5165\u6309\u94AE</div>\n        <textarea id="uploader-textarea"></textarea>\n    </div>\n    <div class="btn-ground">\n        <button id="uploader-textarea-ok-btn" class="btn-x">\u5BFC\u5165</button>\n        <button id="btn-start" type="button" class="btn-x">\u5F00\u59CB</button>\n        <button id="btn-pause" type="button" class="btn-x">\u6682\u505C</button>\n        <button id="btn-go-on" type="button" class="btn-x">\u7EE7\u7EED</button>\n        <button id="btn-export" type="button" class="btn-x">\u5BFC\u51FA</button>\n    </div>\n</div>\n'.trim();
 
-    console.log('你好 这已经是新版的插件');
-    this.ids = ['630808830478', '630808830485', '630808830508', '630358323368', '630506310243', '630808830609', '630506310256', '630808830616', '630598531107', '630598531975', '630598531476', '630598532152', '630598531215', '630598531463', '630598531710', '630598531759', '630598531786', '630598531842'];
-};
+// 调试用的id
+var ids = [
+    // '630808830478',
+    // '630808830485',
+    // '630808830508',
+    // '630358323368',
+    // '630506310243',
+    // '630808830609',
+    // '630506310256',
+    // '630808830616',
+    // '630598531107',
+    // '630598531975',
+    // '630598531476',
+    // '630598532152',
+    // '630598531215',
+    // '630598531463',
+    // '630598531710',
+    // '630598531759',
+    // '630598531786',
+    // '630598531842'
+];
+
+var XPLUS = function () {
+    function XPLUS() {
+        _classCallCheck(this, XPLUS);
+
+        this.$log = null;
+        // 调试用的ids
+        this.ids = ids;
+        this.idIndex = 0;
+        this.res = [];
+        this.play = false;
+        // 在页面上添加面板
+        this.init();
+        // hack
+        $('#Panel1').html('');
+        $('.taskBar').hide();
+    }
+    // 注册事件
+
+
+    _createClass(XPLUS, [{
+        key: 'init',
+        value: function init() {
+            var _this = this;
+
+            // 将结构添加到页面上
+            $('#ajaxdata').before($(domStr));
+            this.$log = $('#log');
+            $('#uploader-textarea-ok-btn').on('click', function () {
+                if ($('#uploader-textarea').val().trim() == "") {
+                    layer.msg('请输入至少一个运单号码');
+                    return false;
+                }
+                var listI = $('#uploader-textarea').val().trim().split("\r\n");
+                var listF = $('#uploader-textarea').val().trim().split("\n");
+                var list = null;
+                if (listI.length > listF.length) {
+                    list = listI;
+                } else {
+                    list = listF;
+                }
+                _this.ids = list;
+                _this.log('\u5BFC\u5165' + _this.ids.length + '\u4E2A\u8BA2\u5355\u67E5\u8BE2\u4EFB\u52A1 \u73B0\u5728\u53EF\u4EE5\u70B9\u51FB [\u5F00\u59CB] \u6309\u94AE\u5F00\u59CB\u81EA\u52A8\u5904\u7406');
+                $('#uploader-textarea').val('');
+                return false;
+            });
+            $('#btn-start').on('click', _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                if (!(_this.ids.length < 1)) {
+                                    _context.next = 3;
+                                    break;
+                                }
+
+                                layer.msg('请输入至少一个运单号码');
+                                return _context.abrupt('return');
+
+                            case 3:
+                                _this.play = true;
+                                _this.startSearch();
+
+                            case 5:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, _this);
+            })));
+            $('#btn-pause').on('click', function () {
+                _this.play = false;
+            });
+            $('#btn-go-on').on('click', function () {
+                _this.play = true;
+                _this.startSearch();
+            });
+            $('#btn-export').on('click', function () {
+                _this.exportCSV();
+            });
+        }
+    }, {
+        key: 'log',
+        value: function log(text) {
+            this.$log.text(text);
+        }
+    }, {
+        key: 'exportCSV',
+        value: function exportCSV() {
+            _csvExport2.default.download('单号查询结果', (0, _csv2.default)([{ label: '运单编号', prop: 'yundanbianhao' }, { label: '订单编号', prop: 'dingdanbianhao' }, { label: '订单时间', prop: 'dingdanshijian' }, { label: '发件人(电话)', prop: 'fajianrendianhua' }, { label: '发件人地址', prop: 'fajianrendizhi' }, { label: '收件人(电话)', prop: 'shoujianrendianhua' }, { label: '收件人地址', prop: 'shoujianrendizhi' }, { label: '揽件人', prop: 'lanjianren' }, { label: '收件网点', prop: 'shoujianwangdian' }, { label: '订单来源', prop: 'dingdanlaiyuan' }, { label: '品名', prop: 'pinming' }, { label: '代收款', prop: 'daishoukuan' }], this.res, {}, false));
+        }
+    }, {
+        key: 'startSearch',
+        value: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                var _this2 = this;
+
+                var round;
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                round = function () {
+                                    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                                        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                                            while (1) {
+                                                switch (_context2.prev = _context2.next) {
+                                                    case 0:
+                                                        _this2.log(_this2.idIndex + 1 + ' / ' + _this2.ids.length + ' ' + _this2.ids[_this2.idIndex] + ' \u6B63\u5728\u67E5\u8BE2');
+                                                        _context2.t0 = _this2.res;
+                                                        _context2.next = 4;
+                                                        return _this2.one(_this2.ids[_this2.idIndex]);
+
+                                                    case 4:
+                                                        _context2.t1 = _context2.sent;
+
+                                                        _context2.t0.push.call(_context2.t0, _context2.t1);
+
+                                                        _this2.log(_this2.idIndex + 1 + ' / ' + _this2.ids.length + ' ' + _this2.ids[_this2.idIndex] + ' \u7ED3\u675F');
+                                                        _this2.idIndex++;
+                                                        if (_this2.play) {
+                                                            if (_this2.idIndex < _this2.ids.length) {
+                                                                round();
+                                                            } else {
+                                                                _this2.exportCSV();
+                                                                _this2.ids = [];
+                                                                _this2.idIndex = 0;
+                                                                _this2.play = false;
+                                                                _this2.res = [];
+                                                            }
+                                                        } else {
+                                                            layer.msg('已经暂停');
+                                                        }
+
+                                                    case 9:
+                                                    case 'end':
+                                                        return _context2.stop();
+                                                }
+                                            }
+                                        }, _callee2, _this2);
+                                    }));
+
+                                    return function round() {
+                                        return _ref3.apply(this, arguments);
+                                    };
+                                }();
+
+                                round();
+
+                            case 2:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function startSearch() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return startSearch;
+        }()
+    }, {
+        key: 'one',
+        value: function () {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(id) {
+                var _this3 = this;
+
+                return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                    while (1) {
+                        switch (_context5.prev = _context5.next) {
+                            case 0:
+                                return _context5.abrupt('return', new Promise(function () {
+                                    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(resolve, reject) {
+                                        var dingdanxinxi, ludanjilu, res;
+                                        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                                            while (1) {
+                                                switch (_context4.prev = _context4.next) {
+                                                    case 0:
+                                                        _context4.next = 2;
+                                                        return _this3.dingdanxinxi(id);
+
+                                                    case 2:
+                                                        dingdanxinxi = _context4.sent;
+                                                        _context4.next = 5;
+                                                        return _this3.ludanjilu(id);
+
+                                                    case 5:
+                                                        ludanjilu = _context4.sent;
+                                                        res = Object.assign({}, dingdanxinxi[0], ludanjilu[0]);
+
+                                                        resolve(res);
+
+                                                    case 8:
+                                                    case 'end':
+                                                        return _context4.stop();
+                                                }
+                                            }
+                                        }, _callee4, _this3);
+                                    }));
+
+                                    return function (_x2, _x3) {
+                                        return _ref5.apply(this, arguments);
+                                    };
+                                }()));
+
+                            case 1:
+                            case 'end':
+                                return _context5.stop();
+                        }
+                    }
+                }, _callee5, this);
+            }));
+
+            function one(_x) {
+                return _ref4.apply(this, arguments);
+            }
+
+            return one;
+        }()
+    }, {
+        key: 'dingdanxinxi',
+        value: function () {
+            var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(id) {
+                var _this4 = this;
+
+                return regeneratorRuntime.wrap(function _callee7$(_context7) {
+                    while (1) {
+                        switch (_context7.prev = _context7.next) {
+                            case 0:
+                                return _context7.abrupt('return', new Promise(function () {
+                                    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(resolve, reject) {
+                                        var table;
+                                        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                                            while (1) {
+                                                switch (_context6.prev = _context6.next) {
+                                                    case 0:
+                                                        _context6.next = 2;
+                                                        return _this4.giveMeTable(id, 'A014');
+
+                                                    case 2:
+                                                        table = _context6.sent;
+
+                                                        resolve(_this4.analysisTable(table, 'dingdanxinxi', id));
+
+                                                    case 4:
+                                                    case 'end':
+                                                        return _context6.stop();
+                                                }
+                                            }
+                                        }, _callee6, _this4);
+                                    }));
+
+                                    return function (_x5, _x6) {
+                                        return _ref7.apply(this, arguments);
+                                    };
+                                }()));
+
+                            case 1:
+                            case 'end':
+                                return _context7.stop();
+                        }
+                    }
+                }, _callee7, this);
+            }));
+
+            function dingdanxinxi(_x4) {
+                return _ref6.apply(this, arguments);
+            }
+
+            return dingdanxinxi;
+        }()
+    }, {
+        key: 'ludanjilu',
+        value: function () {
+            var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(id) {
+                var _this5 = this;
+
+                return regeneratorRuntime.wrap(function _callee9$(_context9) {
+                    while (1) {
+                        switch (_context9.prev = _context9.next) {
+                            case 0:
+                                return _context9.abrupt('return', new Promise(function () {
+                                    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(resolve, reject) {
+                                        var table;
+                                        return regeneratorRuntime.wrap(function _callee8$(_context8) {
+                                            while (1) {
+                                                switch (_context8.prev = _context8.next) {
+                                                    case 0:
+                                                        _context8.next = 2;
+                                                        return _this5.giveMeTable(id, 'A013');
+
+                                                    case 2:
+                                                        table = _context8.sent;
+
+                                                        resolve(_this5.analysisTable(table, 'ludanjilu', id));
+
+                                                    case 4:
+                                                    case 'end':
+                                                        return _context8.stop();
+                                                }
+                                            }
+                                        }, _callee8, _this5);
+                                    }));
+
+                                    return function (_x8, _x9) {
+                                        return _ref9.apply(this, arguments);
+                                    };
+                                }()));
+
+                            case 1:
+                            case 'end':
+                                return _context9.stop();
+                        }
+                    }
+                }, _callee9, this);
+            }));
+
+            function ludanjilu(_x7) {
+                return _ref8.apply(this, arguments);
+            }
+
+            return ludanjilu;
+        }()
+    }, {
+        key: 'analysisTable',
+        value: function analysisTable(table, type, id) {
+            var undefindStr = '未找到';
+            var dingdanxinxiUndefind = {
+                yundanbianhao: id,
+                dingdanbianhao: undefindStr,
+                dingdanshijian: undefindStr,
+                fajianrendianhua: undefindStr,
+                fajianrendizhi: undefindStr,
+                shoujianrendianhua: undefindStr,
+                shoujianrendizhi: undefindStr,
+                lanjianren: undefindStr,
+                shoujianwangdian: undefindStr,
+                dingdanlaiyuan: undefindStr
+            };
+            var ludanjiluUndefind = {
+                pinming: undefindStr,
+                daishoukuan: undefindStr
+            };
+            if (!table) {
+                if (type === 'dingdanxinxi') {
+                    return [dingdanxinxiUndefind];
+                } else {
+                    return [ludanjiluUndefind];
+                }
+            }
+            var res = [];
+            var tableStr = table.match(/<table[^>]*>[\s\S]*<\/table>/)[0];
+            var trs = $(tableStr).children(1).children();
+            // 订单信息
+            if (type === 'dingdanxinxi') {
+                if (trs.length <= 1) {
+                    res.push(dingdanxinxiUndefind);
+                }
+                for (var index = 1; index < trs.length; index++) {
+                    var tds = $(trs[index]).children();
+                    var row = {
+                        yundanbianhao: "\t" + tds[0].innerHTML || '-',
+                        dingdanbianhao: "\t" + tds[1].innerHTML || '-',
+                        dingdanshijian: tds[2].innerHTML || '-',
+                        fajianrendianhua: tds[3].innerHTML || '-',
+                        fajianrendizhi: tds[4].innerHTML || '-',
+                        shoujianrendianhua: tds[5].innerHTML || '-',
+                        shoujianrendizhi: tds[6].innerHTML || '-',
+                        lanjianren: tds[7].innerHTML || '-',
+                        shoujianwangdian: tds[8].innerHTML || '-',
+                        dingdanlaiyuan: $(tds[9]).text() || '-'
+                    };
+                    res.push(row);
+                }
+            }
+            // 录单记录
+            else if (type === 'ludanjilu') {
+                    if (trs.length <= 1) {
+                        res.push(ludanjiluUndefind);
+                    }
+                    for (var _index = 1; _index < trs.length; _index++) {
+                        var _tds = $(trs[_index]).children();
+                        var _row = {
+                            pinming: _tds[8].innerHTML || '-',
+                            daishoukuan: _tds[10].innerHTML || '-'
+                        };
+                        res.push(_row);
+                    }
+                }
+            return res;
+        }
+        // 返回凭证
+
+    }, {
+        key: 'giveMeTickt',
+        value: function giveMeTickt(id, type) {
+            var doTry = function doTry() {
+                return new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: 'https://connect.zto.com/security-services/billtrack/billinfo-query-preauth?bill_id=' + id + '&type=' + type,
+                        type: 'GET',
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        success: function success(res) {
+                            if (res.ticket) {
+                                resolve(res.ticket);
+                            } else {
+                                doTry();
+                            }
+                        }
+                    });
+                });
+            };
+            return doTry();
+        }
+        // 返回表格
+
+    }, {
+        key: 'giveMeTable',
+        value: function giveMeTable(id, type) {
+            var _this6 = this;
+
+            var count = 1;
+            var typeName = type === 'A014' ? '订单信息' : '录单记录';
+            return new Promise(function (resolve, reject) {
+                var round = function () {
+                    var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+                        var tickt;
+                        return regeneratorRuntime.wrap(function _callee10$(_context10) {
+                            while (1) {
+                                switch (_context10.prev = _context10.next) {
+                                    case 0:
+                                        if (count !== 1) {
+                                            _this6.log(_this6.idIndex + 1 + ' / ' + _this6.ids.length + ' ' + _this6.ids[_this6.idIndex] + ' ' + typeName + ' \u7B2C' + count + '\u6B21\u67E5\u8BE2\u6570\u636E');
+                                        }
+                                        _context10.next = 3;
+                                        return _this6.giveMeTickt(id, type);
+
+                                    case 3:
+                                        tickt = _context10.sent;
+
+                                        $.ajax({
+                                            url: 'http://bills.zt-express.com/postdate.aspx?id=' + id + '&type=' + type + '&queryTicket=' + tickt,
+                                            type: 'GET',
+                                            xhrFields: {
+                                                withCredentials: true
+                                            },
+                                            success: function success(res) {
+                                                if (res) {
+                                                    resolve(res);
+                                                } else {
+                                                    if (count < 10) {
+                                                        count++;
+                                                        round();
+                                                    } else {
+                                                        resolve();
+                                                    }
+                                                }
+                                            }
+                                        });
+
+                                    case 5:
+                                    case 'end':
+                                        return _context10.stop();
+                                }
+                            }
+                        }, _callee10, _this6);
+                    }));
+
+                    return function round() {
+                        return _ref10.apply(this, arguments);
+                    };
+                }();
+                round();
+            });
+        }
+    }]);
+
+    return XPLUS;
+}();
 
 exports.default = XPLUS;
-},{}],1:[function(require,module,exports) {
+},{"../lib/csv":8,"../lib/csvExport":7}],1:[function(require,module,exports) {
 'use strict';
 
 require('babel-polyfill');
@@ -8453,7 +8967,7 @@ $(function () {
     // const x = new X()
     var xplus = new _XPLUS2.default();
 });
-},{"babel-polyfill":4,"./style/plug-in.scss":2,"./class/X":3,"./class/XPLUS":343}],346:[function(require,module,exports) {
+},{"babel-polyfill":4,"./style/plug-in.scss":2,"./class/X":3,"./class/XPLUS":343}],421:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -8576,5 +9090,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[346,1])
+},{}]},{},[421,1])
 //# sourceMappingURL=/dist/load.map
